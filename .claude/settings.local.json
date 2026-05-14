@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(make pdf *)",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+# LaTeX 辅助文件
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+
+# 编译输出目录
+output/
+
+# macOS
+.DS_Store
+._*
+
+# 编辑器
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
