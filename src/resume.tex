@@ -14,7 +14,11 @@
 % 个人信息设置
 % ============================================================
 \name{赵志文}
-\lineA{185-5613-5826 \enspace|\enspace cnjszzw@qq.com \enspace|\enspace github.com/cnjszzw}
+\lineA{%
+    \faPhone\ 185-5613-5826 \enspace|\enspace
+    \faEnvelope\ \href{mailto:cnjszzw@qq.com}{cnjszzw@qq.com} \enspace|\enspace
+    \faGithub\ \href{https://github.com/cnjszzw}{cnjszzw}%
+}
 \lineB{籍贯：江苏扬州 \enspace|\enspace 现居城市：北京 \enspace|\enspace 年龄：27（1999/10/27）}
 \photo{assets/photo.jpg}
 
@@ -133,7 +137,12 @@
 
 % --- 项目四：仿"B站"弹幕视频网站 ---
 \cvproject{四、仿"B站"弹幕视频网站}{个人开源项目}{2024/05 -- 2024/11}{%
-    \cvlabeled{项目地址}{\url{https://github.com/Cnjszzw/imooc-bilibili}}
+    \cvlabeled{项目地址}{%
+        \begingroup
+        \hypersetup{urlcolor=nameblue}%
+        \url{https://github.com/Cnjszzw/imooc-bilibili}%
+        \endgroup
+    }
     \cvtech{Java、SpringBoot、MyBatis、Redis、RocketMQ、Nginx、FastDFS、WebSocket}
     \cvlabeled{项目描述}{实现B站核心功能，包括"用户功能"、"视频功能"、"弹幕功能"。具体实现了用户注册登录、用户关注、用户动态发布、用户视频上传和观看、弹幕推送等逻辑，并进行了系统性能提升和用户体验优化。}
     \cvlabeled{我的职责}{%

@@ -19,6 +19,7 @@
 \usepackage[hidelinks]{hyperref}  % 超链接（无边框）
 \usepackage{needspace}      % 防止章节标题孤行
 \usepackage{array}          % 表格列格式
+\usepackage{fontawesome5}   % Font Awesome 5 图标（TeX Live 本地安装，无需网络）
 
 % ============================================================
 % 一、颜色定义
@@ -86,8 +87,8 @@
     % 文字独立居中
     \makebox[\textwidth][c]{%
         \begin{tabular}[c]{@{}c@{}}
-            {\fontsize{15}{19}\selectfont\bfseries\color{nameblue}\cv@name} \\[0.12cm]
-            \cv@lineA \\[0.06cm]
+            {\fontsize{20}{26}\selectfont\bfseries\color{nameblue}\cv@name} \\[0.4cm]
+            \cv@lineA \\[0.12cm]
             \cv@lineB
         \end{tabular}%
     }%
