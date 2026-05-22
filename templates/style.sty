@@ -19,14 +19,15 @@
 \usepackage[hidelinks]{hyperref}  % 超链接（无边框）
 \usepackage{needspace}      % 防止章节标题孤行
 \usepackage{array}          % 表格列格式
+\usepackage{multicol}       % 双栏排版
+\usepackage{tabularx}       % 自适应列宽表格
 \usepackage{fontawesome5}   % Font Awesome 5 图标（TeX Live 本地安装，无需网络）
 \usepackage{microtype}      % 微排版：字符突出 + 字体伸缩，边缘视觉对齐
 
 % ============================================================
 % 一、颜色定义
 % ============================================================
-\definecolor{nameblue}{HTML}{377BB5}      % 姓名颜色
-\definecolor{sectionblue}{HTML}{377BB5}   % 标题栏背景色
+\definecolor{primaryblue}{HTML}{CA3832}   % 主题色：统一控制姓名、标题、链接等所有蓝色元素
 
 % ============================================================
 % 二、页面布局
@@ -88,7 +89,7 @@
     % 文字独立居中
     \makebox[\textwidth][c]{%
         \begin{tabular}[c]{@{}c@{}}
-            {\fontsize{20}{26}\selectfont\bfseries\color{nameblue}\cv@name} \\[0.4cm]
+            {\fontsize{20}{26}\selectfont\bfseries\cv@name} \\[0.4cm]
             \cv@lineA \\[0.1cm]
             \cv@lineB
         \end{tabular}%
@@ -102,14 +103,14 @@
 % ============================================================
 \newcommand{\cvsection}[1]{%
     \needspace{5\baselineskip}%
-    \vspace{0.5em}
+    \vspace{0.5em plus 0.3em minus 0.1em}
     \noindent
     \begin{tikzpicture}[baseline=(text.base)]
         % 通栏横线：向上多画 1pt 与 badge 重叠，杜绝渲染缝隙
-        \fill[sectionblue] (0,0) rectangle (\textwidth,2pt);
+        \fill[primaryblue] (0,0) rectangle (\textwidth,2pt);
         % 白字蓝底 badge（加大内边距），底部坐在 (0, 1pt)
         \node[
-            fill=sectionblue,
+            fill=primaryblue,
             text=white,
             font=\bfseries,
             inner xsep=6pt,
@@ -126,9 +127,9 @@
 % ============================================================
 \newcommand{\cvheading}[3]{%
     \noindent
-    \makebox[0.28\textwidth][l]{\textbf{#1}}%
-    \makebox[0.44\textwidth][c]{\textbf{#2}}%
-    \makebox[0.28\textwidth][r]{\textbf{#3}}\par
+    \makebox[0.28\textwidth][l]{\textbf{\color{primaryblue}#1}}%
+    \makebox[0.44\textwidth][c]{\textbf{\color{primaryblue}#2}}%
+    \makebox[0.28\textwidth][r]{\textbf{\color{primaryblue}#3}}\par
 }
 
 % ============================================================
@@ -182,6 +183,13 @@
 
 \newcommand{\cvlabeled}[2]{%
     \noindent\textbf{#1}：#2\par\vspace{0.04em}
+}
+
+% 技能项：左侧加粗标签 + 右侧描述（用于双栏表格）
+\newcommand{\cvskill}[2]{%
+    \noindent
+    {\bfseries\color{primaryblue}#1}：{#2}\par
+    \vspace{0.3em}
 }
 \makeatother
 
