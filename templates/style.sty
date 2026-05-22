@@ -32,10 +32,10 @@
 % ============================================================
 \geometry{
     a4paper,
-    top     = 1.2cm,
-    bottom  = 0.6cm,
-    left    = 1.5cm,
-    right   = 1.5cm,
+    top     = 0.4cm,
+    bottom  = 0.4cm,
+    left    = 1cm,
+    right   = 1cm,
 }
 \pagestyle{empty}
 
@@ -49,7 +49,7 @@
 % ============================================================
 % 四、基础排版参数
 % ============================================================
-\linespread{1.03}
+\linespread{1.3}
 \setlength{\parskip}{0em}
 \setlength{\parindent}{0pt}
 \widowpenalty=10000
@@ -88,11 +88,11 @@
     \makebox[\textwidth][c]{%
         \begin{tabular}[c]{@{}c@{}}
             {\fontsize{20}{26}\selectfont\bfseries\color{nameblue}\cv@name} \\[0.4cm]
-            \cv@lineA \\[0.12cm]
+            \cv@lineA \\[0.1cm]
             \cv@lineB
         \end{tabular}%
     }%
-    \vspace{0.3cm}
+    \vspace{0.15cm}
 }
 
 % ============================================================
@@ -155,12 +155,12 @@
 % 九、列表环境
 % ============================================================
 \setlist[itemize]{
-    leftmargin = 2em,
+    leftmargin = 1em,
     itemsep    = 0.05em,
     topsep     = 0.06em,
     parsep     = 0em,
-    label      = \textbullet,
-    labelsep   = 0.4em,
+    label      = {\tikz[baseline=-0.65ex]{\fill[black] (0,0) circle (2.2pt);}},
+    labelsep   = 0.35em,
 }
 
 \setlist[enumerate]{
