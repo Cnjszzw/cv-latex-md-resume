@@ -140,9 +140,9 @@ header:
   ~ **个人开源项目**
   ~ **2024/05 - 2024/11**
 
-**项目开源地址**：[https://github.com/Cnjszzw/imooc-bilibili](https://github.com/Cnjszzw/imooc-bilibili)
+**项目开源地址**：[imooc-bilibili](https://github.com/Cnjszzw/imooc-bilibili) | [bilibili-microservices](https://github.com/Cnjszzw/bilibili-microservices)
 
-**技术栈**：Java、SpringBoot、MyBatis、Redis、RocketMQ、Elasticsearch、FastDFS、WebSocket、Vue
+**技术栈**：SpringCloud Alibaba、Nacos、Gateway、OpenFeign、Seata、MyBatis、Redis、RocketMQ、Elasticsearch、WebSocket
 
 **项目概述**：实现B站核心功能——用户体系、视频管理、弹幕系统、站内搜索，涵盖从注册登录、视频上传观看、弹幕实时推送到全文检索的完整闭环。
 
@@ -152,36 +152,29 @@ header:
 
 - 站内全文搜索：集成 Elasticsearch，基于 Multi-Match 实现跨字段检索（title/nick/description），支持关键词高亮、多维度排序（时间/弹幕数/播放量）及分页查询。用户注册和视频发布时同步写入 ES 索引，保证搜索实时性。
 
-- 弹幕与动态推送：基于 WebSocket 构建弹幕实时推送，弹幕消息先写入 RocketMQ 异步消费落库，避免高并发下直接写 DB 导致压力过大。动态发布系统经历三轮迭代：V1 同步推 → V2 MQ 异步推 → V3 推拉结合。推拉结合思路：粉丝 < 10w 走推模式（遍历写入粉丝收件箱），粉丝 ≥ 10w 的头部 UP 主走拉模式（只写自己发件箱，粉丝读时主动拉取），消除大 V 写扩散问题，支撑百万级粉丝场景。经压测验证，10w 粉丝场景下遍历写入从 7s 降至 ~1ms，用户发布等待始终维持在 40ms 以内。
-
 - 视频存储与传输：集成 FastDFS 实现视频分片上传、断点续传与秒传（文件指纹校验），通过 Nginx 提供外部 HTTP 访问。
 
-- 性能优化：自定义线程池（核心 5 线程 / LinkedBlockingQueue），利用线程池并行聚合多源数据，数据汇总接口响应从 150ms 降至 50ms，提升 67%。
+- 弹幕与动态推送：基于 WebSocket 构建弹幕实时推送，弹幕消息先写入 RocketMQ 异步消费落库，避免高并发下直接写 DB 导致压力过大。动态发布系统经历三轮迭代：V1 同步推 → V2 MQ 异步推 → V3 推拉结合。推拉结合思路：粉丝 < 10w 走推模式（遍历写入粉丝收件箱），粉丝 ≥ 10w 的头部 UP 主走拉模式（只写自己发件箱，粉丝读时主动拉取），消除大 V 写扩散问题，支撑百万级粉丝场景。经压测验证，10w 粉丝场景下遍历写入从 7s 降至 ~1ms，用户发布等待始终维持在 40ms 以内。
+
+- 微服务架构改造：基于 Spring Cloud Alibaba 完成单体应用微服务化升级，搭建 Nacos 注册中心 + Spring Cloud Gateway 统一网关，通过全局过滤器实现 JWT 统一鉴权与 X-User-Id 请求头注入，下游服务无需各自处理鉴权逻辑；采用 OpenFeign + Nacos 服务发现实现跨服务调用。
+
+- 分布式事务：视频投稿涉及 content-service 写视频表和 legacy-service 创建动态两个跨服务操作。评估 XA / Seata AT / TCC / 最大努力通知四种方案后，选择 RocketMQ 事务消息实现最终一致性：content-service 本地事务内写视频 + 发半消息，Broker 回查确认后投递，legacy 异步消费创建动态。设计入库消费者与扩散消费者独立重试（16 次递增），解决 Seata AT 无法覆盖 MQ + Redis 的跨存储回滚问题，实现 DB / MQ / Redis 三层最终一致。
 
 **项目产出**：
-- 动态发布系统经三轮迭代（同步→MQ异步→推拉结合），10w粉丝场景下遍历写入从 7s 降至 ~1ms，用户发布等待维持在 40ms 以内，支撑百万级粉丝场景
-- 数据聚合接口经线程池优化后响应从 150ms 降至 50ms，提升 67%
+- 完成单体应用向 Spring Cloud Alibaba 微服务架构升级（Nacos + Gateway + OpenFeign）
+- 动态发布系统经三轮迭代（同步→MQ异步→推拉结合），10w粉丝场景下遍历写入从 7s 降至 ~1ms，支撑百万级粉丝场景
+- 基于 RocketMQ 事务消息实现跨服务分布式事务，解决视频投稿→创建动态的跨存储（DB / MQ / Redis）一致性问题
 
 ## 专业技能
 
-- **开发语言**：熟练掌握 Java，熟悉 JVM 内存模型与并发编程，能够独立完成模块级别的系统设计与编码实现
+- **Java 全家桶**：熟练掌握 Java，熟悉 JVM 内存模型与并发编程；熟练使用 SpringBoot、MyBatis（Plus）；了解 SpringCloud 微服务体系（Nacos、OpenFeign、Gateway）
 
-- **后端框架**：熟练使用 SpringBoot、MyBatis（Plus）；了解 SpringCloud 微服务体系（Nacos、OpenFeign、Gateway）
+- **数据存储与检索**：熟悉 MySQL，有索引优化、延迟关联、覆盖索引等 SQL 优化实战经验；熟悉 Redis 缓存策略设计与数据一致性保障；熟悉 Elasticsearch 全文检索（Multi-Match、高亮、多维度排序）
 
-- **数据库与缓存**：熟悉 MySQL，有索引优化、延迟关联、覆盖索引等 SQL 优化实战经验，能够通过执行计划分析定位性能瓶颈；熟悉 Redis 缓存策略设计与数据一致性保障
+- **AI 全栈开发**：了解 Vue、Cesium、Android 基础开发；熟练使用 Trae、Cursor、ClaudeCode 等 AI 辅助编码工具，了解 Function Calling、MCP 协议等 AI 工程化技术
 
-- **搜索引擎**：熟悉 Elasticsearch 文本检索，有基于 Multi-Match 多字段匹配、关键词高亮、多维度排序及分页查询的实战经验
-
-- **通信协议**：熟悉 WebSocket、MQTT 协议，有实时通信场景下的链路设计与联调经验
-
-- **分布式系统**：了解分布式锁（Redisson）、分布式事务（TCC、可靠消息最终一致）、配置中心（Nacos）等常见组件的设计思路与应用场景
+- **分布式系统**：了解分布式锁（Redisson）、分布式事务（RocketMQ 事务消息 / TCC / 可靠消息最终一致）、配置中心（Nacos）等常见组件的设计思路与应用场景
 
 - **性能优化**：有核心接口性能优化实战经验，接口响应时间从 7-8s 优化至 1s 以内，多次定位并解决大数据量下的查询与存储瓶颈
 
-- **日志与排障**：熟悉 Logback 日志框架，有日志配置与采集系统的前后端开发经验；熟练使用 Kibana 进行日志检索与问题定位；熟悉 Linux 下日志查看与基础排障操作；了解 Docker 基础使用
-
-- **工程协作**：具备从需求分析、方案设计、文档编写到编码联调的全流程交付能力，有前后端、软硬件跨团队联调经验
-
-- **前端及其他**：了解 Vue、Cesium 地图引擎、Android 客户端基础开发，有 GIS 可视化场景下的前后端协作经验
-
-- **AI 工具**：熟练使用 Trae、Cursor、ClaudeCode 等 AI 辅助编码工具，了解 Function Calling、MCP 协议等 AI 工程化技术
+- **工程实践**：熟悉 Logback 日志框架与 Kibana 排障，熟悉 Linux + Docker 基础运维；具备从需求分析到联调交付的全流程能力，有前后端 + 软硬件跨团队协作经验
