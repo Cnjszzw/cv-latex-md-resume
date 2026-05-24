@@ -3,7 +3,24 @@
     "allow": [
       "Bash(make pdf *)",
       "Bash(git init *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(python3 -c \"import yaml; print\\('yaml OK'\\)\")",
+      "Bash(python3 -c \"import markdown; print\\('markdown OK'\\)\")",
+      "Bash(python3 preview/server.py)",
+      "Bash(curl -s http://localhost:8765/)",
+      "Bash(curl -s http://localhost:8765/version)",
+      "Bash(lsof -ti:8765)",
+      "Bash(xargs kill -9)",
+      "Bash(python3 -c ' *)",
+      "Bash(xargs cat)",
+      "Bash(make -C /Users/zhaozhiwen/CodeRepo/cv_latex_md_test pdf)",
+      "Bash(git commit *)",
+      "Bash(open *)",
+      "Bash(python3 *)",
+      "Read(//Users/zhaozhiwen/CodeRepo/bilibili/**)",
+      "Read(//Users/zhaozhiwen/CodeRepo/bilibili/frontEnd/**)"
     ]
   }
 }

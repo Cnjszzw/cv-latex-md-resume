@@ -1,0 +1,5 @@
+1. 全日制计算机硕士，1年半后端开发经验，具备从需求分析、方案设计到编码联调的端到端独立交付能力
+2. 扎实的Java基础，熟悉JVM与并发编程；熟练使用SpringBoot、MyBatis（Plus）；有SpringCloud Alibaba（Nacos/Gateway/OpenFeign）微服务架构实战经验
+3. 有分布式系统设计实践：RocketMQ事务消息实现跨服务最终一致、推拉结合消除写扩散、Redis引用计数等，熟悉分布式事务（TCC/可靠消息最终一致）、分布式锁（Redisson）等技术选型
+4. 有数据库与搜索引擎优化经验：MySQL索引优化（覆盖索引/延迟关联/执行计划分析）、Elasticsearch全文检索（Multi-Match/高亮/多维度排序）
+5. 了解Vue/Cesium/Android等前端与客户端技术，有前后端+软硬件跨团队协作经验；熟练使用Trae、Cursor、ClaudeCode等AI辅助编码工具

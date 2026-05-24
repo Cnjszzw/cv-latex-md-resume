@@ -1,0 +1,15 @@
+内容：
+● 技术栈：SpringCloud Alibaba、Nacos、Gateway、OpenFeign、Seata、MyBatis、Redis、RocketMQ、Elasticsearch、WebSocket
+● 项目概述：实现B站核心功能——用户体系、视频管理、弹幕系统、站内搜索，涵盖从注册登录、视频上传观看、弹幕实时推送到全文检索的完整闭环。
+● 项目实现：
+	1. 用户体系与安全：基于工厂+策略模式构建登录系统（UserGranter策略接口+UserLoginFactory配置驱动注册），新增登录方式只需实现接口并配置，无需修改调用方代码。基于JWT双Token（access+refresh）实现无感登录，RSA加密传输+MD5加盐存储保证密码安全。基于RBAC模型+AOP切面实现接口级和数据级权限控制，与业务代码解耦。
+	2. 站内全文搜索：集成Elasticsearch，基于Multi-Match实现跨字段检索（title/nick/description），支持关键词高亮、多维度排序（时间/弹幕数/播放量）及分页查询。用户注册和视频发布时同步写入ES索引，保证搜索实时性。
+	3. 视频存储与传输：集成FastDFS实现视频分片上传、断点续传与秒传（文件指纹校验），通过Nginx提供外部HTTP访问。
+	4. 弹幕与动态推送：基于WebSocket构建弹幕实时推送，弹幕消息先写入RocketMQ异步消费落库，避免高并发下直接写DB导致压力过大。动态发布系统经历三轮迭代：V1同步推→V2 MQ异步推→V3推拉结合。推拉结合思路：粉丝<10w走推模式（遍历写入粉丝收件箱），粉丝≥10w的头部UP主走拉模式（只写自己发件箱，粉丝读时主动拉取），消除大V写扩散问题，支撑百万级粉丝场景。经压测验证，10w粉丝场景下遍历写入从7s降至~1ms，用户发布等待始终维持在40ms以内。
+	5. 微服务架构改造：基于Spring Cloud Alibaba完成单体应用微服务化升级，搭建Nacos注册中心+Spring Cloud Gateway统一网关，通过全局过滤器实现JWT统一鉴权与X-User-Id请求头注入，下游服务无需各自处理鉴权逻辑；采用OpenFeign+Nacos服务发现实现跨服务调用。
+	6. 分布式事务：视频投稿涉及content-service写视频表和legacy-service创建动态两个跨服务操作。评估XA/Seata AT/TCC/最大努力通知四种方案后，选择RocketMQ事务消息实现最终一致性：content-service本地事务内写视频+发半消息，Broker回查确认后投递，legacy异步消费创建动态。设计入库消费者与扩散消费者独立重试（16次递增），解决Seata AT无法覆盖MQ+Redis的跨存储回滚问题，实现DB/MQ/Redis三层最终一致。
+业绩：
+● 项目产出：
+	1. 完成单体应用向Spring Cloud Alibaba微服务架构升级（Nacos+Gateway+OpenFeign）
+	2. 动态发布系统经三轮迭代（同步→MQ异步→推拉结合），10w粉丝场景下遍历写入从7s降至~1ms，支撑百万级粉丝场景
+	3. 基于RocketMQ事务消息实现跨服务分布式事务，解决视频投稿→创建动态的跨存储（DB/MQ/Redis）一致性问题
