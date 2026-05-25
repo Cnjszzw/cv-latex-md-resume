@@ -13,8 +13,8 @@ make distclean  # 清理所有编译产物（含 PDF）
 
 ## 项目结构
 
-- **`src/resume.md`** — 用户编辑的简历内容源文件。YAML front matter 放个人信息，Markdown 正文放各章节（教育经历、工作经历、项目经历、专业技能）。
-- **`src/resume.tex`** — AI 自动生成的 LaTeX 文件。由 resume.md + templates 生成，用户不手动编辑。
+- **`简历纯文本.txt`** — 用户编辑的简历内容源文件。纯文本格式，仅用 ● / 1.2.3. / tab 三级层次。这是唯一的简历内容来源。
+- **`src/resume.tex`** — AI 自动生成的 LaTeX 文件。严格根据 简历纯文本.txt + templates 生成，用户不手动编辑。
 - **`templates/style.sty`** — 视觉样式。颜色、字体、边距、间距、列表样式等，所有参数有中文注释。
 - **`templates/cv.latex`** — 结构宏（`\makecvheader`、`\cvsection`、`\cvevent`、`\cvheading`、`\cvtech`、`\cvlabeled` 等）。
 - **`Makefile`** — 从项目根目录编译，`resume.tex` 中的路径相对于项目根。
@@ -22,8 +22,8 @@ make distclean  # 清理所有编译产物（含 PDF）
 ## 工作流程
 
 1. 用户提出内容或样式变更
-2. 读取 `src/resume.md` 和 `templates/style.sty`、`templates/cv.latex`
-3. 如涉及简历内容变更，先改 `resume.md`，再同步生成 `resume.tex`
+2. 读取 `简历纯文本.txt` 和 `templates/style.sty`、`templates/cv.latex`
+3. 如涉及简历内容变更，先改 `简历纯文本.txt`，再同步生成 `src/resume.tex`
 4. 如涉及样式变更，直接改 `style.sty`
 5. 运行 `make pdf` 验证编译通过
 
