@@ -141,7 +141,7 @@
 
 \cvproject{项目二：WVP Copilot --- 基于 AI Agent 的无人机智能体}{}{2025/11 -- 2026/03}{%
     \cvtech{Python、LangChain、DeepSeek API、FastAPI、SSE、MCP、LangGraph、Redis}
-    \cvlabeled{项目概述}{面向消防应急指挥场景，对标 DJI 司空 2 Copilot，设计并实现基于 LLM Agent 的无人机智能体操控系统。用户通过自然语言输入（如"飞到陆家嘴，变焦 7x 拍照，返航"），Agent 自动完成意图理解、任务规划、安全校验、指令编排执行的全链路闭环。采用 Python（Agent 编排层）+ Java（设备控制层）两层架构，通过 REST 通信解耦。}
+    \cvlabeled{项目概述}{面向消防应急指挥场景，深度结合软硬件能力与 AI 算法打造无人机智能体 Copilot，极大降低使用门槛。用户只需自然语言描述需求（如"飞到陆家嘴，变焦 7x 拍照，返航"），Copilot 即可精准理解意图，自动拆分为无人机指令序列并编排执行，通过对话的方式完成远程控制与任务下达。采用 Python（Agent 编排层）+ Java（设备控制层）两层架构，通过 REST 通信解耦。}
     \cvlabeled{项目实现}{%
         \begin{itemize}
             \item \textbf{MCP 外部工具集成}：通过 MCP 协议集成高德地图 MCP Server，langchain-mcp-adapters 完成握手后 15 个地图工具自动注册为 LangChain Tool。地理编码返回多个候选项时回传 LLM 根据上下文选择最佳匹配（"陆家嘴"6 个候选，LLM 判定选上海浦东），解决地名歧义问题。
