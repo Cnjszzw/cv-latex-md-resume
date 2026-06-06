@@ -21,7 +21,9 @@
       "Bash(python3 *)",
       "Read(//Users/zhaozhiwen/CodeRepo/bilibili/**)",
       "Read(//Users/zhaozhiwen/CodeRepo/bilibili/frontEnd/**)",
-      "Bash(/Library/TeX/texbin/xelatex -interaction=nonstopmode -output-directory=output \"src/resume AIAgent.tex\")"
+      "Bash(/Library/TeX/texbin/xelatex -interaction=nonstopmode -output-directory=output \"src/resume AIAgent.tex\")",
+      "Bash(officecli view *)",
+      "Bash(officecli get *)"
     ]
   }
 }
