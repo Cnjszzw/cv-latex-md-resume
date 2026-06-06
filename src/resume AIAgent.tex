@@ -138,22 +138,22 @@
     }
 }
 
-\cvproject{项目二：AI Agent 无人机自然语言操控系统}{}{2025/04 -- 2026/03}{%
+\cvproject{项目二：AI Agent 无人机自然语言操控系统}{}{2025/11 -- 2026/03}{%
     \cvtech{Python、LangChain、DeepSeek API、FastAPI、SSE、MCP、LangGraph、Redis}
-    \cvlabeled{项目概述}{面向消防应急指挥场景，对标 DJI 司空 2 Copilot，设计并实现基于 LLM Agent 的无人机自然语言操控系统。用户通过自然语言输入（如"飞到陆家嘴，变焦 7x 拍照，返航"），Agent 自动完成意图理解→任务规划→安全校验→指令编排执行的全链路闭环。采用 Python（Agent 编排层）+ Java（设备控制层）两层架构，通过 REST 通信解耦。}
+    \cvlabeled{项目概述}{面向消防应急指挥场景，对标 DJI 司空 2 Copilot，设计并实现基于 LLM Agent 的无人机自然语言操控系统。用户通过自然语言输入（如"飞到陆家嘴，变焦 7x 拍照，返航"），Agent 自动完成意图理解、任务规划、安全校验、指令编排执行的全链路闭环。采用 Python（Agent 编排层）+ Java（设备控制层）两层架构，通过 REST 通信解耦。}
     \cvlabeled{项目实现}{%
         \begin{itemize}
-            \item \textbf{MCP 外部工具集成}：通过 MCP 协议（StreamableHTTP/JSON-RPC 2.0）集成高德地图 MCP Server，langchain-mcp-adapters 一行 MultiServerMCPClient 完成 initialize→tools/list 握手，15 个地图工具自动注册。地理编码返回多个候选项时回传 LLM 根据上下文选择最佳匹配（"陆家嘴"6 个候选→LLM 判定选上海浦东），解决地名歧义问题。
+            \item \textbf{MCP 外部工具集成}：通过 MCP 协议集成高德地图 MCP Server，langchain-mcp-adapters 完成握手后 15 个地图工具自动注册为 LangChain Tool。地理编码返回多个候选项时回传 LLM 根据上下文选择最佳匹配（"陆家嘴"6 个候选，LLM 判定选上海浦东），解决地名歧义问题。
 
-            \item \textbf{Plan→Confirm→Execute 三段式流程}：规划阶段 LLM 输出结构化 JSON 任务计划（目标+有序步骤+飞前检查）；确认阶段前端渲染规划卡片，高风险操作不进入自动执行链路；执行阶段 SSE 流式推送每步状态（○→◐→✓/✗）。每步返回 ❌/⛔ 时立即 break 中止后续，防止级联错误。
+            \item \textbf{Plan - Confirm - Execute 三段式流程}：规划阶段 LLM 输出结构化 JSON 任务计划（目标 + 有序步骤列表 + 飞前检查）；确认阶段前端渲染规划卡片，高风险操作不进入自动执行链路；执行阶段 SSE 流式推送每步状态（等待 / 进行中 / 完成 / 失败）。每步返回失败或急停时立即 break 中止后续，防止级联错误。
 
-            \item \textbf{工具定义与复合封装}：基于 LangChain @tool 装饰器定义 16 个无人机工具函数（飞行/相机/曝光/云台），docstring+类型注解自动生成 Function Calling Schema。遵循"工具暴露业务语义而非硬件原语"原则——硬件仅有 start/stop 录像原子指令，工具层封装 record\-\_for\-\_duration(60) 复合工具（start→倒计时→stop），LLM 不感知时序编排。
+            \item \textbf{工具定义与复合封装}：基于 LangChain @tool 装饰器定义 16 个无人机工具函数（飞行 / 相机 / 曝光 / 云台），docstring 与类型注解自动生成 Function Calling Schema。遵循"工具暴露业务语义而非硬件原语"原则：硬件仅有 start/stop 录像原子指令，工具层封装复合工具（start -> 倒计时 -> stop），LLM 不感知时序编排。
 
-            \item \textbf{同步 LLM 与异步飞行的状态同步}：无人机飞行是分钟级异步过程，工具函数内部封装 Redis 轮询等待——Python redis-py 直连 localhost Redis（<1ms/次），每秒查询任务状态。评估四种替代方案后选 Redis 直连（零新依赖/零连接管理），中间进度仅推前端、LLM 不感知。
+            \item \textbf{同步 LLM 与异步飞行的状态同步}：无人机飞行是分钟级异步过程，工具函数内部封装 Redis 轮询等待：Python redis-py 直连 localhost Redis（$<$1ms/次），每秒查询任务状态。评估四种替代方案后选 Redis 直连（零新依赖、零连接管理），中间进度仅推前端、LLM 不感知。
 
-            \item \textbf{LangGraph 环绕飞行子图}：AgentExecutor 无法可靠处理环绕飞行（LLM 需自主判断时机）。引入 LangGraph 建模显式子图：enter\-\_orbit→orbit\-\_loop（条件边: $\theta \ge 360^\circ$ 退出）→exit\-\_orbit，执行周期由图的边决定。主链路保持 AgentExecutor（不过度设计），仅状态机子任务用 LangGraph。
+            \item \textbf{LangGraph 环绕飞行子图}：AgentExecutor 无法可靠处理环绕飞行（LLM 需自主判断时机）。引入 LangGraph 建模显式子图：enter\_orbit -> orbit\_loop（条件边: 角度 $\ge$ 360\textdegree{} 时退出）-> exit\_orbit，执行周期由图的边决定。主链路保持 AgentExecutor（不过度设计），仅状态机子任务用 LangGraph。
 
-            \item \textbf{安全校验与急停}：SafetyGate 硬编码安全规则（高度限制/坐标范围/电量预估），LLM 不参与安全决策。Human-in-the-loop 高风险确认。急停走独立 MQTT 通道直达硬件（不经过 Agent/LLM），前端同步关闭 SSE 终止会话。
+            \item \textbf{安全校验与急停}：SafetyGate 硬编码安全规则（高度限制 / 坐标范围 / 电量预估），LLM 不参与安全决策。Human-in-the-loop 高风险确认。急停走独立 MQTT 通道直达硬件（不经过 Agent/LLM），前端同步关闭 SSE 终止会话。
         \end{itemize}
     }
 }
