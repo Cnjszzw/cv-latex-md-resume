@@ -18,6 +18,7 @@
     \makebox[0.42\textwidth][l]{\textbf{#2}}%
     \makebox[0.28\textwidth][r]{\textbf{#3}}\par
 }
+\renewcommand{\cvtech}[1]{\noindent\textbf{技术栈：#1}\par\vspace{0.04em}}% 技术栈全部加粗
 \let\cvheadingThree\cvheading% 保存3列版本，项目部分恢复用
 \newcommand{\cvbullet}{\tikz[baseline=-0.65ex]{\fill[black] (0,0) circle (2.2pt);}}% 与itemize统一的圆点
 % 教育经历专用四列（学校 / 学历 / 专业·学院·地点 / 时间）
@@ -125,7 +126,7 @@
 \cvsection{上海寰创通信股份有限公司}
 
 \cvproject{项目一：无人机管理云平台}{}{2025/04 -- 2026/03}{%
-    \cvtech{Java、SpringBoot、Redis、MySQL、MyBatis（Plus）、WebSocket、MQTT、ZLM、Vue 3、TypeScript、Cesium}
+    \cvtech{Java、SpringBoot、Redis、MySQL、MyBatis(Plus)、WebSocket、MQTT、Vue、JavaScript、TypeScript、Cesium}
     \cvlabeled{项目概述}{平台原有能力集中于地面 Mesh 设备管理，缺乏对无人机的统一接入与远程控制能力，无法满足消防场景下超视距视频回传与飞行控制需求。利用公司自组网超远距离传输（>20km）优势，建设无人机接入与控制模块，覆盖设备管理、飞行控制、相机操作、视频点播及三维 GIS 可视化等核心能力，实现空地一体化指挥调度。}
     \cvlabeled{项目实现}{%
         \begin{itemize}
@@ -138,9 +139,9 @@
     }
 }
 
-\cvproject{项目二：AI Agent 无人机自然语言操控系统}{}{2025/11 -- 2026/03}{%
+\cvproject{项目二：WVP Copilot --- 基于 AI Agent 的无人机智能体操控系统}{}{2025/11 -- 2026/03}{%
     \cvtech{Python、LangChain、DeepSeek API、FastAPI、SSE、MCP、LangGraph、Redis}
-    \cvlabeled{项目概述}{面向消防应急指挥场景，对标 DJI 司空 2 Copilot，设计并实现基于 LLM Agent 的无人机自然语言操控系统。用户通过自然语言输入（如"飞到陆家嘴，变焦 7x 拍照，返航"），Agent 自动完成意图理解、任务规划、安全校验、指令编排执行的全链路闭环。采用 Python（Agent 编排层）+ Java（设备控制层）两层架构，通过 REST 通信解耦。}
+    \cvlabeled{项目概述}{面向消防应急指挥场景，对标 DJI 司空 2 Copilot，设计并实现基于 LLM Agent 的无人机智能体操控系统。用户通过自然语言输入（如"飞到陆家嘴，变焦 7x 拍照，返航"），Agent 自动完成意图理解、任务规划、安全校验、指令编排执行的全链路闭环。采用 Python（Agent 编排层）+ Java（设备控制层）两层架构，通过 REST 通信解耦。}
     \cvlabeled{项目实现}{%
         \begin{itemize}
             \item \textbf{MCP 外部工具集成}：通过 MCP 协议集成高德地图 MCP Server，langchain-mcp-adapters 完成握手后 15 个地图工具自动注册为 LangChain Tool。地理编码返回多个候选项时回传 LLM 根据上下文选择最佳匹配（"陆家嘴"6 个候选，LLM 判定选上海浦东），解决地名歧义问题。
