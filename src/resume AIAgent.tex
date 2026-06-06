@@ -56,6 +56,11 @@
     \fi
 }
 
+% --- 局部重定义 makecvheader：加第三行 + 调名字间距 ---
+\makeatletter
+\def\cv@lineC{} \def\lineC#1{\def\cv@lineC{#1}}
+\makeatother
+
 % ============================================================
 % 个人信息设置
 % ============================================================
@@ -65,8 +70,40 @@
     \faEnvelope\ \href{mailto:cnjszzw@qq.com}{cnjszzw@qq.com} \enspace|\enspace
     \faWeixin\ cnjszzw%
 }
-\lineB{籍贯：江苏扬州 \enspace|\enspace 求职意向：后端开发/AI 全栈开发 \enspace|\enspace 年龄：27 (1999/10/27)}
+\lineB{籍贯：江苏扬州 \enspace|\enspace 年龄：27 (1999/10/27) \enspace|\enspace 性别：男}
+\lineC{求职意向：后端开发/AI 全栈开发/测试开发}
 \photo{assets/photo.jpg}
+
+% --- 局部重定义 makecvheader ---
+\makeatletter
+\renewcommand{\makecvheader}{%
+    \noindent
+    \rlap{%
+        \makebox[\textwidth][l]{%
+            \hfill
+            \ifx\cv@photo\empty
+                \tikz{
+                    \node[rectangle,draw=black!30,line width=0.3pt,
+                          minimum width=2.2cm,minimum height=2.8cm,
+                          fill=black!5] {};
+                }
+            \else
+                \sbox\cv@photobox{\includegraphics[width=2.2cm,height=2.8cm,keepaspectratio]{\cv@photo}}%
+                \raisebox{-\dimexpr\ht\cv@photobox/2\relax}{\usebox{\cv@photobox}}%
+            \fi
+        }%
+    }%
+    \makebox[\textwidth][c]{%
+        \begin{tabular}[c]{@{}c@{}}
+            {\fontsize{20}{26}\selectfont\bfseries\cv@name} \\[0.2cm]% ← 改这个数字调名字与下方间距
+            \cv@lineA \\[0.08cm]
+            \cv@lineB \\[0.08cm]
+            \cv@lineC
+        \end{tabular}%
+    }%
+    \vspace{0.15cm}
+}
+\makeatother
 
 % ============================================================
 % 文档正文
@@ -106,7 +143,7 @@
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/北京流金岁月科技有限公司.png}}%
     \hspace{0.4em}北京流金岁月科技 (军民融合部)}{数据平台（内部平台）}{后端开发}{}
 
-\cvevent{2024/02 -- 2025/05 (实习)}{%
+\cvevent{2024/02 -- 2024/05 (实习)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/美团.png}}%
     \hspace{0.4em}美团 (质量工程部/酒旅测试组)}{电商（B端商家侧）}{测试开发}{}
 
@@ -159,25 +196,9 @@
     }
 }
 
-\cvsection{北京流金岁月科技有限公司}
-
-\cvproject{项目一：数据同步与监控平台}{}{2024/12 -- 2025/03}{%
-    \cvtech{Java、SpringBoot、Maven、Oracle、JDBC、Git}
-    \cvlabeled{项目概述}{面向公司多服务数据分散、缺少统一数据基建的现状，建设从数据接入、清洗、审核到同步入仓的全流程数据处理链路，并配套建设同步过程的监控告警体系。}
-    \cvlabeled{项目实现}{%
-        \begin{itemize}
-            \item \textbf{系统架构优化}：针对多数据源场景下 Controller 频繁手动实例化导致的代码重复问题，利用 JDK 动态代理 + 反射封装统一代理层，将实例化与横切逻辑集中管理，实现模块解耦。
-
-            \item \textbf{数据同步与监控}：参与跨库表结构映射、规则引擎驱动的清洗审核、数据同步的核心链路开发；建设数字化监控模块与预警机制，同步异常时自动触发告警；监控看板采用定时缓存预热策略，解决大数据量加载慢的问题。
-
-            \item \textbf{工程优化}：设计自定义注解 + AOP 切面的冗余字段自动处理方案（@RedundantField + @IgnoreRedundant），AOP 在请求进入前自动清理冗余数据，消除每个接口手工 set null 的重复代码。
-        \end{itemize}
-    }
-}
-
 \cvsection{个人开源项目}
 
-\cvproject{项目一：仿"B站"弹幕视频网站}{}{2024/05 -- 2024/11}{%
+\cvproject{项目一：仿"B站"弹幕视频网站}{}{2026/05}{%
     \cvlabeled{项目地址}{%
         \begingroup
         \hypersetup{urlcolor=primaryblue}%
@@ -199,6 +220,74 @@
             \item \textbf{微服务架构改造}：基于 Spring Cloud Alibaba 完成单体应用微服务化升级，搭建 Nacos 注册中心 + Spring Cloud Gateway 统一网关，通过全局过滤器实现 JWT 统一鉴权与 X-User-Id 请求头注入，下游服务无需各自处理鉴权逻辑；采用 OpenFeign + Nacos 服务发现实现跨服务调用。
 
             \item \textbf{分布式事务}：视频投稿涉及 content-service 写视频表和 legacy-service 创建动态两个跨服务操作。评估 XA / Seata AT / TCC / 最大努力通知四种方案后，选择 RocketMQ 事务消息实现最终一致性：content-service 本地事务内写视频 + 发半消息，Broker 回查确认后投递，legacy 异步消费创建动态。设计入库消费者与扩散消费者独立重试（16 次递增），解决 Seata AT 无法覆盖 MQ + Redis 的跨存储回滚问题，实现 DB / MQ / Redis 三层最终一致。
+        \end{itemize}
+    }
+}
+
+\cvsection{北京流金岁月科技有限公司}
+
+\cvproject{项目一：数据同步与监控平台}{}{2024/12 -- 2025/03}{%
+    \cvtech{Java、SpringBoot、Maven、Oracle、JDBC、Git}
+    \cvlabeled{项目概述}{面向公司多服务数据分散、缺少统一数据基建的现状，建设从数据接入、清洗、审核到同步入仓的全流程数据处理链路，并配套建设同步过程的监控告警体系。}
+    \cvlabeled{项目实现}{%
+        \begin{itemize}
+            \item \textbf{系统架构优化}：针对多数据源场景下 Controller 频繁手动实例化导致的代码重复问题，利用 JDK 动态代理 + 反射封装统一代理层，将实例化与横切逻辑集中管理，实现模块解耦。
+
+            \item \textbf{数据同步与监控}：参与跨库表结构映射、规则引擎驱动的清洗审核、数据同步的核心链路开发；建设数字化监控模块与预警机制，同步异常时自动触发告警；监控看板采用定时缓存预热策略，解决大数据量加载慢的问题。
+
+            \item \textbf{工程优化}：设计自定义注解 + AOP 切面的冗余字段自动处理方案（@RedundantField + @IgnoreRedundant），AOP 在请求进入前自动清理冗余数据，消除每个接口手工 set null 的重复代码。
+        \end{itemize}
+    }
+}
+
+\cvsection{丁香园}
+
+\cvproject{项目一："丁香人才"小程序 UI 自动化测试}{}{2023/04 -- 2023/08}{%
+    \cvtech{Python、minium 框架、Git}
+    \cvlabeled{项目概述}{"丁香人才"是面向医护群体的垂直招聘小程序，存在较多回归测试场景，耗费人力且缺少成熟的自动化测试平台。基于微信官方 minium 框架搭建 UI 自动化测试平台，编写和维护回归测试用例。}
+    \cvlabeled{项目实现}{%
+        \begin{itemize}
+            \item \textbf{UI 自动化脚本开发}：使用 Python + minium 框架独立设计与编写企业屏蔽详情页、招聘公告页面共计两个页面的回归测试用例及 10+ 个自动化脚本，代码经走查后 merge 到主分支。
+            \item \textbf{代码优化}：对自动化脚本进行逻辑重构，降低代码冗余度和耦合度，提高可拓展性。
+        \end{itemize}
+    }
+}
+
+\cvsection{哔哩哔哩}
+
+\cvproject{项目一：UGC 播放页测试与播放一致性改造}{}{2023/09 -- 2024/02}{%
+    \cvtech{Python、Golang、Git}
+    \cvlabeled{项目概述}{UGC 播放页是 B 站用户核心体验场景（客户端日活 1500w，接口 QPS 过万）。UGC 和 OGV 独立维护两套播放体系，存在体验不一致、重复造轮子等问题，2023 年对播放器播放页进行了多场景融合改造。}
+    \cvlabeled{项目实现}{%
+        \begin{itemize}
+            \item \textbf{全流程测试}：参与播放一致性相关需求的移动端和服务端测试，执行 220+ 总包 case，优化 15+ case，沉淀 23+ 业务文档，针对一致性需求进行系统回归测试和 UI/UX DIFF，排查 40+ bug。
+            \item \textbf{接口自动化从 0 到 1}：梳理编写 57 条 P0 自动化 case，构造 UAT/PRE 双环境数据，从 0 到 1 落地接口自动化专项测试，发现 1 例线上 bug。
+            \item \textbf{测试体系建设}：累计完成 17+ 需求测试，编写 6+ 测试用例，发现 86+ bug，编写 100+ Python 自动化脚本。
+        \end{itemize}
+    }
+}
+
+\cvsection{美团}
+
+\cvproject{项目一：直连上单流程接口自动化测试}{}{2024/02 -- 2024/05}{%
+    \cvtech{Java、Mario 框架（基于 TestNG）、TestX}
+    \cvlabeled{项目概述}{直连平台将供应商的住宿、餐饮等产品通过系统对接转化为美团可售卖产品。针对存量微服务进行自动化用例补充和业务沉淀，覆盖上单商品同步服务的核心链路。}
+    \cvlabeled{项目实现}{%
+        \begin{itemize}
+            \item \textbf{自动化方案设计}：沉淀业务逻辑，梳理校验链路（网关入参校验 \ \faArrowRight\  内部服务入参校验 \ \faArrowRight\  数据库落库校验 \ \faArrowRight\  业务层映射转发校验），设计自动化方案，完成 5 个主要流程 24 个接口自动化用例，代码覆盖率提升至 77\%。
+            \item \textbf{数据构造}：面对中间层校验链路长、小流量接口日志缺失、接口文档缺失等难点，通过代码走读确定参数模型，完成复杂数据构造。
+        \end{itemize}
+    }
+}
+
+\cvproject{项目二：JBOX 环境治理工具}{}{2024/02 -- 2024/05}{%
+    \cvtech{Java、SpringBoot、Redis、Redisson、Git}
+    \cvlabeled{项目概述}{直连团队采用 JBOX 插件容器技术对接不同商家，存在"平台"和"插件"概念及特定部署顺序。当前内部平台无法按序部署插件、感知插件状态、及时同步线上下插件，导致环境不稳定和自动化用例大量无效失败。}
+    \cvlabeled{项目实现}{%
+        \begin{itemize}
+            \item \textbf{插件同步工具}：独立负责线上下插件同步工具开发，解决线上下插件及时同步问题。
+            \item \textbf{插件监控修复}：参与插件监控修复工具开发，重新设计原问题方案并完成开发和测试，日均修复 20+ 问题插件。
+            \item \textbf{工程优化}：利用 Redis 分布式锁解决同平台插件必须串行部署的问题；通过多线程并发部署不同平台插件，提高部署效率。
         \end{itemize}
     }
 }
