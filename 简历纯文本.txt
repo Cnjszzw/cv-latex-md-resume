@@ -62,7 +62,7 @@
 	2. Plan - Confirm - Execute 三段式流程：规划阶段 LLM 输出结构化 JSON 任务计划（目标 + 有序步骤列表 + 飞前检查），确认阶段前端渲染规划卡片等待用户审核（高风险操作不进入自动执行链路），执行阶段 SSE 流式推送每步状态（等待 / 进行中 / 完成 / 失败）。每步工具返回失败或急停时立即 break 中止后续，防止无人机已悬停但 Agent 继续执行后续步骤的级联错误。
 	3. 安全校验与 Human-in-the-Loop：SafetyGate 层硬编码安全规则（高度限制 10-120m、GPS 坐标中国境内范围校验、电量预估），LLM 负责意图理解，安全决策由确定性代码执行，两者不混淆。高风险操作执行前强制人工确认。
 	4. 工具定义与复合封装：基于 LangChain @tool 装饰器定义 16 个无人机工具函数（飞行、相机、曝光、云台），函数的 docstring 与类型注解自动生成 OpenAI Function Calling Schema。遵循"工具暴露业务语义而非硬件原语"原则：硬件仅有 start/stop 录像指令，工具层封装 record_for_duration(60) 复合工具（start -> 倒计时 -> stop），LLM 不感知时序编排。
-	5. 同步 LLM 与异步飞行的状态同步：LLM 是秒级同步推理，无人机飞行是分钟级异步过程。工具函数内部封装 Redis 轮询等待：Python redis-py 直连 localhost Redis（<1ms/次），每秒查询任务状态，completed/failed/超时后返回 LLM。中间进度仅推前端展示。评估四种替代方案后选 Redis 直连（零新依赖、零连接管理）。
+	5. 同步 LLM 与异步飞行的状态同步：LLM 是秒级同步推理，无人机飞行是分钟级异步过程。工具函数内部封装 Redis 轮询等待：Python redis-py 直连 Redis（<1ms/次），每秒查询任务状态，completed/failed/超时后返回 LLM。中间进度仅推前端展示。评估四种替代方案后选 Redis 直连（零新依赖、零连接管理）。
 	6. LangGraph 环绕飞行子图：AgentExecutor 无法可靠处理环绕飞行（LLM 需自主判断绕到哪了、该不该停）。引入 LangGraph 将环绕流程建模为显式子图：enter_orbit -> orbit_loop（条件边: 角度 >= 360度时退出）-> exit_orbit，执行周期由图的边决定而非 LLM 判断。主链路保持 AgentExecutor（不过度设计），仅在状态机子任务用 LangGraph。
 	7. 急停与 SSE 流式交互：急停按钮走独立 MQTT 通道直达无人机硬件（不经过 Agent/LLM），前端同时关闭 SSE 连接终止当前会话。基于 FastAPI + SSE 实现 Agent 执行过程实时推送，工具调用卡片和进度在前端实时渲染。
 ● 项目产出：

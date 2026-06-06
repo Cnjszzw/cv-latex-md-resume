@@ -150,7 +150,7 @@
 
             \item \textbf{工具定义与复合封装}：基于 LangChain @tool 装饰器定义 16 个无人机工具函数（飞行 / 相机 / 曝光 / 云台），docstring 与类型注解自动生成 Function Calling Schema。遵循"工具暴露业务语义而非硬件原语"原则：硬件仅有 start/stop 录像原子指令，工具层封装复合工具（start -> 倒计时 -> stop），LLM 不感知时序编排。
 
-            \item \textbf{同步 LLM 与异步飞行的状态同步}：无人机飞行是分钟级异步过程，工具函数内部封装 Redis 轮询等待：Python redis-py 直连 localhost Redis（$<$1ms/次），每秒查询任务状态。评估四种替代方案后选 Redis 直连（零新依赖、零连接管理），中间进度仅推前端、LLM 不感知。
+            \item \textbf{同步 LLM 与异步飞行的状态同步}：无人机飞行是分钟级异步过程，工具函数内部封装 Redis 轮询等待：Python redis-py 直连 Redis（$<$1ms/次），每秒查询任务状态。评估四种替代方案后选 Redis 直连（零新依赖、零连接管理），中间进度仅推前端、LLM 不感知。
 
             \item \textbf{LangGraph 环绕飞行子图}：AgentExecutor 无法可靠处理环绕飞行（LLM 需自主判断时机）。引入 LangGraph 建模显式子图：enter\_orbit -> orbit\_loop（条件边: 角度 $\ge$ 360\textdegree{} 时退出）-> exit\_orbit，执行周期由图的边决定。主链路保持 AgentExecutor（不过度设计），仅状态机子任务用 LangGraph。
 
