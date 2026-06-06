@@ -1,0 +1,234 @@
+% ============================================================
+% resume.tex — 由 AI 自动生成，基于 src/resume.md + templates/
+% 请勿手动编辑此文件，修改简历内容请编辑 src/resume.md
+% 修改样式请编辑 templates/style.sty
+% ============================================================
+
+\documentclass[10pt,a4paper]{article}
+
+% --- 加载样式与模板 ---
+\input{templates/style.sty}
+\input{templates/cv.latex}
+
+% --- 局部重定义：本简历首行用黑色（不影响原简历） ---
+% 默认三列：教育经历/项目经历用
+\renewcommand{\cvheading}[3]{%
+    \noindent
+    \makebox[0.30\textwidth][l]{\textbf{#1}}%
+    \makebox[0.42\textwidth][l]{\textbf{#2}}%
+    \makebox[0.28\textwidth][r]{\textbf{#3}}\par
+}
+\let\cvheadingThree\cvheading% 保存3列版本，项目部分恢复用
+\newcommand{\cvbullet}{\tikz[baseline=-0.65ex]{\fill[black] (0,0) circle (2.2pt);}}% 与itemize统一的圆点
+% 教育经历专用四列（学校 / 学历 / 专业·学院·地点 / 时间）
+\newcommand{\cvheadingEdu}[4]{%
+    \noindent
+    \makebox[0.16\textwidth][l]{\textbf{#1}}\hspace{0.04\textwidth}%
+    \makebox[0.16\textwidth][l]{\textbf{#2}}\hspace{0.04\textwidth}%
+    \makebox[0.32\textwidth][l]{\textbf{#3}}%
+    \makebox[0.28\textwidth][r]{\textbf{#4}}\par
+}
+\newcommand{\cveventEdu}[5]{%
+    \vspace{0.3em}
+    \cvheadingEdu{#1}{#2}{#3}{#4}
+    \ifx\relax#5\relax\else
+        \vspace{0.06em}
+        #5
+    \fi
+}
+% 四列版本：工作经历用（时间 / 公司 / 领域 / 岗位）
+% 调格式看这里：六个数字总和必须 ≤ 1.0
+\newcommand{\cvheadingWork}[4]{%
+    \noindent
+    \makebox[0.14\textwidth][l]{\textbf{#1}}\hspace{0.14\textwidth}% ①时间列宽 | ②时间→公司间隙(改大=整体右移)
+    \makebox[0.24\textwidth][l]{\textbf{#2}}\hspace{0.14\textwidth}% ③公司列宽 | ④公司→领域间隙
+    \makebox[0.14\textwidth][l]{\textbf{#3}}%                        % ⑤领域列宽
+    \makebox[0.20\textwidth][r]{\textbf{#4}}\par                     % ⑥岗位列宽
+}
+% 工作经历专用 \cvevent（5参：时间/公司/领域/岗位/描述）
+\newcommand{\cveventWork}[5]{%
+    \vspace{0.3em}
+    \cvheadingWork{#1}{#2}{#3}{#4}
+    \ifx\relax#5\relax\else
+        \vspace{0.06em}
+        #5
+    \fi
+}
+
+% ============================================================
+% 个人信息设置
+% ============================================================
+\name{赵志文}
+\lineA{%
+    \faPhone\ 185-5613-5826 \enspace|\enspace
+    \faEnvelope\ \href{mailto:cnjszzw@qq.com}{cnjszzw@qq.com} \enspace|\enspace
+    \faWeixin\ cnjszzw%
+}
+\lineB{籍贯：江苏扬州 \enspace|\enspace 求职意向：后端开发/AI 全栈开发 \enspace|\enspace 年龄：27 (1999/10/27)}
+\photo{assets/photo.jpg}
+
+% ============================================================
+% 文档正文
+% ============================================================
+\begin{document}
+
+\makecvheader
+
+% ============================================================
+% 教育经历
+% ============================================================
+\vspace{-0.825cm}%  第一个标题向上偏移，利用 header 下方空白
+\cvsection{教育经历}
+
+% 切换为4列布局（学校 / 学历 / 专业·学院·地点 / 时间）
+\let\cvheading\cvheadingEdu
+\let\cvevent\cveventEdu
+
+\cvevent{山东师范大学}{本科（全日制）}{广播电视编导(新闻与传媒学院/山东济南)}{2018/09 -- 2022/06}{}
+
+\cvevent{西京学院}{硕士（全日制）}{计算机技术(计算机学院/陕西西安)}{2022/09 -- 2025/01}{}
+
+% ============================================================
+% 工作经历
+% ============================================================
+\cvsection{工作经历}
+
+% 切换为4列布局（时间 / 公司 / 领域 / 岗位）
+\let\cvheading\cvheadingWork
+\let\cvevent\cveventWork
+
+\cvevent{2025/04 -- 2026/03 (正职)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/上海环创通信科技股份有限公司.png}}%
+    \hspace{0.4em}上海寰创通信 (软件平台部)}{物联网（政企B端）}{AI 全栈开发}{}
+
+\cvevent{2024/12 -- 2025/03 (实习)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/北京流金岁月科技有限公司.png}}%
+    \hspace{0.4em}北京流金岁月科技 (军民融合部)}{数据平台（内部平台）}{后端开发}{}
+
+\cvevent{2024/02 -- 2025/05 (实习)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/美团.png}}%
+    \hspace{0.4em}美团 (质量工程部/酒旅测试组)}{电商（B端商家侧）}{测试开发}{}
+
+\cvevent{2023/09 -- 2024/02 (实习)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/哔哩哔哩.png}}%
+    \hspace{0.4em}哔哩哔哩 (用户生态技术质量部)}{内容社区（C端）}{测试开发}{}
+
+\cvevent{2023/04 -- 2023/08 (实习)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/丁香园.png}}%
+    \hspace{0.4em}丁香园 (丁香人才/Insight)}{招聘平台（B/C双端）}{测试开发}{}
+
+
+% ============================================================
+% 项目经历（按公司分组）
+% ============================================================
+\let\cvheading\cvheadingThree% 恢复3列版本
+\cvsection{上海寰创通信股份有限公司}
+
+\cvproject{项目一：无人机管理云平台}{}{2025/04 -- 2026/03}{%
+    \cvtech{Java、SpringBoot、Redis、MySQL、MyBatis（Plus）、WebSocket、MQTT、ZLM、Vue 3、TypeScript、Cesium}
+    \cvlabeled{项目概述}{平台原有能力集中于地面 Mesh 设备管理，缺乏对无人机的统一接入与远程控制能力，无法满足消防场景下超视距视频回传与飞行控制需求。利用公司自组网超远距离传输（>20km）优势，建设无人机接入与控制模块，覆盖设备管理、飞行控制、相机操作、视频点播及三维 GIS 可视化等核心能力，实现空地一体化指挥调度。}
+    \cvlabeled{项目实现}{%
+        \begin{itemize}
+            \item \textbf{无人机接入与操控}：基于自组网硬件 + MQTT 搭建前端到无人机的实时操控通道（参考 DJI Cloud API 消息格式）。前端封装 MQTT 客户端，支持 1s 心跳保活、订阅自动恢复及遥测数据实时接收。后端通过 Redis 管理设备在线状态，区分主动下线与异常断连；利用 Spring 启动就绪事件 + MQTT 自定义重连指令，解决服务器重启后设备无法自动上线的问题，实现无人值守自愈。
+
+            \item \textbf{飞行控制与相机系统}：完成一键起飞、指点飞行、环绕飞行、航线飞行、返航、急停等飞行指令，以及变焦、拍照、录像、模式切换、云台重置、框选变焦、AIM 瞄准等相机负载指令的功能实现。前期大部分指令由前端通过 MQTT 与硬件直接通信以快速验证功能，后期迁移至后端统一处理，提高可维护性。后端增加飞行安全校验逻辑：起飞/返航/目标高度 vs 系统限高对比校验、降落确认与取消。
+
+            \item \textbf{实时视频点播服务}：集成 ZLM 流媒体服务器，搭建无人机视频流 \ \faArrowRight\  ZLM 拉流转发 \ \faArrowRight\  前端基于 Jessibuca 实现低延迟播放的完整链路。基于 Spring DeferredResult 实现异步点播：前端发起 HTTP 请求后，后端立即释放 Tomcat 线程，异步等待 ZLM 推流就绪后再通过回调返回播放地址，避免点播等待期间占用线程资源。设计 Redis 引用计数策略：每个视频流维护观看用户集合，用户关闭时计数减 1，归零时自动停止拉流，避免无人观看时持续消耗带宽。
+        \end{itemize}
+    }
+}
+
+\cvproject{项目二：AI Agent 无人机自然语言操控系统}{}{2025/04 -- 2026/03}{%
+    \cvtech{Python、LangChain、DeepSeek API、FastAPI、SSE、MCP、LangGraph、Redis}
+    \cvlabeled{项目概述}{面向消防应急指挥场景，对标 DJI 司空 2 Copilot，设计并实现基于 LLM Agent 的无人机自然语言操控系统。用户通过自然语言输入（如"飞到陆家嘴，变焦 7x 拍照，返航"），Agent 自动完成意图理解→任务规划→安全校验→指令编排执行的全链路闭环。采用 Python（Agent 编排层）+ Java（设备控制层）两层架构，通过 REST 通信解耦。}
+    \cvlabeled{项目实现}{%
+        \begin{itemize}
+            \item \textbf{MCP 外部工具集成}：通过 MCP 协议（StreamableHTTP/JSON-RPC 2.0）集成高德地图 MCP Server，langchain-mcp-adapters 一行 MultiServerMCPClient 完成 initialize→tools/list 握手，15 个地图工具自动注册。地理编码返回多个候选项时回传 LLM 根据上下文选择最佳匹配（"陆家嘴"6 个候选→LLM 判定选上海浦东），解决地名歧义问题。
+
+            \item \textbf{Plan→Confirm→Execute 三段式流程}：规划阶段 LLM 输出结构化 JSON 任务计划（目标+有序步骤+飞前检查）；确认阶段前端渲染规划卡片，高风险操作不进入自动执行链路；执行阶段 SSE 流式推送每步状态（○→◐→✓/✗）。每步返回 ❌/⛔ 时立即 break 中止后续，防止级联错误。
+
+            \item \textbf{工具定义与复合封装}：基于 LangChain @tool 装饰器定义 16 个无人机工具函数（飞行/相机/曝光/云台），docstring+类型注解自动生成 Function Calling Schema。遵循"工具暴露业务语义而非硬件原语"原则——硬件仅有 start/stop 录像原子指令，工具层封装 record\-\_for\-\_duration(60) 复合工具（start→倒计时→stop），LLM 不感知时序编排。
+
+            \item \textbf{同步 LLM 与异步飞行的状态同步}：无人机飞行是分钟级异步过程，工具函数内部封装 Redis 轮询等待——Python redis-py 直连 localhost Redis（<1ms/次），每秒查询任务状态。评估四种替代方案后选 Redis 直连（零新依赖/零连接管理），中间进度仅推前端、LLM 不感知。
+
+            \item \textbf{LangGraph 环绕飞行子图}：AgentExecutor 无法可靠处理环绕飞行（LLM 需自主判断时机）。引入 LangGraph 建模显式子图：enter\-\_orbit→orbit\-\_loop（条件边: $\theta \ge 360^\circ$ 退出）→exit\-\_orbit，执行周期由图的边决定。主链路保持 AgentExecutor（不过度设计），仅状态机子任务用 LangGraph。
+
+            \item \textbf{安全校验与急停}：SafetyGate 硬编码安全规则（高度限制/坐标范围/电量预估），LLM 不参与安全决策。Human-in-the-loop 高风险确认。急停走独立 MQTT 通道直达硬件（不经过 Agent/LLM），前端同步关闭 SSE 终止会话。
+        \end{itemize}
+    }
+}
+
+\cvsection{北京流金岁月科技有限公司}
+
+\cvproject{项目一：数据同步与监控平台}{}{2024/12 -- 2025/03}{%
+    \cvtech{Java、SpringBoot、Maven、Oracle、JDBC、Git}
+    \cvlabeled{项目概述}{面向公司多服务数据分散、缺少统一数据基建的现状，建设从数据接入、清洗、审核到同步入仓的全流程数据处理链路，并配套建设同步过程的监控告警体系。}
+    \cvlabeled{项目实现}{%
+        \begin{itemize}
+            \item \textbf{系统架构优化}：针对多数据源场景下 Controller 频繁手动实例化导致的代码重复问题，利用 JDK 动态代理 + 反射封装统一代理层，将实例化与横切逻辑集中管理，实现模块解耦。
+
+            \item \textbf{数据同步与监控}：参与跨库表结构映射、规则引擎驱动的清洗审核、数据同步的核心链路开发；建设数字化监控模块与预警机制，同步异常时自动触发告警；监控看板采用定时缓存预热策略，解决大数据量加载慢的问题。
+
+            \item \textbf{工程优化}：设计自定义注解 + AOP 切面的冗余字段自动处理方案（@RedundantField + @IgnoreRedundant），AOP 在请求进入前自动清理冗余数据，消除每个接口手工 set null 的重复代码。
+        \end{itemize}
+    }
+}
+
+\cvsection{个人开源项目}
+
+\cvproject{项目一：仿"B站"弹幕视频网站}{}{2024/05 -- 2024/11}{%
+    \cvlabeled{项目地址}{%
+        \begingroup
+        \hypersetup{urlcolor=primaryblue}%
+        \url{https://github.com/Cnjszzw/imooc-bilibili} \textbar\ \url{https://github.com/Cnjszzw/bilibili-microservices}%
+        \endgroup
+    }
+    \cvtech{SpringCloud Alibaba、Nacos、Gateway、OpenFeign、Seata、MyBatis、Redis、RocketMQ、Elasticsearch、WebSocket}
+    \cvlabeled{项目概述}{实现B站核心功能——用户体系、视频管理、弹幕系统、站内搜索，涵盖从注册登录、视频上传观看、弹幕实时推送到全文检索的完整闭环。}
+    \cvlabeled{项目实现}{%
+        \begin{itemize}
+            \item \textbf{用户体系与安全}：基于工厂 + 策略模式构建登录系统（UserGranter 策略接口 + UserLoginFactory 配置驱动注册），新增登录方式只需实现接口并配置，无需修改调用方代码。基于 JWT 双 Token（access + refresh）实现无感登录，RSA 加密传输 + MD5 加盐存储保证密码安全。基于 RBAC + AOP 切面实现接口级和数据级权限控制，与业务代码解耦。
+
+            \item \textbf{站内全文搜索}：集成 Elasticsearch，基于 Multi-Match 实现跨字段检索（title\slash nick\slash description），支持关键词高亮、多维度排序（时间/弹幕数/播放量）及分页查询。用户注册和视频发布时同步写入 ES 索引，保证搜索实时性。
+
+            \item \textbf{视频存储与传输}：集成 FastDFS 实现视频分片上传、断点续传与秒传（文件指纹校验），通过 Nginx 提供外部 HTTP 访问。
+
+            \item \textbf{弹幕与动态推送}：基于 WebSocket 构建弹幕实时推送，弹幕消息先写入 RocketMQ 异步消费落库，避免高并发下直接写 DB 导致压力过大。动态发布系统经历三轮迭代：V1 同步推 \ \faArrowRight\  V2 MQ 异步推 \ \faArrowRight\  V3 推拉结合。推拉结合思路：粉丝 < 10w 走推模式（遍历写入粉丝收件箱），粉丝 ≥ 10w 的头部 UP 主走拉模式（只写自己发件箱，粉丝读时主动拉取），消除大 V 写扩散问题，支撑百万级粉丝场景。经压测验证，10w 粉丝场景下遍历写入从 7s 降至 $\sim$1ms，用户发布等待始终维持在 40ms 以内。
+
+            \item \textbf{微服务架构改造}：基于 Spring Cloud Alibaba 完成单体应用微服务化升级，搭建 Nacos 注册中心 + Spring Cloud Gateway 统一网关，通过全局过滤器实现 JWT 统一鉴权与 X-User-Id 请求头注入，下游服务无需各自处理鉴权逻辑；采用 OpenFeign + Nacos 服务发现实现跨服务调用。
+
+            \item \textbf{分布式事务}：视频投稿涉及 content-service 写视频表和 legacy-service 创建动态两个跨服务操作。评估 XA / Seata AT / TCC / 最大努力通知四种方案后，选择 RocketMQ 事务消息实现最终一致性：content-service 本地事务内写视频 + 发半消息，Broker 回查确认后投递，legacy 异步消费创建动态。设计入库消费者与扩散消费者独立重试（16 次递增），解决 Seata AT 无法覆盖 MQ + Redis 的跨存储回滚问题，实现 DB / MQ / Redis 三层最终一致。
+        \end{itemize}
+    }
+}
+
+% ============================================================
+% 竞赛/获奖/证书
+% ============================================================
+\cvsection{竞赛/获奖/证书}
+
+\begin{itemize}
+    \item 考研初试368分（专业第一）\enspace|\enspace 2022西京学院一等奖学金（前20\%）\enspace|\enspace 2022传智杯程序设计赛区域赛二等奖（前20\%）
+    \item 雅思IELTS（6.5分）\enspace|\enspace 英语六级CET-6（593分）\enspace|\enspace 国际人才英语考试ETIC（优秀等级）\enspace|\enspace 计算机二级证书（MS OFFICE）
+\end{itemize}
+
+% ============================================================
+% 专业技能
+% ============================================================
+\cvsection{专业技能}
+
+\begin{multicols}{2}
+\cvskill{Java 全家桶}{熟练掌握 Java，熟悉 JVM 内存模型与并发编程；熟练使用 SpringBoot、MyBatis（Plus）；了解 SpringCloud 微服务体系（Nacos、OpenFeign、Gateway）}
+
+\cvskill{数据存储与检索}{熟悉 MySQL，有 N+1 查询优化（预加载 + HashMap 索引）、延迟关联、覆盖索引等 SQL 调优实战经验；熟悉 Redis 缓存策略与数据一致性保障；熟悉 Elasticsearch 全文检索（Multi-Match、高亮、多维度排序）}
+
+\cvskill{AI 全栈开发}{了解 Vue、Cesium、Android 基础开发；熟练使用 Trae、Cursor、ClaudeCode 等 AI 辅助编码工具，了解 Function Calling、MCP 协议等 AI 工程化技术}
+
+\cvskill{分布式系统}{了解分布式锁（Redisson）、分布式事务（RocketMQ 事务消息 / TCC / 可靠消息最终一致）、配置中心（Nacos）等常见组件的设计思路与应用场景}
+
+\cvskill{性能优化}{有核心接口性能优化实战经验：千台 Mesh 设备查询从 7-8s 优化至 1s 以内，30w 条日志深分页从 5s 降至 1s 以内（性能提升 5 倍）；善于定位并解决大数据量场景下的查询与存储瓶颈}
+
+\cvskill{工程实践}{熟悉 Logback 日志框架与 Kibana 排障，熟悉 Linux + Docker 基础运维；具备从需求分析到联调交付的全流程能力，有前后端 + 软硬件跨团队协作经验}
+\end{multicols}
+
+\end{document}

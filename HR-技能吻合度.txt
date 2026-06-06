@@ -1,0 +1,1 @@
+技能吻合：1. Java/SpringBoot/SpringCloud Alibaba（Nacos、Gateway、OpenFeign）微服务架构实战经验，独立完成单体应用微服务化升级。2. RESTful API开发经验，曾负责40+个Controller的设计与实现。3. Redis、MySQL、RocketMQ高并发优化实战（千台设备接口7s→1s，推拉结合消除写扩散）。4. 流金岁月实习期间基于规则引擎实现数据清洗与审核流水线，与JD要求的规则引擎经验吻合。5. Docker熟悉基础使用与部署，了解Kubernetes基本概念，有容器化实践经验。6. 无百炼开发平台项目经验，但了解AI工程化相关技术（Function Calling、MCP协议），使用AI编码工具辅助日常开发。
