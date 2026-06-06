@@ -125,21 +125,7 @@
 \let\cvheading\cvheadingThree% 恢复3列版本
 \cvsection{上海寰创通信股份有限公司}
 
-\cvproject{项目一：无人机管理云平台}{}{2025/04 -- 2026/03}{%
-    \cvtech{Java、SpringBoot、Redis、MySQL、MyBatis(Plus)、WebSocket、MQTT、Vue、JavaScript、TypeScript、Cesium}
-    \cvlabeled{项目概述}{平台原有能力集中于地面 Mesh 设备管理，缺乏对无人机的统一接入与远程控制能力，无法满足消防场景下超视距视频回传与飞行控制需求。利用公司自组网超远距离传输（>20km）优势，建设无人机接入与控制模块，覆盖设备管理、飞行控制、相机操作、视频点播及三维 GIS 可视化等核心能力，实现空地一体化指挥调度。}
-    \cvlabeled{项目实现}{%
-        \begin{itemize}
-            \item \textbf{无人机接入与操控}：基于自组网硬件 + MQTT 搭建前端到无人机的实时操控通道（参考 DJI Cloud API 消息格式）。前端封装 MQTT 客户端，支持 1s 心跳保活、订阅自动恢复及遥测数据实时接收。后端通过 Redis 管理设备在线状态，区分主动下线与异常断连；利用 Spring 启动就绪事件 + MQTT 自定义重连指令，解决服务器重启后设备无法自动上线的问题，实现无人值守自愈。
-
-            \item \textbf{飞行控制与相机系统}：完成一键起飞、指点飞行、环绕飞行、航线飞行、返航、急停等飞行指令，以及变焦、拍照、录像、模式切换、云台重置、框选变焦、AIM 瞄准等相机负载指令的功能实现。前期大部分指令由前端通过 MQTT 与硬件直接通信以快速验证功能，后期迁移至后端统一处理，提高可维护性。后端增加飞行安全校验逻辑：起飞/返航/目标高度 vs 系统限高对比校验、降落确认与取消。
-
-            \item \textbf{实时视频点播服务}：集成 ZLM 流媒体服务器，搭建无人机视频流 \ \faArrowRight\  ZLM 拉流转发 \ \faArrowRight\  前端基于 Jessibuca 实现低延迟播放的完整链路。基于 Spring DeferredResult 实现异步点播：前端发起 HTTP 请求后，后端立即释放 Tomcat 线程，异步等待 ZLM 推流就绪后再通过回调返回播放地址，避免点播等待期间占用线程资源。设计 Redis 引用计数策略：每个视频流维护观看用户集合，用户关闭时计数减 1，归零时自动停止拉流，避免无人观看时持续消耗带宽。
-        \end{itemize}
-    }
-}
-
-\cvproject{项目二：WVP Copilot --- 基于 LLM 的无人机 AI Agent 智能体}{}{2025/11 -- 2026/03}{%
+\cvproject{项目一：WVP Copilot --- 基于 LLM 的无人机 AI Agent 智能体}{}{2025/11 -- 2026/03}{%
     \cvtech{Python、LangChain、DeepSeek API、FastAPI、SSE、MCP、LangGraph、Redis}
     \cvlabeled{项目概述}{面向消防应急指挥场景，深度结合软硬件能力与 AI 算法打造无人机智能体 Copilot，极大降低使用门槛。用户只需自然语言描述需求（如"飞到陆家嘴，变焦 7x 拍照，返航"），Copilot 即可精准理解意图，自动拆分为无人机指令序列并编排执行，通过对话的方式完成远程控制与任务下达。采用 Python（Agent 编排层）+ Java（设备控制层）两层架构，通过 REST 通信解耦。}
     \cvlabeled{项目实现}{%
@@ -155,6 +141,20 @@
             \item \textbf{LangGraph 环绕飞行子图}：AgentExecutor 无法可靠处理环绕飞行（LLM 需自主判断时机）。引入 LangGraph 建模显式子图：enter\_orbit -> orbit\_loop（条件边: 角度 $\ge$ 360\textdegree{} 时退出）-> exit\_orbit，执行周期由图的边决定。主链路保持 AgentExecutor（不过度设计），仅状态机子任务用 LangGraph。
 
             \item \textbf{安全校验与急停}：SafetyGate 硬编码安全规则（高度限制 / 坐标范围 / 电量预估），LLM 不参与安全决策。Human-in-the-loop 高风险确认。急停走独立 MQTT 通道直达硬件（不经过 Agent/LLM），前端同步关闭 SSE 终止会话。
+        \end{itemize}
+    }
+}
+
+\cvproject{项目二：无人机管理云平台}{}{2025/04 -- 2026/03}{%
+    \cvtech{Java、SpringBoot、Redis、MySQL、MyBatis(Plus)、WebSocket、MQTT、Vue、JavaScript、TypeScript、Cesium}
+    \cvlabeled{项目概述}{平台原有能力集中于地面 Mesh 设备管理，缺乏对无人机的统一接入与远程控制能力，无法满足消防场景下超视距视频回传与飞行控制需求。利用公司自组网超远距离传输（>20km）优势，建设无人机接入与控制模块，覆盖设备管理、飞行控制、相机操作、视频点播及三维 GIS 可视化等核心能力，实现空地一体化指挥调度。}
+    \cvlabeled{项目实现}{%
+        \begin{itemize}
+            \item \textbf{无人机接入与操控}：基于自组网硬件 + MQTT 搭建前端到无人机的实时操控通道（参考 DJI Cloud API 消息格式）。前端封装 MQTT 客户端，支持 1s 心跳保活、订阅自动恢复及遥测数据实时接收。后端通过 Redis 管理设备在线状态，区分主动下线与异常断连；利用 Spring 启动就绪事件 + MQTT 自定义重连指令，解决服务器重启后设备无法自动上线的问题，实现无人值守自愈。
+
+            \item \textbf{飞行控制与相机系统}：完成一键起飞、指点飞行、环绕飞行、航线飞行、返航、急停等飞行指令，以及变焦、拍照、录像、模式切换、云台重置、框选变焦、AIM 瞄准等相机负载指令的功能实现。前期大部分指令由前端通过 MQTT 与硬件直接通信以快速验证功能，后期迁移至后端统一处理，提高可维护性。后端增加飞行安全校验逻辑：起飞/返航/目标高度 vs 系统限高对比校验、降落确认与取消。
+
+            \item \textbf{实时视频点播服务}：集成 ZLM 流媒体服务器，搭建无人机视频流 \ \faArrowRight\  ZLM 拉流转发 \ \faArrowRight\  前端基于 Jessibuca 实现低延迟播放的完整链路。基于 Spring DeferredResult 实现异步点播：前端发起 HTTP 请求后，后端立即释放 Tomcat 线程，异步等待 ZLM 推流就绪后再通过回调返回播放地址，避免点播等待期间占用线程资源。设计 Redis 引用计数策略：每个视频流维护观看用户集合，用户关闭时计数减 1，归零时自动停止拉流，避免无人观看时持续消耗带宽。
         \end{itemize}
     }
 }
