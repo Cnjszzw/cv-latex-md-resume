@@ -134,3 +134,45 @@ make distclean  # 清理所有编译产物（含 PDF）
 - **WebSocket 弹幕**：实时弹幕推送，异步化存储
 - **FastDFS 视频**：分片上传、断点续传、秒传
 - **线程池优化**：自定义 ThreadPoolExecutor（5 核心/6 最大/60s 超时/LinkedBlockingQueue），数据聚合接口从 150ms→50ms
+
+## 两份简历的样式隔离
+
+- **`templates/style.sty`** — 原后端简历样式，不动
+- **`templates/style-aiagent.sty`** — AI 全栈工程师简历专用样式（`\raggedbottom`、`\needspace` 已去掉、黑色标题、紧凑列表等）
+- **`src/resume.tex`** — 引用 `style.sty`
+- **`src/resume AIAgent.tex`** — 引用 `style-aiagent.sty`
+
+## 技术栈图标（devicon）
+
+devicon 完整仓库 clone 在 `assets/icons/devicon/`，精选图标复制到了 `assets/myIcons/`。
+
+### 使用方式
+
+XeLaTeX 原生支持 EPS，可直接用：
+```latex
+\includegraphics[height=0.5cm]{assets/myIcons/java.eps}
+```
+
+SVG 需要先转 PNG（推荐 64x64 或 128x128），或用 `svg` 宏包 + Inkscape + `--shell-escape`。
+
+### 已复制到 myIcons 的图标
+
+| 图标 | EPS | SVG |
+|------|-----|-----|
+| Docker | ✓ | ✓ |
+| Elasticsearch | - | ✓ |
+| FastAPI | - | ✓ |
+| Flask | - | ✓ |
+| Git | ✓ | ✓ |
+| Java | ✓ | ✓ |
+| Maven | - | ✓ |
+| MySQL | ✓ | ✓ |
+| Nginx | ✓ | ✓ |
+| OpenCV | - | ✓ |
+| PostgreSQL | ✓ | ✓ |
+| Python | ✓ | ✓ |
+| PyTorch | ✓ | ✓ |
+| Redis | ✓ | ✓ |
+| Spring | - | ✓ |
+| TypeScript | ✓ | ✓ |
+| Vue.js | ✓ | ✓ |

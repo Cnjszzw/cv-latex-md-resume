@@ -7,32 +7,11 @@
 \documentclass[10pt,a4paper]{article}
 
 % --- 加载样式与模板 ---
-\input{templates/style.sty}
+\input{templates/style-aiagent.sty}
 \input{templates/cv.latex}
 
-% --- 局部覆盖：压缩间距减少页面空白（不影响原简历） ---
-\raggedbottom% 取消页面强制等高校准，消除大片空白
-\linespread{1.25}% 行距从 1.3 压缩
-\setlist[itemize]{
-    leftmargin = 1em,
-    itemsep    = 0.02em,% 列表项间距进一步压缩
-    topsep     = 0.04em,
-    parsep     = 0em,
-    label      = {\tikz[baseline=-0.65ex]{\fill[black] (0,0) circle (2.2pt);}},
-    labelsep   = 0.35em,
-}
-
-% --- 局部重定义：本简历首行用黑色（不影响原简历） ---
-% 默认三列：教育经历/项目经历用
-\renewcommand{\cvheading}[3]{%
-    \noindent
-    \makebox[0.30\textwidth][l]{\textbf{#1}}%
-    \makebox[0.42\textwidth][l]{\textbf{#2}}%
-    \makebox[0.28\textwidth][r]{\textbf{#3}}\par
-}
-\renewcommand{\cvtech}[1]{\noindent\textbf{技术栈：#1}\par\vspace{0.04em}}% 技术栈全部加粗
+% --- 局部扩展：四列布局等（调格式直接改数字） ---
 \let\cvheadingThree\cvheading% 保存3列版本，项目部分恢复用
-\newcommand{\cvbullet}{\tikz[baseline=-0.65ex]{\fill[black] (0,0) circle (2.2pt);}}% 与itemize统一的圆点
 % 教育经历专用四列（学校 / 学历 / 专业·学院·地点 / 时间）
 \newcommand{\cvheadingEdu}[4]{%
     \noindent
@@ -68,11 +47,6 @@
     \fi
 }
 
-% --- 局部重定义 makecvheader：加第三行 + 调名字间距 ---
-\makeatletter
-\def\cv@lineC{} \def\lineC#1{\def\cv@lineC{#1}}
-\makeatother
-
 % ============================================================
 % 个人信息设置
 % ============================================================
@@ -85,37 +59,6 @@
 \lineB{籍贯：江苏扬州 \enspace|\enspace 年龄：27 (1999/10/27) \enspace|\enspace 性别：男}
 \lineC{求职意向：后端开发/AI 全栈开发/测试开发}
 \photo{assets/photo.jpg}
-
-% --- 局部重定义 makecvheader ---
-\makeatletter
-\renewcommand{\makecvheader}{%
-    \noindent
-    \rlap{%
-        \makebox[\textwidth][l]{%
-            \hfill
-            \ifx\cv@photo\empty
-                \tikz{
-                    \node[rectangle,draw=black!30,line width=0.3pt,
-                          minimum width=2.2cm,minimum height=2.8cm,
-                          fill=black!5] {};
-                }
-            \else
-                \sbox\cv@photobox{\includegraphics[width=2.2cm,height=2.8cm,keepaspectratio]{\cv@photo}}%
-                \raisebox{-\dimexpr\ht\cv@photobox/2\relax}{\usebox{\cv@photobox}}%
-            \fi
-        }%
-    }%
-    \makebox[\textwidth][c]{%
-        \begin{tabular}[c]{@{}c@{}}
-            {\fontsize{20}{26}\selectfont\bfseries\cv@name} \\[0.12cm]% ← 改这个数字调名字与下方间距
-            \cv@lineA \\[0.08cm]
-            \cv@lineB \\[0.08cm]
-            \cv@lineC
-        \end{tabular}%
-    }%
-    \vspace{0.15cm}
-}
-\makeatother
 
 % ============================================================
 % 文档正文
@@ -172,6 +115,21 @@
 % 项目经历（按公司分组）
 % ============================================================
 \let\cvheading\cvheadingThree% 恢复3列版本
+\cvsection{硕士毕业论文-AI算法研究及模型训练}
+
+\cvproject{复杂环境下小目标无人机智能检测研究}{}{2023/05 -- 2024/12}{%
+    \cvtech{Python、PyTorch、YOLOv8、imgaug、OpenCV、labelimg、AutoDL、Flask}
+    \cvlabeled{项目概述}{面向复杂环境下小目标无人机检测难题，基于 YOLOv8 提出 TD-YOLO 改进算法，覆盖数据集构建、模型优化、注意力机制引入及可视化系统开发的全流程。论文获西安市科技局科技计划项目资助（22GXFW0149）。}
+    \cvlabeled{项目实现}{%
+        \begin{itemize}
+            \item \textbf{数据集构建与增强}：基于 TIB-NET 和 UAVDrones 数据集，利用 Python imgaug 库进行多维度数据增强（随机旋转/翻转/亮度对比度调整/高斯噪声），模拟雾天、雨天、雪天等复杂天气场景，并通过背景融合技术扩充复杂背景样本，最终构建 5920 张高质量标注数据集。
+            \item \textbf{TD-YOLO 算法设计}：针对小目标特征丢失和复杂环境干扰两大难点，在 YOLOv8 基础上引入三项改进——GDST-Conv 结构增强特征提取、自适应空间特征融合结构优化多尺度特征、Focal Loss 损失函数缓解类别不平衡，mAP50 较 YOLOv8 提升 1.3 个百分点。
+            \item \textbf{BiFormer 注意力机制优化}：引入 BiFormer 注意力模块增强模型对无人机目标的注意力分配，有效解决 TD-YOLO 在特定天气和复杂背景下的误检测问题，mAP50 进一步提升 1.9 个百分点。
+            \item \textbf{模型训练与系统开发}：基于 AutoDL 云算力平台（NVIDIA RTX 3090）完成模型训练与调优；使用 Flask 开发检测可视化系统，支持图像上传、实时推理与结果展示。
+        \end{itemize}
+    }
+}
+
 \cvsection{上海寰创通信股份有限公司}
 
 \cvproject{项目一：WVP Copilot --- 基于 LLM 的无人机 AI Agent 智能体}{}{2025/11 -- 2026/03}{%
@@ -300,21 +258,6 @@
         \begin{itemize}
             \item \textbf{UI 自动化脚本开发}：使用 Python + minium 框架独立设计与编写企业屏蔽详情页、招聘公告页面共计两个页面的回归测试用例及 10+ 个自动化脚本，代码经走查后 merge 到主分支。
             \item \textbf{代码优化}：对自动化脚本进行逻辑重构，降低代码冗余度和耦合度，提高可拓展性。
-        \end{itemize}
-    }
-}
-
-\cvsection{硕士毕业论文-AI算法研究及模型训练}
-
-\cvproject{硕士毕业论文-AI算法研究及模型训练}{}{2024/06 -- 2024/12}{%
-    \cvtech{Python、PyTorch、YOLOv8、imgaug、OpenCV、labelimg、AutoDL、Flask}
-    \cvlabeled{项目概述}{面向复杂环境下小目标无人机检测难题，基于 YOLOv8 提出 TD-YOLO 改进算法，覆盖数据集构建、模型优化、注意力机制引入及可视化系统开发的全流程。论文获西安市科技局科技计划项目资助（22GXFW0149）。}
-    \cvlabeled{项目实现}{%
-        \begin{itemize}
-            \item \textbf{数据集构建与增强}：基于 TIB-NET 和 UAVDrones 数据集，利用 Python imgaug 库进行多维度数据增强（随机旋转/翻转/亮度对比度调整/高斯噪声），模拟雾天、雨天、雪天等复杂天气场景，并通过背景融合技术扩充复杂背景样本，最终构建 5920 张高质量标注数据集。
-            \item \textbf{TD-YOLO 算法设计}：针对小目标特征丢失和复杂环境干扰两大难点，在 YOLOv8 基础上引入三项改进——GDST-Conv 结构增强特征提取、自适应空间特征融合结构优化多尺度特征、Focal Loss 损失函数缓解类别不平衡，mAP50 较 YOLOv8 提升 1.3 个百分点。
-            \item \textbf{BiFormer 注意力机制优化}：引入 BiFormer 注意力模块增强模型对无人机目标的注意力分配，有效解决 TD-YOLO 在特定天气和复杂背景下的误检测问题，mAP50 进一步提升 1.9 个百分点。
-            \item \textbf{模型训练与系统开发}：基于 AutoDL 云算力平台（NVIDIA RTX 3090）完成模型训练与调优；使用 Flask 开发检测可视化系统，支持图像上传、实时推理与结果展示。
         \end{itemize}
     }
 }

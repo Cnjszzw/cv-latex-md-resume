@@ -23,7 +23,12 @@
       "Read(//Users/zhaozhiwen/CodeRepo/bilibili/frontEnd/**)",
       "Bash(/Library/TeX/texbin/xelatex -interaction=nonstopmode -output-directory=output \"src/resume AIAgent.tex\")",
       "Bash(officecli view *)",
-      "Bash(officecli get *)"
+      "Bash(officecli get *)",
+      "Bash(kpsewhich devicon.sty)",
+      "Bash(kpsewhich fontawesome5.sty)",
+      "Read(//usr/local/texlive/2026/texmf-dist/tex/latex/fontawesome5/**)",
+      "Bash(tlmgr --usermode init-usertree)",
+      "Bash(tlmgr --usermode install devicon)"
     ]
   }
 }
