@@ -15,10 +15,10 @@
 % 教育经历专用四列（学校 / 学历 / 专业·学院·地点 / 时间）
 \newcommand{\cvheadingEdu}[4]{%
     \noindent
-    \makebox[0.16\textwidth][l]{\textbf{#1}}\hspace{0.04\textwidth}%
-    \makebox[0.16\textwidth][l]{\textbf{#2}}\hspace{0.04\textwidth}%
-    \makebox[0.32\textwidth][l]{\textbf{#3}}%
-    \makebox[0.28\textwidth][r]{\textbf{#4}}\par
+    \makebox[0.18\textwidth][l]{\textbf{#1}}%
+    \makebox[0.24\textwidth][l]{\textbf{#2}}%
+    \makebox[0.34\textwidth][l]{\textbf{#3}}%
+    \makebox[0.24\textwidth][r]{\textbf{#4}}\par
 }
 \newcommand{\cveventEdu}[5]{%
     \vspace{0.3em}
@@ -28,22 +28,23 @@
         #5
     \fi
 }
-% 四列版本：工作经历用（时间 / 公司 / 领域 / 岗位）
-% 调格式看这里：六个数字总和必须 ≤ 1.0
-\newcommand{\cvheadingWork}[4]{%
+% 五列版本：工作经历用（时间 / 公司 / 领域 / 语言 / 岗位）
+% 调格式看这里：八个数字总和必须 ≤ 1.0
+\newcommand{\cvheadingWork}[5]{%
     \noindent
-    \makebox[0.14\textwidth][l]{\textbf{#1}}\hspace{0.14\textwidth}% ①时间列宽 | ②时间→公司间隙(改大=整体右移)
-    \makebox[0.24\textwidth][l]{\textbf{#2}}\hspace{0.14\textwidth}% ③公司列宽 | ④公司→领域间隙
-    \makebox[0.14\textwidth][l]{\textbf{#3}}%                        % ⑤领域列宽
-    \makebox[0.20\textwidth][r]{\textbf{#4}}\par                     % ⑥岗位列宽
+    \makebox[0.24\textwidth][l]{\textbf{#1}}% ①时间列宽 | ②时间→公司间隙
+    \makebox[0.32\textwidth][l]{\textbf{#2}}% ③公司列宽 | ④公司→领域间隙
+    \makebox[0.18\textwidth][l]{\textbf{#3}}% ⑤领域列宽 | ⑥领域→语言间隙
+    \makebox[0.12\textwidth][l]{\textbf{#4}}%                        % ⑦语言列宽
+    \makebox[0.14\textwidth][r]{\textbf{#5}}\par                     % ⑧岗位列宽
 }
-% 工作经历专用 \cvevent（5参：时间/公司/领域/岗位/描述）
-\newcommand{\cveventWork}[5]{%
-    \vspace{0.3em}
-    \cvheadingWork{#1}{#2}{#3}{#4}
-    \ifx\relax#5\relax\else
-        \vspace{0.06em}
-        #5
+% 工作经历专用 \cvevent（6参：时间/公司/领域/语言/岗位/描述）
+\newcommand{\cveventWork}[6]{%
+    \vspace{0.2em}
+    \cvheadingWork{#1}{#2}{#3}{#4}{#5}
+    \ifx\relax#6\relax\else
+        \vspace{0.04em}
+        #6
     \fi
 }
 % section 标题旁的技术栈图标（PNG 彩色小图标）
@@ -89,9 +90,9 @@
 \let\cvheading\cvheadingEdu
 \let\cvevent\cveventEdu
 
-\cvevent{山东师范大学}{本科（全日制）}{广播电视编导(新闻与传媒学院/山东济南)}{2018/09 -- 2022/06}{}
+\cvevent{山东师范大学}{本科（学信网全日制）}{广播电视编导(新闻与传媒学院/山东济南)}{2018/09 -- 2022/06}{}
 
-\cvevent{西京学院}{硕士（全日制）}{计算机技术(计算机学院/陕西西安)}{2022/09 -- 2025/01}{}
+\cvevent{西京学院}{硕士（学信网全日制）}{计算机技术(计算机学院/陕西西安)}{2022/09 -- 2025/01}{}
 
 % ============================================================
 % 工作经历
@@ -104,33 +105,33 @@
 
 \cvevent{2025/04 -- 2026/03 (正职)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/上海环创通信科技股份有限公司.png}}%
-    \hspace{0.4em}上海寰创通信 (软件平台部)}{AI物联网（政企B端）}{AI 全栈开发}{}
+    \hspace{0.4em}上海寰创通信 (软件平台部)}{物联网(政企B端)}{Java/Python/JS}{AI 全栈开发}{}
 
 \cvevent{2024/12 -- 2025/03 (实习)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/北京流金岁月科技有限公司.png}}%
-    \hspace{0.4em}北京流金岁月科技 (军民融合部)}{数据平台（内部平台）}{后端开发}{}
+    \hspace{0.4em}北京流金岁月科技 (军民融合部)}{数据平台(内部平台)}{Java}{后端开发}{}
 
 \cvevent{2024/02 -- 2024/05 (实习)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/美团.png}}%
-    \hspace{0.4em}美团 (质量工程部/酒旅测试组)}{电商（B端商家侧）}{测试开发}{}
+    \hspace{0.4em}美团 (质量工程部/酒旅测试组)}{电商(B端商家侧)}{Java}{测试开发}{}
 
 \cvevent{2023/09 -- 2024/02 (实习)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/哔哩哔哩.png}}%
-    \hspace{0.4em}哔哩哔哩 (用户生态技术质量部)}{内容社区（C端）}{测试开发}{}
+    \hspace{0.4em}哔哩哔哩 (用户生态技术质量部)}{内容社区(C端)}{Python/Golang}{测试开发}{}
 
 \cvevent{2023/04 -- 2023/08 (实习)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/丁香园.png}}%
-    \hspace{0.4em}丁香园 (丁香人才/Insight)}{招聘平台（B/C双端）}{测试开发}{}
+    \hspace{0.4em}丁香园 (丁香人才/Insight)}{招聘平台(B/C双端)}{Python/JS}{测试开发}{}
 
 
 % ============================================================
 % 项目经历（按公司分组）
 % ============================================================
 \let\cvheading\cvheadingThree% 恢复3列版本
-\cvsection{硕士毕业论文-AI算法研究及模型训练}[\seclogo{python}\seclogo{pytorch}\seclogo{yolo}\seclogo{opencv}\seclogo{flask}]
+\cvsection{硕士毕业论文-西安市科技局科技计划项目资助(22GXFW0149)}[\seclogo{python}\seclogo{pytorch}\seclogo{yolo}\seclogo{opencv}\seclogo{flask}]
 
 \cvproject{复杂环境下小目标无人机智能检测研究}{}{2023/05 -- 2024/12}{%
-    \cvtech{Python、PyTorch、YOLOv8、imgaug、OpenCV、labelimg、AutoDL、Flask}
+    \cvtech{深度学习、 AI模型优化/训练、Python、PyTorch、YOLOv8、imgaug、OpenCV、labelimg、AutoDL、Flask}
     \cvlabeled{项目概述}{面向复杂环境下小目标无人机检测难题，基于 YOLOv8 提出 TD-YOLO 改进算法，覆盖数据集构建、模型优化、注意力机制引入及可视化系统开发的全流程。论文获西安市科技局科技计划项目资助（22GXFW0149）。}
     \cvlabeled{项目实现}{%
         \begin{itemize}
