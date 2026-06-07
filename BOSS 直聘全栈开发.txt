@@ -15,9 +15,9 @@
 1. 两年三个月开发经验（含实习），已离职，一周内到岗
 2. 学历：全日制本硕，学信网可查
 3. 地点：居住地-北京；户口-江苏扬州
-4. 薪资：现17.2万(12k*14+4k)，期望平薪
-5. 技术栈：Java、SpringBoot、SpringCloud、MyBatis、MySQL、Redis、RocketMQ、ES、MQTT、Python、LangChain、LangGraph、FastAPI
-6. 优势：主导无人机接入与控制模块及 AI Agent 智能体从 0 到 1 交付，有微服务架构升级和分布式系统设计实战经验，能够独立完成模块级端到端交付
+4. 薪资：目前薪资 12000，期望平薪
+5. 技术栈：Java、SpringBoot、Python、MySQL、Redis、ES、MQTT
+6. 优势：主导无人机云平台全栈开发及 AI Agent 智能体从 0 到 1 交付，有微服务架构升级和分布式系统设计实战经验，能够独立完成模块级端到端交付
 
 您好，以上是我的基本信息，期待与您进一步沟通。
 
