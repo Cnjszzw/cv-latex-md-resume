@@ -53,8 +53,8 @@
 \linespread{1.25}
 \setlength{\parskip}{0em}
 \setlength{\parindent}{0pt}
-\widowpenalty=10000
-\clubpenalty=10000
+\widowpenalty=500% 原值10000过于激进，降低后允许更自然的页面填充
+\clubpenalty=500% 避免因孤行限制导致底部大片空白
 
 % ============================================================
 % 五、个人信息变量 + 头部（支持 lineC）
@@ -133,19 +133,19 @@
 % 八、条目宏
 % ============================================================
 \newcommand{\cvevent}[4]{%
-    \vspace{0.3em}
+    \vspace{0.2em}
     \cvheading{#1}{#2}{#3}
     \ifx\relax#4\relax\else
-        \vspace{0.06em}
+        \vspace{0.04em}
         #4
     \fi
 }
 
 \newcommand{\cvproject}[4]{%
-    \vspace{0.3em}
+    \vspace{0.2em}
     \cvheading{#1}{#2}{#3}
     \ifx\relax#4\relax\else
-        \vspace{0.06em}
+        \vspace{0.04em}
         #4
     \fi
 }
@@ -175,11 +175,11 @@
 % 十、辅助宏
 % ============================================================
 \newcommand{\cvtech}[1]{%
-    \noindent\textbf{技术栈：#1}\par\vspace{0.04em}%
+    \noindent\textbf{技术栈：#1}\par
 }
 
 \newcommand{\cvlabeled}[2]{%
-    \noindent\textbf{#1}：#2\par\vspace{0.04em}
+    \noindent\textbf{#1}：#2\par\vspace{0.02em}
 }
 
 \newcommand{\cvskill}[2]{%
