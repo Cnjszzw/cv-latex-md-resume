@@ -38,3 +38,29 @@
 ● 前端基于 Vue3 + Cesium 开发三维 GIS 地图与无人机座舱界面；Agent 前端基于 FastAPI + SSE 流式推送，支持规划确认卡片、步骤进度可视化和急停硬通道
 
 ● Agent 技术栈：Python、LangChain（AgentExecutor + @tool）、LangGraph（环绕飞行状态机子图）、DeepSeek API（Function Calling）、MCP 协议集成高德地图 15 个工具、FastAPI + SSE
+
+
+北京流金岁月科技有限公司 · 工作业绩
+
+1. 参与数据采集及数字化处理系统的后端开发，面向公司多服务数据分散、缺少统一数据基建的现状，建设从数据接入、清洗、审核到同步入仓的全流程数据处理链路。
+
+2. 针对多数据源场景下 Controller 频繁手动实例化导致的代码重复问题，利用 JDK 动态代理 + 反射封装统一代理层，将实例化与横切逻辑集中管理，实现模块解耦，降低后续开发成本。
+
+3. 设计自定义注解 + AOP 切面的冗余字段自动处理方案（@RedundantField + @IgnoreRedundant），请求进入 Controller 前自动清理冗余字段，消除每个接口手工 set null 的重复代码。
+
+4. 建设同步过程的数字化监控模块，实时展示各链路同步状态、业务量及审核异常；开发预警机制，数据量或失败次数超阈值时自动触发告警推送。
+
+5. 监控看板采用定时缓存预热策略，解决大量同步数据加载慢的问题，提升看板接口响应速度。
+
+
+仿B站弹幕视频网站 · 项目业绩
+
+● 独立完成仿B站弹幕视频网站的全栈开发，涵盖用户体系、视频管理、弹幕系统、站内搜索，从单体应用升级至 SpringCloud Alibaba 微服务架构（Nacos + Gateway + OpenFeign）
+
+● 基于工厂 + 策略模式构建登录系统（UserLoginFactory 配置驱动注册），JWT 双 Token 无感登录 + RSA 加密 + MD5 加盐；RBAC + AOP 切面实现接口级和数据级权限控制
+
+● 集成 Elasticsearch 实现站内全文搜索，Multi-Match 跨字段检索 + 关键词高亮 + 多维度排序，用户注册和视频发布时同步写入 ES 保证实时性
+
+● 弹幕基于 WebSocket 实时推送，RocketMQ 异步消费落库削峰；动态发布系统经历三轮迭代（同步 -> MQ异步 -> 推拉结合），粉丝 < 10w 推模式、>= 10w 拉模式，消除大 V 写扩散问题，10w 粉丝场景下遍历写入从 7s 降至约 1ms
+
+● 基于 RocketMQ 事务消息实现视频投稿跨服务分布式事务（content-service + legacy-service），评估 XA / Seata AT / TCC / 最大努力通知后选定事务消息方案，独立重试 16 次递增，解决 DB / MQ / Redis 三层最终一致
