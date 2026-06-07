@@ -1,0 +1,27 @@
+个人优势
+
+● 全日制计算机硕士，两年三个月开发经验（含实习），具备从需求分析、方案设计到编码联调的端到端独立交付能力
+
+● AI Agent 工程化：有 LLM Agent 系统从 0 到 1 的实践经验
+	1. 熟练使用 LangChain、LangGraph 进行 Agent 编排与状态机建模
+	2. 熟练使用 Function Calling、MCP 协议进行工具链集成与外部服务对接
+	3. 熟悉 FastAPI + SSE 流式交互，实现工具调用链路的实时可观测
+	4. 掌握 Agent 系统可靠性设计：幻觉多层防御、异步超时恢复、级联故障阻断等
+
+● 扎实的 Java 基础，熟悉 JVM 内存模型与并发编程
+	1. 熟练使用 SpringBoot、MyBatis（Plus）进行后端开发
+	2. 有 SpringCloud Alibaba（Nacos、Gateway、OpenFeign）微服务架构实战经验
+
+● 有分布式系统设计实践
+	1. 消息队列：RocketMQ 事务消息实现跨服务最终一致性
+	2. 缓存与锁：Redis 引用计数策略、Redisson 分布式锁
+	3. 分布式事务：熟悉 TCC、可靠消息最终一致、事务消息等方案选型
+	4. 其他模式：推拉结合消除写扩散等常见设计模式
+
+● 有数据库与搜索引擎优化经验
+	1. MySQL：索引优化（覆盖索引、延迟关联、执行计划分析）、N+1 查询优化（预加载 + HashMap 索引）
+	2. Elasticsearch：全文检索（Multi-Match 多字段匹配、关键词高亮、多维度排序）
+
+● 了解 Vue、Cesium、Android 等前端与客户端技术，有前后端 + 软硬件跨团队协作经验
+
+● 熟练使用 Cursor、ClaudeCode 等 AI 辅助编码工具，有效提升开发效率

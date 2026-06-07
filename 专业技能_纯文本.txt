@@ -1,0 +1,13 @@
+专业技能
+
+● Java 全家桶：熟练掌握 Java，熟悉 JVM 内存模型与并发编程；熟练使用 SpringBoot、MyBatis（Plus）；了解 SpringCloud 微服务体系（Nacos、OpenFeign、Gateway）。
+
+● 数据存储与检索：熟悉 MySQL，有 N+1 查询优化（预加载 + HashMap 索引）、延迟关联、覆盖索引等 SQL 调优实战经验；熟悉 Redis 缓存策略与数据一致性保障；熟悉 Elasticsearch 全文检索（Multi-Match、高亮、多维度排序）。
+
+● AI Agent 工程化：有 LLM Agent 从 0 到 1 的实践经验：熟练使用 LangChain、LangGraph、Function Calling、MCP 协议；掌握 Agent 可靠性设计；熟练使用 Cursor/ClaudeCode。
+
+● 分布式系统：了解分布式锁（Redisson）、分布式事务（RocketMQ 事务消息 / TCC / 可靠消息最终一致）、配置中心（Nacos）等常见组件的设计思路与应用场景。
+
+● 性能优化：有核心接口性能优化实战经验：千台 Mesh 设备查询从 7-8s 优化至 1s 以内，30w 条日志深分页从 5s 降至 1s 以内（性能提升 5 倍）；善于定位并解决大数据量场景下的查询与存储瓶颈。
+
+● 工程实践：熟悉 Logback 日志框架与 Kibana 排障，熟悉 Linux + Docker 基础运维；具备从需求分析到联调交付的全流程能力，有前后端 + 软硬件跨团队协作经验。
