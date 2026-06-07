@@ -74,26 +74,6 @@
 	3. 积累前后端 + 软硬件跨团队协作经验
 
 三、数据同步与监控平台（toD）
-上海寰创通信股份有限公司
-2025/11 -- 2026/03
-技术栈：Python、LangChain、DeepSeek API、FastAPI、SSE、MCP、LangGraph、Redis
-● 项目概述：面向消防应急指挥场景，深度结合软硬件能力与 AI 算法打造无人机智能体 Copilot，极大降低使用门槛。用户只需自然语言描述需求（如"飞到陆家嘴，变焦 7x 拍照，返航"），Copilot 即可精准理解意图，自动拆分为无人机指令序列并编排执行，通过对话的方式完成远程控制与任务下达，交互体验焕然一新。采用 Python（Agent 编排层）+ Java（设备控制层）两层架构，通过 REST 通信解耦。
-● 背景与诉求：平台已具备无人机手动控制能力（MQTT 指令下发、DRC 遥控、ZLM 视频推流），业务方提出对标 DJI Copilot 的自然语言操控需求。Java 侧 LangChain4j 要求 JDK 17，与 WVP 主服务的 JDK 8 不兼容，且 Python 侧 Agent 生态远更成熟。最终确定 Python 负责 LLM 编排与工具调用，Java 负责底层设备通信。
-● 项目实现：
-	1. MCP 外部工具集成：通过 MCP 协议集成高德地图 MCP Server，langchain-mcp-adapters 完成握手后 15 个地图工具自动注册为 LangChain Tool。Agent 处理"飞到陆家嘴"等自然语言地名时先调 maps_geo 地理编码，候选坐标列表回传 LLM 根据上下文选择最佳匹配（"陆家嘴"6 个候选，LLM 判定选上海浦东），解决地名歧义和坐标推断不可靠的问题。
-	2. Plan - Confirm - Execute 三段式流程：规划阶段 LLM 输出结构化 JSON 任务计划（目标 + 有序步骤列表 + 飞前检查），确认阶段前端渲染规划卡片等待用户审核（高风险操作不进入自动执行链路），执行阶段 SSE 流式推送每步状态（等待 / 进行中 / 完成 / 失败）。每步工具返回失败或急停时立即 break 中止后续，防止无人机已悬停但 Agent 继续执行后续步骤的级联错误。
-	3. 安全校验与 Human-in-the-Loop：SafetyGate 层硬编码安全规则（高度限制 10-120m、GPS 坐标中国境内范围校验、电量预估），LLM 负责意图理解，安全决策由确定性代码执行，两者不混淆。高风险操作执行前强制人工确认。
-	4. 工具定义与复合封装：基于 LangChain @tool 装饰器定义 16 个无人机工具函数（飞行、相机、曝光、云台），函数的 docstring 与类型注解自动生成 OpenAI Function Calling Schema。遵循"工具暴露业务语义而非硬件原语"原则：硬件仅有 start/stop 录像指令，工具层封装 record_for_duration(60) 复合工具（start -> 倒计时 -> stop），LLM 不感知时序编排。
-	5. 同步 LLM 与异步飞行的状态同步：LLM 是秒级同步推理，无人机飞行是分钟级异步过程。工具函数内部封装 Redis 轮询等待：Python redis-py 直连 Redis（<1ms/次），每秒查询任务状态，completed/failed/超时后返回 LLM。中间进度仅推前端展示。评估四种替代方案后选 Redis 直连（零新依赖、零连接管理）。
-	6. LangGraph 环绕飞行子图：AgentExecutor 无法可靠处理环绕飞行（LLM 需自主判断绕到哪了、该不该停）。引入 LangGraph 将环绕流程建模为显式子图：enter_orbit -> orbit_loop（条件边: 角度 >= 360度时退出）-> exit_orbit，执行周期由图的边决定而非 LLM 判断。主链路保持 AgentExecutor（不过度设计），仅在状态机子任务用 LangGraph。
-	7. 急停与 SSE 流式交互：急停按钮走独立 MQTT 通道直达无人机硬件（不经过 Agent/LLM），前端同时关闭 SSE 连接终止当前会话。基于 FastAPI + SSE 实现 Agent 执行过程实时推送，工具调用卡片和进度在前端实时渲染。
-● 项目产出：
-	1. 独立完成从需求分析、技术选型、架构设计到编码联调的全流程闭环
-	2. 定义 16 个无人机控制工具函数，覆盖飞行/相机/云台四大类；接入 15 个高德 MCP 地图工具
-	3. 沉淀 Agent 工程化方法论：LLM 与确定性规则的职责划分、异步操作的工具层封装、混合编排（AgentExecutor + LangGraph）
-	4. GitHub：https://github.com/Cnjszzw/agent-drone-demo
-
-三、数据同步与监控平台（toD）
 北京流金岁月科技有限公司
 2024/12 -- 2025/03
 技术栈：Java、SpringBoot、Maven、Oracle、JDBC、Git
