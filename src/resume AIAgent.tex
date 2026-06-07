@@ -156,17 +156,15 @@
     \cvlabeled{项目概述}{面向消防应急指挥场景，深度结合软硬件能力与 AI 算法打造无人机智能体 Copilot，极大降低使用门槛。用户只需自然语言描述需求（如"飞到陆家嘴，变焦 7x 拍照，返航"），Copilot 即可精准理解意图，自动拆分为无人机指令序列并编排执行，通过对话的方式完成远程控制与任务下达。采用 Python（Agent 编排层）+ Java（设备控制层）两层架构，通过 REST 通信解耦。}
     \cvlabeled{项目实现}{%
         \begin{itemize}
-            \item \textbf{MCP 外部工具集成}：通过 MCP 协议集成高德地图 MCP Server，langchain-mcp-adapters 完成握手后 15 个地图工具自动注册为 LangChain Tool。地理编码返回多个候选项时回传 LLM 根据上下文选择最佳匹配（"陆家嘴"6 个候选，LLM 判定选上海浦东），解决地名歧义问题。
+            \item \textbf{LLM 不可靠性的工程防御}：在工具函数入口做三层校验——格式清洗（正则去掉单位后缀如 "100m" $\to$ 100）、类型校验（Pydantic 参数模型）、业务校验（调用后端已有飞行安全接口，复用限高限远禁飞区逻辑）。LLM API 不可用或超时时，指数退避重试（最多 3 次），最终失败降级为预设话术提示手动操控。遵循"能硬编码的规则不交给 LLM"原则——飞行前通知前端、高风险确认、紧急停止全部硬编码执行。
 
-            \item \textbf{Plan - Confirm - Execute 三段式流程}：规划阶段 LLM 输出结构化 JSON 任务计划（目标 + 有序步骤列表 + 飞前检查）；确认阶段前端渲染规划卡片，高风险操作不进入自动执行链路；执行阶段 SSE 流式推送每步状态（等待 / 进行中 / 完成 / 失败）。每步返回失败或急停时立即 break 中止后续，防止级联错误。
+            \item \textbf{同步 LLM 与异步飞行的状态同步与超时恢复}：无人机飞行是分钟级异步过程，工具函数内部封装 Redis 轮询等待，依据距离动态计算预估飞行时间（超时 = 预估 $\times$ 1.5）。超时后不直接宣布失败，先查 OSD 实际位置兜底——距目标点 $<$ 5m 判定到达（通信延迟），位置无变化判定故障，位置在变化则延长等待。中间进度仅推前端、LLM 不感知。
 
-            \item \textbf{工具定义与复合封装}：基于 LangChain @tool 装饰器定义 16 个无人机工具函数（飞行 / 相机 / 曝光 / 云台），docstring 与类型注解自动生成 Function Calling Schema。遵循"工具暴露业务语义而非硬件原语"原则：硬件仅有 start/stop 录像原子指令，工具层封装复合工具（start -> 倒计时 -> stop），LLM 不感知时序编排。
+            \item \textbf{步骤失败的异常中止与状态保护}：Plan-Confirm-Execute 三段式流程中，每步返回失败或急停时立即 break 中止后续，防止级联错误。高风险操作执行前强制 Human-in-the-Loop 确认。急停走独立 MQTT 通道直达硬件（不经过 Agent/LLM），前端同步关闭 SSE 终止会话。
 
-            \item \textbf{同步 LLM 与异步飞行的状态同步}：无人机飞行是分钟级异步过程，工具函数内部封装 Redis 轮询等待：Python redis-py 直连 Redis（$<$1ms/次），每秒查询任务状态。评估四种替代方案后选 Redis 直连（零新依赖、零连接管理），中间进度仅推前端、LLM 不感知。
+            \item \textbf{混合编排（AgentExecutor + LangGraph）}：主链路用 AgentExecutor 保持简洁。引入 LangGraph 处理环绕飞行等有状态机的子任务——enter\_orbit $\to$ orbit\_loop（条件边: $\ge$ $360^\circ$ 退出）$\to$ exit\_orbit，执行周期由图的边决定而非 LLM 判断。
 
-            \item \textbf{LangGraph 环绕飞行子图}：AgentExecutor 无法可靠处理环绕飞行（LLM 需自主判断时机）。引入 LangGraph 建模显式子图：enter\_orbit -> orbit\_loop（条件边: 角度 $\ge$ 360\textdegree{} 时退出）-> exit\_orbit，执行周期由图的边决定。主链路保持 AgentExecutor（不过度设计），仅状态机子任务用 LangGraph。
-
-            \item \textbf{安全校验与急停}：SafetyGate 硬编码安全规则（高度限制 / 坐标范围 / 电量预估），LLM 不参与安全决策。Human-in-the-loop 高风险确认。急停走独立 MQTT 通道直达硬件（不经过 Agent/LLM），前端同步关闭 SSE 终止会话。
+            \item \textbf{其他}：16 个 @tool 工具函数（飞行/相机/曝光/云台），封装复合工具遵循"暴露业务语义而非硬件原语"原则；MCP 协议集成高德地图 15 个工具，地理编码多候选项回传 LLM 选择最佳匹配；SSE 流式推送执行状态到前端。
         \end{itemize}
     }
 }
