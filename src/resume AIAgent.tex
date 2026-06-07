@@ -105,7 +105,7 @@
 
 \cvevent{2025/04 -- 2026/03 (正职)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/上海环创通信科技股份有限公司.png}}%
-    \hspace{0.4em}上海寰创通信 (软件平台部)}{物联网(政企B端)}{Java/Python/JS}{AI 全栈开发}{}
+    \hspace{0.4em}上海寰创通信 (软件平台部)}{物联网(政企B端)}{Java/Python/TS}{AI 全栈开发}{}
 
 \cvevent{2024/12 -- 2025/03 (实习)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/北京流金岁月科技有限公司.png}}%
@@ -152,7 +152,7 @@
 ]
 
 \cvproject{项目一：WVP Copilot --- 基于 LLM 的无人机 AI Agent 智能体}{}{2025/11 -- 2026/03}{%
-    \cvtech{Python、LangChain、DeepSeek API、FastAPI、SSE、MCP、LangGraph、Redis}
+    \cvtech{Python、LangChain、LangGraph、SSE、MCP、FastAPI、DeepSeek API、Redis}
     \cvlabeled{项目概述}{面向消防应急指挥场景，深度结合软硬件能力与 AI 算法打造无人机智能体 Copilot，极大降低使用门槛。用户只需自然语言描述需求（如"飞到陆家嘴，变焦 7x 拍照，返航"），Copilot 即可精准理解意图，自动拆分为无人机指令序列并编排执行，通过对话的方式完成远程控制与任务下达。采用 Python（Agent 编排层）+ Java（设备控制层）两层架构，通过 REST 通信解耦。}
     \cvlabeled{项目实现}{%
         \begin{itemize}
@@ -288,5 +288,24 @@
     \item 考研初试368分（专业第一）\enspace|\enspace 2022西京学院一等奖学金（前20\%）\enspace|\enspace 2022传智杯程序设计赛区域赛二等奖（前20\%）
     \item 雅思IELTS（6.5分）\enspace|\enspace 英语六级CET-6（593分）\enspace|\enspace 国际人才英语考试ETIC（优秀等级）\enspace|\enspace 计算机二级证书（MS OFFICE）
 \end{itemize}
+
+% ============================================================
+% 专业技能
+% ============================================================
+\cvsection{专业技能}
+
+\begin{multicols}{2}
+\cvskill{AI Agent 工程化}{Python、LangChain、LangGraph、DeepSeek API、FastAPI、SSE、MCP 协议、Function Calling；熟悉 Agent 编排（Plan-Confirm-Execute）、工具链设计、RAG 检索增强生成、LLM 幻觉防御与确定性兜底}
+
+\cvskill{Java 后端}{Java、SpringBoot、MyBatis（Plus）、MySQL；熟悉 JVM 内存模型与并发编程；了解 SpringCloud 微服务体系（Nacos、OpenFeign、Gateway）}
+
+\cvskill{数据与中间件}{Redis（缓存策略/分布式锁/状态轮询）、MQTT（EMQX）、WebSocket（实时推送）、RocketMQ（事务消息）、Elasticsearch（全文检索）}
+
+\cvskill{前端与 GIS}{Vue 3、TypeScript、JavaScript；Cesium 三维 GIS 可视化；了解 Android 基础开发}
+
+\cvskill{性能优化}{核心接口性能优化实战：N+1 查询优化（预加载 + HashMap 索引）、延迟关联与覆盖索引、日志深分页游标优化，接口响应从 7-8s 降至 1s 以内}
+
+\cvskill{工程实践}{Linux + Docker 基础运维；Logback 日志框架与 Kibana 排障；Git 协作；具备从需求分析、方案设计到联调交付的全流程闭环能力}
+\end{multicols}
 
 \end{document}
