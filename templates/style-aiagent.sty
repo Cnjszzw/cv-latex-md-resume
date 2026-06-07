@@ -96,10 +96,10 @@
 }
 
 % ============================================================
-% 六、一级章节标题（低阈值避免整块跳页）
+% 六、一级章节标题（可选第二参数放右侧图标）
 % ============================================================
-\newcommand{\cvsection}[1]{%
-    \vspace{0.3em plus 0.2em minus 0.3em}% 允许压缩到 0，不强制分页
+\NewDocumentCommand{\cvsection}{ m o }{%
+    \vspace{0.3em plus 0.2em minus 0.3em}%
     \noindent
     \begin{tikzpicture}[baseline=(text.base)]
         \fill[primaryblue] (0,0) rectangle (\textwidth,2pt);
@@ -112,7 +112,10 @@
             anchor=south west,
             outer sep=0pt,
         ] (text) at (0,1pt) {#1};
-    \end{tikzpicture}
+        \IfValueT{#2}{
+            \node[anchor=east, outer sep=0pt, inner sep=0pt] at (\textwidth, 0.9em) {#2};
+        }
+    \end{tikzpicture}%
     \par\vspace{0.1em}%
 }
 

@@ -28,7 +28,11 @@
       "Bash(kpsewhich fontawesome5.sty)",
       "Read(//usr/local/texlive/2026/texmf-dist/tex/latex/fontawesome5/**)",
       "Bash(tlmgr --usermode init-usertree)",
-      "Bash(tlmgr --usermode install devicon)"
+      "Bash(tlmgr --usermode install devicon)",
+      "Bash(/Library/TeX/texbin/xelatex -interaction=nonstopmode -output-directory=output 'src/resume AIAgent.tex')",
+      "Bash(grep -v '^$')",
+      "Bash(/Library/TeX/texbin/xelatex -output-directory=output 'src/resume AIAgent.tex')",
+      "Bash(/Library/TeX/texbin/xelatex -interaction=nonstopmode -output-directory=output '/Users/zhaozhiwen/CodeRepo/cv_latex_md_test/src/resume AIAgent.tex')"
     ]
   }
 }

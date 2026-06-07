@@ -46,6 +46,18 @@
         #5
     \fi
 }
+% section 标题旁的技术栈图标（PNG 彩色小图标）
+% 技术栈图标：优先 devicon(-original) → simple-icons(-simple) → 手动(-custom)
+\newcommand{\ticon}[1]{%
+    \IfFileExists{assets/myIcons/#1-original.png}{%
+        \raisebox{-0.08cm}{\includegraphics[height=0.42cm]{assets/myIcons/#1-original.png}}%
+    }{\IfFileExists{assets/myIcons/#1-simple.png}{%
+        \raisebox{-0.08cm}{\includegraphics[height=0.42cm]{assets/myIcons/#1-simple.png}}%
+    }{%
+        \raisebox{-0.08cm}{\includegraphics[height=0.42cm]{assets/myIcons/#1-custom.png}}%
+    }}%
+}
+\newcommand{\seclogo}[1]{\hspace{0.12em}\ticon{#1}}
 
 % ============================================================
 % 个人信息设置
@@ -115,7 +127,7 @@
 % 项目经历（按公司分组）
 % ============================================================
 \let\cvheading\cvheadingThree% 恢复3列版本
-\cvsection{硕士毕业论文-AI算法研究及模型训练}
+\cvsection{硕士毕业论文-AI算法研究及模型训练}[\seclogo{python}\seclogo{pytorch}\seclogo{yolo}\seclogo{opencv}\seclogo{flask}]
 
 \cvproject{复杂环境下小目标无人机智能检测研究}{}{2023/05 -- 2024/12}{%
     \cvtech{Python、PyTorch、YOLOv8、imgaug、OpenCV、labelimg、AutoDL、Flask}
@@ -130,7 +142,7 @@
     }
 }
 
-\cvsection{上海寰创通信股份有限公司}
+\cvsection{上海寰创通信股份有限公司}[\seclogo{java}\seclogo{python}\seclogo{spring}\seclogo{springboot}\seclogo{redis}\seclogo{mysql}\seclogo{mybatis}\seclogo{mybatis-plus}\seclogo{vuejs}\seclogo{javascript}\seclogo{typescript}\seclogo{fastapi}\seclogo{langchain}\seclogo{langgraph}\seclogo{deepseek}\seclogo{mcp}\seclogo{mqtt}\seclogo{cesium}\seclogo{git}]
 
 \cvproject{项目一：WVP Copilot --- 基于 LLM 的无人机 AI Agent 智能体}{}{2025/11 -- 2026/03}{%
     \cvtech{Python、LangChain、DeepSeek API、FastAPI、SSE、MCP、LangGraph、Redis}
@@ -166,7 +178,7 @@
     }
 }
 
-\cvsection{个人开源项目}
+\cvsection{个人开源项目}[\seclogo{java}\seclogo{spring}\seclogo{springboot}\seclogo{mybatis}\seclogo{mysql}\seclogo{redis}\seclogo{git}\seclogo{elasticsearch}\seclogo{rocketmq}\seclogo{nginx}]
 
 \cvproject{项目一：仿"B站"弹幕视频网站}{}{2024/05 -- 2026/05}{%
     \cvlabeled{项目地址}{%
@@ -194,7 +206,7 @@
     }
 }
 
-\cvsection{北京流金岁月科技有限公司}
+\cvsection{北京流金岁月科技有限公司}[\seclogo{java}\seclogo{spring}\seclogo{maven}\seclogo{oracle}\seclogo{git}]
 
 \cvproject{项目一：数据同步与监控平台}{}{2024/12 -- 2025/03}{%
     \cvtech{Java、SpringBoot、Maven、Oracle、JDBC、Git}
@@ -210,7 +222,7 @@
     }
 }
 
-\cvsection{美团}
+\cvsection{美团}[\seclogo{java}\seclogo{spring}\seclogo{redis}\seclogo{git}]
 
 \cvproject{项目一：直连上单流程接口自动化测试}{}{2024/02 -- 2024/05}{%
     \cvtech{Java、Mario 框架（基于 TestNG）、TestX}
@@ -235,7 +247,7 @@
     }
 }
 
-\cvsection{哔哩哔哩}
+\cvsection{哔哩哔哩}[\seclogo{python}\seclogo{go}\seclogo{git}]
 
 \cvproject{项目一：UGC 播放页测试与播放一致性改造}{}{2023/09 -- 2024/02}{%
     \cvtech{Python、Golang、Git}
@@ -249,7 +261,7 @@
     }
 }
 
-\cvsection{丁香园}
+\cvsection{丁香园}[\seclogo{python}\seclogo{git}]
 
 \cvproject{项目一："丁香人才"小程序 UI 自动化测试}{}{2023/04 -- 2023/08}{%
     \cvtech{Python、minium 框架、Git}

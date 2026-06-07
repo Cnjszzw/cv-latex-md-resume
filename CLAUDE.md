@@ -142,37 +142,37 @@ make distclean  # 清理所有编译产物（含 PDF）
 - **`src/resume.tex`** — 引用 `style.sty`
 - **`src/resume AIAgent.tex`** — 引用 `style-aiagent.sty`
 
-## 技术栈图标（devicon）
+## 技术栈图标规则
 
-devicon 完整仓库 clone 在 `assets/icons/devicon/`，精选图标复制到了 `assets/myIcons/`。
+### 图标来源优先级
 
-### 使用方式
+1. **devicon** (`assets/icons/devicon/`) — 彩色、编程相关、1:1 方形，优先使用
+2. **simple-icons** (`assets/icons/simple-icons/`) — 单色但覆盖广，附带品牌色（`data/simple-icons.json` 中的 `hex` 字段）
+3. **MISSING.md** (`assets/myIcons/MISSING.md`) — 前两者都没有的，记录待手动下载
 
-XeLaTeX 原生支持 EPS，可直接用：
+### 使用到简历中的图标，均复制一份到 `assets/myIcons/`
+
+- devicon 的用 `-original.svg` + `-original.png`（64x64 rsvg-convert）
+- simple-icons 的用 `-simple.svg`（已填充品牌色）+ `-simple.png`
+- 手动下载的 PNG 统一命名 `{name}-custom.png`
+
+### LaTeX 中使用
+
 ```latex
-\includegraphics[height=0.5cm]{assets/myIcons/java.eps}
+% 辅助宏（在 resume AIAgent.tex 中定义）
+\newcommand{\ticon}[1]{\raisebox{-0.08cm}{\includegraphics[height=0.42cm]{assets/myIcons/#1-original.png}}}
+\newcommand{\seclogo}[1]{\hspace{0.12em}\ticon{#1}}
+
+% Section 标题右侧放图标（\cvsection 支持可选第二参数）
+\cvsection{标题}[图标...]  % 图标右对齐，无背景
 ```
 
-SVG 需要先转 PNG（推荐 64x64 或 128x128），或用 `svg` 宏包 + Inkscape + `--shell-escape`。
+### 转换命令
 
-### 已复制到 myIcons 的图标
+```bash
+# SVG → PNG (devicon, 64x64)
+rsvg-convert -w 64 -h 64 input.svg -o output.png
 
-| 图标 | EPS | SVG |
-|------|-----|-----|
-| Docker | ✓ | ✓ |
-| Elasticsearch | - | ✓ |
-| FastAPI | - | ✓ |
-| Flask | - | ✓ |
-| Git | ✓ | ✓ |
-| Java | ✓ | ✓ |
-| Maven | - | ✓ |
-| MySQL | ✓ | ✓ |
-| Nginx | ✓ | ✓ |
-| OpenCV | - | ✓ |
-| PostgreSQL | ✓ | ✓ |
-| Python | ✓ | ✓ |
-| PyTorch | ✓ | ✓ |
-| Redis | ✓ | ✓ |
-| Spring | - | ✓ |
-| TypeScript | ✓ | ✓ |
-| Vue.js | ✓ | ✓ |
+# simple-icons SVG 先填色再转
+# 品牌色从 data/simple-icons.json 获取
+```
