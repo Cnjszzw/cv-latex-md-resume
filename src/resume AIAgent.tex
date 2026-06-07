@@ -266,31 +266,33 @@
     }
 }
 
-\cvsection{丁香园}[\seclogo{python}\seclogo{git}]
+% ============================================================
+% 竞赛/获奖/证书
+% ============================================================
+\cvsection{竞赛/获奖/证书}
 
-\cvproject{项目一："丁香人才"小程序 UI 自动化测试}{}{2023/04 -- 2023/08}{%
-    \cvtech{Python、minium 框架、Git}
-    \cvlabeled{项目概述}{"丁香人才"是面向医护群体的垂直招聘小程序，存在较多回归测试场景，耗费人力且缺少成熟的自动化测试平台。基于微信官方 minium 框架搭建 UI 自动化测试平台，编写和维护回归测试用例。}
-    \cvlabeled{项目实现}{%
-        \begin{itemize}
-            \item \textbf{UI 自动化脚本开发}：使用 Python + minium 框架独立设计与编写企业屏蔽详情页、招聘公告页面共计两个页面的回归测试用例及 10+ 个自动化脚本，代码经走查后 merge 到主分支。
-            \item \textbf{代码优化}：对自动化脚本进行逻辑重构，降低代码冗余度和耦合度，提高可拓展性。
-        \end{itemize}
-    }
-}
+\begin{itemize}
+    \item 考研初试368分（专业第一）\enspace|\enspace 2022西京学院一等奖学金（前20\%）\enspace|\enspace 2022传智杯程序设计赛区域赛二等奖（前20\%）
+    \item 雅思IELTS（6.5分）\enspace|\enspace 英语六级CET-6（593分）\enspace|\enspace 国际人才英语考试ETIC（优秀等级）\enspace|\enspace 计算机二级证书（MS OFFICE）
+\end{itemize}
 
 % ============================================================
-% 专业技能与证书
+% 专业技能
 % ============================================================
-\cvsection{专业技能与证书}
+\cvsection{专业技能}
 
-{\small
-\textcolor{primaryblue}{\textbf{1. 语言与荣誉：}}雅思 IELTS 6.5、英语六级 CET-6 593 分、考研初试 368 分（专业第一）；2022 西京学院一等奖学金（前 20\%）、2022 传智杯程序设计赛区域赛二等奖（前 20\%）。~
-\textcolor{primaryblue}{\textbf{2. AI Agent 工程化：}}Python、LangChain、LangGraph、DeepSeek、FastAPI、SSE、MCP 协议；熟悉 Agent 编排（Plan-Confirm-Execute）、Function Calling 工具链设计、LLM 幻觉防御与确定性兜底、RAG 检索增强生成；熟练使用 Cursor、ClaudeCode 等 AI 辅助编码工具。~
-\textcolor{primaryblue}{\textbf{3. Java 全家桶：}}熟练掌握 Java，熟悉 JVM 内存模型与并发编程；熟练使用 SpringBoot、MyBatis（Plus）；了解 SpringCloud 微服务体系（Nacos、OpenFeign、Gateway）。~
-\textcolor{primaryblue}{\textbf{4. 数据与中间件：}}熟悉 MySQL，有索引优化、延迟关联、覆盖索引等 SQL 调优实战经验；熟悉 Redis 缓存策略与数据一致性保障、MQTT（EMQX）、WebSocket 实时推送、RocketMQ 事务消息、Elasticsearch 全文检索。~
-\textcolor{primaryblue}{\textbf{5. 前端与性能：}}了解 Vue 3、TypeScript、Cesium 三维 GIS、Android 基础开发；有核心接口性能优化实战经验（N+1 查询/延迟关联/覆盖索引/深分页游标），接口响应从 7--8s 降至 1s 以内。~
-\textcolor{primaryblue}{\textbf{6. 工程实践：}}熟悉 Logback 日志框架与 Kibana 排障，熟悉 Linux + Docker 基础运维，Git 协作；具备从需求分析、方案设计到联调交付的全流程能力，有前后端 + 软硬件跨团队协作经验。
-}
+\begin{multicols}{2}
+\cvskill{Java 全家桶}{熟练掌握 Java，熟悉 JVM 内存模型与并发编程；熟练使用 SpringBoot、MyBatis（Plus）；了解 SpringCloud 微服务体系（Nacos、OpenFeign、Gateway）}
+
+\cvskill{数据存储与检索}{熟悉 MySQL，有 N+1 查询优化（预加载 + HashMap 索引）、延迟关联、覆盖索引等 SQL 调优实战经验；熟悉 Redis 缓存策略与数据一致性保障；熟悉 Elasticsearch 全文检索（Multi-Match、高亮、多维度排序）}
+
+\cvskill{AI 全栈开发}{了解 Vue、Cesium、Android 基础开发；熟练使用 Trae、Cursor、ClaudeCode 等 AI 辅助编码工具，了解 Function Calling、MCP 协议等 AI 工程化技术}
+
+\cvskill{分布式系统}{了解分布式锁（Redisson）、分布式事务（RocketMQ 事务消息 / TCC / 可靠消息最终一致）、配置中心（Nacos）等常见组件的设计思路与应用场景}
+
+\cvskill{性能优化}{有核心接口性能优化实战经验：千台 Mesh 设备查询从 7-8s 优化至 1s 以内，30w 条日志深分页从 5s 降至 1s 以内（性能提升 5 倍）；善于定位并解决大数据量场景下的查询与存储瓶颈}
+
+\cvskill{工程实践}{熟悉 Logback 日志框架与 Kibana 排障，熟悉 Linux + Docker 基础运维；具备从需求分析到联调交付的全流程能力，有前后端 + 软硬件跨团队协作经验}
+\end{multicols}
 
 \end{document}
