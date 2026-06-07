@@ -162,7 +162,7 @@
 
             \item \textbf{多步任务链的级联故障阻断与安全隔离}：Plan-Confirm-Execute 三段式流程中，任意步骤返回失败或触发急停时立即 break 阻断后续执行，防止级联错误。高风险操作（飞行、返航）执行前强制 Human-in-the-Loop 确认。急停指令走独立 MQTT 硬件通道，不经过 Agent 或 LLM，前端同步关闭 SSE 连接实现会话级安全隔离。
 
-            \item \textbf{状态机驱动的子任务编排替代 LLM 时序决策}：环绕飞行天然为状态机（进入环绕 $\to$ 逐 $30^\circ$ 拍照 $\to$ 满 $360^\circ$ 退出），AgentExecutor 的 ReAct 循环依赖 LLM 自主判断时序导致拍照频率和停止时机不可控。引入 LangGraph 建模显式条件子图——enter\_orbit $\to$ orbit\_loop（条件边: $\ge 360^\circ$ 退出）$\to$ exit\_orbit，执行周期由图的边决定，LLM 仅负责意图路由而非时序判断。主链路（线性任务）保持 AgentExecutor 避免过度设计。
+            \item \textbf{状态机驱动的子任务编排替代 LLM 时序决策}：环绕飞行天然为状态机（进入环绕 $\to$ 逐 $30^\circ$ 拍照 $\to$ 满 $360^\circ$ 退出），LLM 推理延迟（1-3s/次）在无人机 3m/s 飞行速度下将导致拍照点偏移 3-9 米，ReAct 循环依赖 LLM 判断时序在实时控制场景下物理上不可行。引入 LangGraph 建模显式条件子图——enter\_orbit $\to$ orbit\_loop（条件边: $\ge 360^\circ$ 退出）$\to$ exit\_orbit，执行周期由图的边决定，LLM 仅负责意图路由而非时序判断。主链路（线性任务）保持 AgentExecutor 避免过度设计。
 
             \item \textbf{MCP 外部工具链与复合指令封装}：通过 MCP 协议集成高德地图 Server，15 个地图工具自动注册，地理编码多候选项回传 LLM 根据上下文仲裁最佳匹配。基于 LangChain @tool 定义 16 个无人机工具函数，遵循"暴露业务语义而非硬件原语"原则封装复合指令（如 record\_for\_duration 内部编排 start $\to$ 倒计时 $\to$ stop 完整时序）。SSE 流式推送实现工具调用链路的实时可观测。
         \end{itemize}
