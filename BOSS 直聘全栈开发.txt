@@ -35,6 +35,6 @@
 
 ● 解决服务器重启后设备无法自动恢复在线的稳定性难题，监听服务就绪事件后通过 MQTT 广播重连指令触发设备自动上线；Agent 侧同样考虑进程崩溃场景，任务状态持久化至 Redis，重启后自动恢复未完成任务
 
-● 前端基于 Vue3 + Cesium 开发三维 GIS 地图与无人机座舱界面；Agent 前端基于 FastAPI + SSE 流式推送，支持 DJI Copilot 风格的规划确认卡片、步骤进度可视化和急停硬通道
+● 前端基于 Vue3 + Cesium 开发三维 GIS 地图与无人机座舱界面；Agent 前端基于 FastAPI + SSE 流式推送，支持规划确认卡片、步骤进度可视化和急停硬通道
 
 ● Agent 技术栈：Python、LangChain（AgentExecutor + @tool）、LangGraph（环绕飞行状态机子图）、DeepSeek API（Function Calling）、MCP 协议集成高德地图 15 个工具、FastAPI + SSE
