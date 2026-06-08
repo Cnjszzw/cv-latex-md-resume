@@ -1,0 +1,198 @@
+% ============================================================
+% style-aiagent.sty — AI 全栈工程师简历专用样式（不影响原简历）
+% ============================================================
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{style-aiagent}[2024 AI Agent Resume Style]
+
+% --- 依赖宏包 ----------------------------------------------
+\usepackage{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage[table]{xcolor}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage{needspace}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{microtype}
+
+% ============================================================
+% 一、颜色定义
+% ============================================================
+\definecolor{primaryblue}{HTML}{CA3832}
+
+% ============================================================
+% 二、页面布局
+% ============================================================
+\geometry{
+    a4paper,
+    top     = 0.4cm,
+    bottom  = 0.4cm,
+    left    = 0.9cm,
+    right   = 0.9cm,
+}
+\pagestyle{empty}
+\raggedbottom
+
+% ============================================================
+% 三、字体设置
+% ============================================================
+\setmainfont{Helvetica Neue}
+\setCJKmainfont{PingFang SC}
+\setCJKmonofont{PingFang SC}
+
+% ============================================================
+% 四、基础排版参数
+% ============================================================
+\linespread{1.25}
+\setlength{\parskip}{0em}
+\setlength{\parindent}{0pt}
+\widowpenalty=500% 原值10000过于激进，降低后允许更自然的页面填充
+\clubpenalty=500% 避免因孤行限制导致底部大片空白
+
+% ============================================================
+% 五、个人信息变量 + 头部（支持 lineC）
+% ============================================================
+\makeatletter
+\def\cv@photo{}        \def\photo#1{\def\cv@photo{#1}}
+\def\cv@name{}         \def\name#1{\def\cv@name{#1}}
+\def\cv@lineA{}        \def\lineA#1{\def\cv@lineA{#1}}
+\def\cv@lineB{}        \def\lineB#1{\def\cv@lineB{#1}}
+\def\cv@lineC{}        \def\lineC#1{\def\cv@lineC{#1}}
+
+\newsavebox\cv@photobox
+\newcommand{\makecvheader}{%
+    \noindent
+    \rlap{%
+        \makebox[\textwidth][l]{%
+            \hfill
+            \ifx\cv@photo\empty
+                \tikz{
+                    \node[rectangle,draw=black!30,line width=0.3pt,
+                          minimum width=2.2cm,minimum height=2.8cm,
+                          fill=black!5] {};
+                }
+            \else
+                \sbox\cv@photobox{\includegraphics[width=2.2cm,height=2.8cm,keepaspectratio]{\cv@photo}}%
+                \raisebox{-\dimexpr\ht\cv@photobox/2\relax}{\usebox{\cv@photobox}}%
+            \fi
+        }%
+    }%
+    \makebox[\textwidth][c]{%
+        \begin{tabular}[c]{@{}c@{}}
+            {\fontsize{20}{26}\selectfont\bfseries\cv@name} \\[0.2cm]
+            \cv@lineA \\[0.08cm]
+            \cv@lineB \\[0.08cm]
+            \cv@lineC
+        \end{tabular}%
+    }%
+    \vspace{0.15cm}
+}
+
+% ============================================================
+% 六、一级章节标题（可选第二参数放右侧图标）
+% ============================================================
+\NewDocumentCommand{\cvsection}{ m o }{%
+    \vspace{0.3em plus 0.2em minus 0.3em}%
+    \noindent
+    \begin{tikzpicture}[baseline=(text.base)]
+        \fill[primaryblue] (0,0) rectangle (\textwidth,2pt);
+        \node[
+            fill=primaryblue,
+            text=white,
+            font=\bfseries,
+            inner xsep=6pt,
+            inner ysep=5pt,
+            anchor=south west,
+            outer sep=0pt,
+        ] (text) at (0,1pt) {#1};
+        \IfValueT{#2}{
+            \node[anchor=east, outer sep=0pt, inner sep=0pt] at (\textwidth, 0.9em) {#2};
+        }
+    \end{tikzpicture}%
+    \par\vspace{0.1em}%
+}
+
+% ============================================================
+% 七、三列对齐宏 — 黑色版本
+% ============================================================
+\newcommand{\cvheading}[3]{%
+    \noindent
+    \makebox[0.30\textwidth][l]{\textbf{#1}}%
+    \makebox[0.42\textwidth][l]{\textbf{#2}}%
+    \makebox[0.28\textwidth][r]{\textbf{#3}}\par
+}
+
+% ============================================================
+% 八、条目宏
+% ============================================================
+\newcommand{\cvevent}[4]{%
+    \vspace{0.2em}
+    \cvheading{#1}{#2}{#3}
+    \ifx\relax#4\relax\else
+        \vspace{0.04em}
+        #4
+    \fi
+}
+
+\newcommand{\cvproject}[4]{%
+    \vspace{0.2em}
+    \cvheading{#1}{#2}{#3}
+    \ifx\relax#4\relax\else
+        \vspace{0.04em}
+        #4
+    \fi
+}
+
+% ============================================================
+% 九、列表环境（紧凑版）
+% ============================================================
+\setlist[itemize]{
+    leftmargin = 1em,
+    itemsep    = 0.02em,
+    topsep     = 0.04em,
+    parsep     = 0em,
+    label      = {\tikz[baseline=-0.65ex]{\fill[black] (0,0) circle (2.2pt);}},
+    labelsep   = 0.35em,
+}
+
+\setlist[enumerate]{
+    leftmargin = 2em,
+    itemsep    = 0.05em,
+    topsep     = 0.06em,
+    parsep     = 0em,
+    label      = \arabic*.,
+    labelsep   = 0.4em,
+}
+
+% ============================================================
+% 十、辅助宏
+% ============================================================
+\newcommand{\cvtech}[1]{%
+    \noindent\textbf{技术栈：#1}\par
+}
+
+\newcommand{\cvlabeled}[2]{%
+    \noindent\textbf{#1}：#2\par\vspace{0.02em}
+}
+
+\newcommand{\cvskill}[2]{%
+    \noindent
+    {\bfseries\color{primaryblue}#1}：{#2}\par
+    \vspace{0.3em}
+}
+
+\newcommand{\cvbullet}{\tikz[baseline=-0.65ex]{\fill[black] (0,0) circle (2.2pt);}}
+\makeatother
+
+\hypersetup{
+    colorlinks = true,
+    urlcolor   = black,
+    linkcolor  = black,
+}

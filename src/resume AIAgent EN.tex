@@ -1,0 +1,303 @@
+% ============================================================
+% resume AIAgent EN.tex — English version, translated from resume AIAgent.tex
+% ============================================================
+
+\documentclass[10pt,a4paper]{article}
+
+% --- Load style & templates ---
+\input{templates/style-aiagent-en.sty}
+\input{templates/cv.latex}
+
+% --- Local extensions: 4-column / 5-column layouts ---
+\let\cvheadingThree\cvheading% save 3-col version for project sections
+
+% Education: 2-line (Line1: School + Date | Line2: Degree, Major·School·Location)
+\newcommand{\cvheadingEdu}[4]{%
+    \noindent
+    \makebox[0.30\textwidth][l]{\textbf{#1}}%   School
+    \makebox[0.40\textwidth][c]{\textbf{#2}}%   Degree (centered)
+    \makebox[0.30\textwidth][r]{#4}\par         
+    \vspace{0.08em}
+    #3\par                                       
+}
+\newcommand{\cveventEdu}[5]{%
+    \vspace{0.3em}
+    \cvheadingEdu{#1}{#2}{#3}{#4}
+    \ifx\relax#5\relax\else
+        \vspace{0.06em}
+        #5
+    \fi
+}
+
+% Work Experience: 2-line (Line1: Date / Domain / Lang / Role | Line2: Company)
+\newcommand{\cvheadingWork}[5]{%
+    \noindent
+    \makebox[0.40\textwidth][l]{\textbf{#1}}%   Date
+    \makebox[0.30\textwidth][l]{#3}%            Domain
+    \makebox[0.30\textwidth][r]{\textbf{#5}}%   Role
+    \par
+    \vspace{0.08em}
+    \makebox[0.68\textwidth][l]{#2}%            Company (with logo)
+    \makebox[0.32\textwidth][r]{#4}\par          % Tech stack (right-aligned)
+}
+\newcommand{\cveventWork}[6]{%
+    \vspace{0.2em}
+    \cvheadingWork{#1}{#2}{#3}{#4}{#5}
+    \ifx\relax#6\relax\else
+        \vspace{0.04em}
+        #6
+    \fi
+}
+
+% Tech stack icons next to section titles (PNG color icons)
+% Priority: devicon(-original) \,\faArrowRight\, simple-icons(-simple) \,\faArrowRight\, manual(-custom)
+\newcommand{\ticon}[1]{%
+    \IfFileExists{assets/myIcons/#1-original.png}{%
+        \raisebox{-0.08cm}{\includegraphics[height=0.42cm]{assets/myIcons/#1-original.png}}%
+    }{\IfFileExists{assets/myIcons/#1-simple.png}{%
+        \raisebox{-0.08cm}{\includegraphics[height=0.42cm]{assets/myIcons/#1-simple.png}}%
+    }{%
+        \raisebox{-0.08cm}{\includegraphics[height=0.42cm]{assets/myIcons/#1-custom.png}}%
+    }}%
+}
+\newcommand{\seclogo}[1]{\hspace{0.12em}\ticon{#1}}
+
+% ============================================================
+% Personal Information
+% ============================================================
+\name{Zhiwen Zhao}
+\lineA{%
+    \faPhone\ 185-5613-5826 \enspace|\enspace
+    \faEnvelope\ \href{mailto:cnjszzw@qq.com}{cnjszzw@qq.com} \enspace|\enspace
+    \faWeixin\ cnjszzw%
+}
+\lineB{Hometown: Yangzhou, Jiangsu \enspace|\enspace Age: 27 (1999/10/27) \enspace|\enspace Gender: Male}
+\lineC{Job Preference: Backend Development / AI Full-Stack Development / Test Development}
+\photo{assets/photo.jpg}
+
+% ============================================================
+% Document Body
+% ============================================================
+\begin{document}
+
+\makecvheader
+
+% ============================================================
+% Education
+% ============================================================
+\vspace{-0.825cm}% shift first section up to use header whitespace
+\cvsection{Education}
+
+% Switch to 4-column layout (School / Degree / Major·School·Location / Date)
+\let\cvheading\cvheadingEdu
+\let\cvevent\cveventEdu
+
+\cvevent{Shandong Normal University}{B.S. (Full-time, verified on CHSI)}{Broadcasting \& TV Directing (School of Journalism \& Media, Jinan, Shandong)}{2018/09 -- 2022/06}{}
+
+\cvevent{Xijing University}{M.S. (Full-time, verified on CHSI)}{Computer Technology (School of Computer Science, Xi'an, Shaanxi)}{2022/09 -- 2025/01}{}
+
+% ============================================================
+% Work Experience
+% ============================================================
+\cvsection{Work Experience}
+
+% Switch to 5-column layout (Date / Company / Domain / Role)
+\let\cvheading\cvheadingWork
+\let\cvevent\cveventWork
+
+\cvevent{2025/04 -- 2026/03 (Full-time)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/上海环创通信科技股份有限公司.png}}%
+    \hspace{0.4em}Shanghai Huanchuang Communication (Software Platform Dept.)}{IoT (Gov \& Enterprise B2B)}{Java/Python/TS}{AI Full-Stack Dev}{}
+
+\cvevent{2024/12 -- 2025/03 (Internship)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/北京流金岁月科技有限公司.png}}%
+    \hspace{0.4em}Beijing Liujinsuiyue Technology (Military-Civilian Integration Dept.)}{Data Platform (Internal)}{Java}{Backend Dev}{}
+
+\cvevent{2024/02 -- 2024/05 (Internship)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/美团.png}}%
+    \hspace{0.4em}Meituan (Quality Engineering Dept. / Hotel \& Travel Testing Team)}{E-Commerce (B2B Merchant)}{Java}{Test Dev}{}
+
+\cvevent{2023/09 -- 2024/02 (Internship)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/哔哩哔哩.png}}%
+    \hspace{0.4em}Bilibili (User Ecosystem Tech Quality Dept.)}{Content Community (C-end)}{Python/Golang}{Test Dev}{}
+
+\cvevent{2023/04 -- 2023/08 (Internship)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/丁香园.png}}%
+    \hspace{0.4em}DXY / DingXiangYuan (DXY Talent / Insight)}{Recruitment Platform (B/C Dual-end)}{Python/JS}{Test Dev}{}
+
+
+% ============================================================
+% Project Experience (grouped by company)
+% ============================================================
+\let\cvheading\cvheadingThree% restore 3-col version
+\cvsection{Master's Thesis --- Funded by Xi'an Science \& Technology Bureau (22GXFW0149)}[\seclogo{python}\seclogo{pytorch}\seclogo{yolo}\seclogo{opencv}\seclogo{flask}]
+
+\cvproject{Intelligent Detection of Small-Target UAVs in Complex Environments}{}{2023/05 -- 2024/12}{%
+    \cvtech{Deep Learning, AI Model Optimization/Training, Python, PyTorch, YOLOv8, imgaug, OpenCV, labelimg, AutoDL, Flask}
+    \cvlabeled{Overview}{Addressing the challenge of small-target UAV detection in complex environments, this thesis proposes TD-YOLO, an improved algorithm based on YOLOv8, covering the full pipeline of dataset construction, model optimization, attention mechanism integration, and visualization system development. Funded by Xi'an Science \& Technology Bureau (22GXFW0149).}
+    \cvlabeled{Implementation}{%
+        \begin{itemize}
+            \item \textbf{Dataset Construction \& Augmentation}: Based on TIB-NET and UAVDrones datasets, applied multi-dimensional data augmentation (random rotation/flip/brightness-contrast adjustment/Gaussian noise) using Python imgaug library to simulate complex weather conditions (fog, rain, snow), and expanded complex-background samples via background fusion, ultimately building a high-quality annotated dataset of 5,920 images.
+
+            \item \textbf{TD-YOLO Algorithm Design}: To address two key challenges---small-target feature loss and complex-environment interference---introduced three improvements on top of YOLOv8: GDST-Conv structure for enhanced feature extraction, adaptive spatial feature fusion for multi-scale feature optimization, and Focal Loss function to mitigate class imbalance. Achieved a 1.3 percentage point improvement in mAP50 over YOLOv8.
+
+            \item \textbf{BiFormer Attention Mechanism Optimization}: Integrated the BiFormer attention module to enhance the model's focus on UAV targets, effectively reducing false detections under specific weather conditions and complex backgrounds, further improving mAP50 by 1.9 percentage points.
+
+            \item \textbf{Model Training \& System Development}: Completed model training and tuning on the AutoDL cloud computing platform (NVIDIA RTX 3090); developed a detection visualization system using Flask, supporting image upload, real-time inference, and result display.
+        \end{itemize}
+    }
+}
+
+\cvsection{Shanghai Huanchuang Communication Co., Ltd.}[%
+    \seclogo{claudecode}\seclogo{cursor}%                                  AI Tools
+    \seclogo{python}\seclogo{langchain}\seclogo{langgraph}\seclogo{deepseek}\seclogo{mcp}\seclogo{fastapi}% Python/AI Stack
+    \seclogo{java}\seclogo{spring}\seclogo{springboot}\seclogo{mybatis}\seclogo{mybatis-plus}\seclogo{mysql}\seclogo{redis}\seclogo{mqtt}% Java Stack
+    \seclogo{vuejs}\seclogo{javascript}\seclogo{typescript}\seclogo{cesium}% Frontend
+    \seclogo{git}\seclogo{docker}%    Infrastructure
+]
+
+\cvproject{Project 1: WVP Copilot --- LLM-Based Drone AI Agent}{}{2025/11 -- 2026/03}{%
+    \cvtech{Python, LangChain, LangGraph, SSE, MCP, FastAPI, DeepSeek API, Redis}
+    \cvlabeled{Overview}{Designed for fire emergency command scenarios, WVP Copilot deeply integrates hardware/software capabilities with AI algorithms to create a drone intelligent agent, dramatically lowering the barrier to use. Users simply describe their needs in natural language (e.g., "Fly to Lujiazui, zoom to 7x, take a photo, return home"), and Copilot accurately understands the intent, automatically decomposes it into a sequence of drone commands, orchestrates execution, and completes remote control and mission dispatch through conversational interaction. Built with a two-tier architecture: Python (Agent orchestration layer) + Java (device control layer), decoupled via REST communication.}
+    \cvlabeled{Implementation}{%
+        \begin{itemize}
+            \item \textbf{Multi-Layer Defense \& Self-Healing Against Parameter Hallucination}: When LLMs generate flight commands, parameter hallucination is common (e.g., height: "100m" with unit suffix, coordinate out-of-bounds). A three-layer defense is built at tool function entry points---Regex format cleaning layer (strip unit suffixes), Pydantic type constraint layer (reject illegal values), business rule validation layer (reuse existing backend flight safety APIs for altitude/distance/geofence limits). All three layers are deterministic code, independent of LLM self-correction. On LLM API timeout or unavailability, exponential backoff retries (max 3 rounds) are attempted, ultimately falling back to predefined prompts guiding manual control.
+
+            \item \textbf{State Synchronization \& Deterministic Fault Recovery for Async Operations}: LLM inference is synchronous (seconds), while drone execution is asynchronous (minutes). Tool functions internally encapsulate Redis polling waits, dynamically estimating timeout thresholds based on flight distance. On timeout, instead of immediately declaring failure, the system queries the drone's actual OSD position for a deterministic fallback---if distance to target < 5m, classify as arrived (state lag due to communication delay); if position unchanged, classify as hardware fault; if position still changing, extend waiting time. Intermediate states are only pushed to the frontend; the LLM does not perceive them.
+
+            \item \textbf{Cascading Failure Prevention \& Safety Isolation for Multi-Step Task Chains}: In the Plan-Confirm-Execute three-stage workflow, any step returning failure or triggering an emergency stop immediately breaks and blocks subsequent execution to prevent cascading errors. High-risk operations (takeoff, return home) require mandatory Human-in-the-Loop confirmation before execution. Emergency stop commands go through an independent MQTT hardware channel, bypassing the Agent and LLM entirely; the frontend simultaneously closes the SSE connection to achieve session-level safety isolation.
+
+            \item \textbf{State-Machine-Driven Sub-Task Orchestration Replacing LLM Temporal Decision-Making}: Orbit flight is inherently a state machine (enter orbit \,\faArrowRight\, capture photo every 30° \,\faArrowRight\, 360° complete \,\faArrowRight\, exit orbit). With LLM inference latency (1--3s per call) and drone flight speed of 3m/s, relying on LLM for timing decisions would cause photo capture point drift of 3--9 meters---the ReAct loop's dependency on LLM temporal judgment is physically infeasible in real-time control scenarios. Introduced LangGraph to model explicit conditional subgraphs: enter\_orbit \,\faArrowRight\, orbit\_loop (conditional edge: ≥ 360° \,\faArrowRight\, exit) \,\faArrowRight\, exit\_orbit, where the execution cycle is governed by graph edges, with the LLM only responsible for intent routing, not temporal decisions. The main task chain (linear tasks) retains AgentExecutor to avoid over-engineering.
+
+            \item \textbf{MCP External Tool Chain \& Composite Command Encapsulation}: Integrated Amap (Gaode Map) Server via the MCP protocol with 15 map tools auto-registered; geocoding returns multiple candidates for the LLM to arbitrate the best match based on context. Defined 16 drone tool functions using LangChain @tool decorator, following the principle of "exposing business semantics, not hardware primitives"---encapsulating composite commands (e.g., record\_for\_duration internally orchestrates start \,\faArrowRight\, countdown \,\faArrowRight\, stop as a complete temporal sequence). SSE streaming push enables real-time observability of the tool invocation chain.
+        \end{itemize}
+    }
+}
+
+\cvproject{Project 2: Drone Management Cloud Platform}{}{2025/04 -- 2026/03}{%
+    \cvtech{Java, SpringBoot, Redis, MySQL, MyBatis(Plus), WebSocket, MQTT, Vue, JavaScript, TypeScript, Cesium}
+    \cvlabeled{Overview}{The platform's existing capabilities were centered on ground-based Mesh device management, lacking unified drone access and remote control capabilities to meet the demands of beyond-visual-line-of-sight video transmission and flight control in firefighting scenarios. Leveraging the company's self-organizing mesh network for ultra-long-distance transmission (>20km), built drone access and control modules covering device management, flight control, camera operations, video on-demand, and 3D GIS visualization, enabling integrated air-ground command and dispatch.}
+    \cvlabeled{Implementation}{%
+        \begin{itemize}
+            \item \textbf{Drone Access \& Control}: Built a real-time control channel from frontend to drone based on self-organizing mesh hardware + MQTT (message format referencing DJI Cloud API). Encapsulated an MQTT client on the frontend supporting 1s heartbeat keep-alive, automatic subscription recovery, and real-time telemetry data reception. Backend managed device online status via Redis, distinguishing between active disconnection and abnormal disconnection; leveraged Spring startup-ready events + MQTT custom reconnect commands to solve the problem of devices failing to auto-reconnect after server restart, achieving unattended self-healing.
+
+            \item \textbf{Flight Control \& Camera System}: Implemented flight commands (takeoff, point-to-point flight, orbit flight, waypoint flight, return home, emergency stop) and camera payload commands (zoom, photo, recording, mode switch, gimbal reset, box-select zoom, AIM targeting). Initially, most commands were sent directly from frontend to hardware via MQTT for rapid functional validation; later migrated to backend for unified processing to improve maintainability. Backend added flight safety validation logic: takeoff/return home/target altitude vs. system altitude limit comparison, landing confirmation and cancellation.
+
+            \item \textbf{Real-Time Video On-Demand Service}: Integrated ZLM streaming media server to build a complete video pipeline: drone video stream \,\faArrowRight\, ZLM pull-stream relay \,\faArrowRight\, frontend low-latency playback via Jessibuca. Implemented async video on-demand using Spring DeferredResult: after frontend HTTP request, backend immediately releases Tomcat thread and asynchronously waits for ZLM stream readiness before returning the playback URL via callback, avoiding thread resource occupation during on-demand wait. Designed Redis reference counting strategy: each video stream maintains a set of viewing users---count decrements on user close, and the pull stream automatically stops when count reaches zero, preventing bandwidth waste when no one is watching.
+        \end{itemize}
+    }
+}
+
+\cvsection{Personal Open-Source Project}[\seclogo{claudecode}\seclogo{java}\seclogo{spring}\seclogo{springboot}\seclogo{mybatis}\seclogo{mysql}\seclogo{redis}\seclogo{git}\seclogo{elasticsearch}\seclogo{rocketmq}\seclogo{nginx}]
+
+\cvproject{Project 1: Bilibili-Style Danmaku Video Website}{}{2024/05 -- 2026/05}{%
+    \cvlabeled{Repository}{%
+        \begingroup
+        \hypersetup{urlcolor=primaryblue}%
+        \url{https://github.com/Cnjszzw/imooc-bilibili} \textbar\ \url{https://github.com/Cnjszzw/bilibili-microservices}%
+        \endgroup
+    }
+    \cvtech{SpringCloud Alibaba, Nacos, Gateway, OpenFeign, Seata, MyBatis, Redis, RocketMQ, Elasticsearch, WebSocket}
+    \cvlabeled{Overview}{Implements core Bilibili functionality---user system, video management, danmaku (real-time comments) system, and site-wide search---covering the complete loop from registration/login, video upload/viewing, real-time danmaku streaming, to full-text search.}
+    \cvlabeled{Implementation}{%
+        \begin{itemize}
+            \item \textbf{User System \& Security}: Built a login system based on Factory + Strategy pattern (UserGranter strategy interface + UserLoginFactory configuration-driven registration), where adding a new login method only requires implementing the interface and configuration, without modifying caller code. Implemented seamless login via JWT dual-token (access + refresh), with RSA encrypted transmission + MD5 salted hashing for password security. Implemented interface-level and data-level access control using RBAC + AOP aspects, decoupled from business code.
+
+            \item \textbf{Site-Wide Full-Text Search}: Integrated Elasticsearch with Multi-Match cross-field retrieval (title/nick/description), supporting keyword highlighting, multi-dimensional sorting (by date/danmaku count/view count), and paginated queries. User registration and video publishing synchronously write to ES index to ensure search real-timeness.
+
+            \item \textbf{Video Storage \& Transfer}: Integrated FastDFS for video chunked upload, resumeable transfer, and instant upload (file fingerprint verification), with external HTTP access provided through Nginx.
+
+            \item \textbf{Danmaku \& Feed Push}: Built real-time danmaku push via WebSocket, with danmaku messages first written to RocketMQ for async consumption and persistence, preventing direct DB write pressure under high concurrency. The feed/dynamic push system went through three iterations: V1 synchronous push \,\faArrowRight\, V2 MQ async push \,\faArrowRight\, V3 push-pull hybrid. Push-pull hybrid strategy: creators with < 100K followers use push mode (fanout write to follower inboxes); top creators with ≥ 100K followers use pull mode (only write to own outbox, followers actively pull on read), eliminating the write amplification problem for large creators and supporting million-follower scenarios. Stress testing validated that for 100K followers, fanout write latency dropped from 7s to ~1ms, with user publish wait time consistently under 40ms.
+
+            \item \textbf{Microservices Architecture Migration}: Completed microservice decomposition of the monolith using Spring Cloud Alibaba: set up Nacos service registry + Spring Cloud Gateway unified gateway, implemented unified JWT authentication and X-User-Id header injection via global filters so downstream services don't need to handle auth individually; used OpenFeign + Nacos service discovery for cross-service calls.
+
+            \item \textbf{Distributed Transactions}: Video upload involves two cross-service operations---writing video to content-service and creating a feed to legacy-service. After evaluating XA / Seata AT / TCC / Best-Effort Notification, chose RocketMQ transactional messages for eventual consistency: content-service writes video + sends half-message in local transaction, Broker confirms via callback before delivery, legacy async consumes to create feed. Designed independent retry logic (16-step incremental) for the ingest consumer and diffusion consumer, solving Seata AT's inability to cover cross-storage rollback (DB + MQ + Redis), achieving eventual consistency across three storage tiers.
+        \end{itemize}
+    }
+}
+
+\cvsection{Beijing Liujinsuiyue Technology Co., Ltd.}[\seclogo{cursor}\seclogo{java}\seclogo{spring}\seclogo{maven}\seclogo{oracle}\seclogo{git}]
+
+\cvproject{Project 1: Data Synchronization \& Monitoring Platform}{}{2024/12 -- 2025/03}{%
+    \cvtech{Java, SpringBoot, Maven, Oracle, JDBC, Git}
+    \cvlabeled{Overview}{Addressing the company's fragmented data across multiple services and lack of unified data infrastructure, built a full-process data processing pipeline from data ingestion, cleaning, and auditing to synchronized warehousing, along with a monitoring and alerting system for the synchronization process.}
+    \cvlabeled{Implementation}{%
+        \begin{itemize}
+            \item \textbf{System Architecture Optimization}: To address code duplication from frequent manual Controller instantiation in multi-data-source scenarios, built a unified proxy layer using JDK dynamic proxy + reflection, centralizing instantiation and cross-cutting concerns to achieve module decoupling.
+
+            \item \textbf{Data Sync \& Monitoring}: Participated in core chain development for cross-database table structure mapping, rule-engine-driven cleaning and auditing, and data synchronization; built a digital monitoring module and early-warning mechanism that auto-triggers alerts on sync anomalies; the monitoring dashboard uses scheduled cache warm-up to solve slow loading with large datasets.
+
+            \item \textbf{Engineering Optimization}: Designed a custom annotation + AOP aspect solution for automatic redundant field handling (@RedundantField + @IgnoreRedundant), where the AOP aspect automatically cleans redundant data before requests enter, eliminating repetitive manual set-null code in every interface.
+        \end{itemize}
+    }
+}
+
+\cvsection{Meituan}[\seclogo{java}\seclogo{spring}\seclogo{redis}\seclogo{git}]
+
+\cvproject{Project 1: Direct Connection Listing API Automation Testing}{}{2024/02 -- 2024/05}{%
+    \cvtech{Java, Mario Framework (based on TestNG), TestX}
+    \cvlabeled{Overview}{The Direct Connection platform converts suppliers' accommodation, dining, and other products into Meituan-sellable products through system integration. Supplemented automated test cases and business knowledge accumulation for existing microservices, covering the core chain of the listing product synchronization service.}
+    \cvlabeled{Implementation}{%
+        \begin{itemize}
+            \item \textbf{Automation Design}: Consolidated business logic, mapped the validation chain (gateway parameter validation \,\faArrowRight\, internal service parameter validation \,\faArrowRight\, DB write validation \,\faArrowRight\, business-layer mapping/forwarding validation), designed the automation approach, completed automated test cases for 5 major flows covering 24 APIs, raising code coverage to 77\%.
+            \item \textbf{Data Construction}: Facing challenges such as long validation chains in the middle tier, missing logs for low-traffic APIs, and missing API documentation, determined parameter models through code walk-through to complete complex data construction.
+        \end{itemize}
+    }
+}
+
+\cvproject{Project 2: JBOX Environment Governance Tool}{}{2024/02 -- 2024/05}{%
+    \cvtech{Java, SpringBoot, Redis, Redisson, Git}
+    \cvlabeled{Overview}{The Direct Connection team uses JBOX plugin container technology to integrate with different merchants, with concepts of "platform" and "plugin" plus a specific deployment order. The existing internal platform could not deploy plugins in sequence, perceive plugin status, or synchronize online/offline plugins timely, causing environment instability and a large number of invalid automated test failures.}
+    \cvlabeled{Implementation}{%
+        \begin{itemize}
+            \item \textbf{Plugin Sync Tool}: Independently developed the online-offline plugin sync tool to solve the problem of timely plugin synchronization.
+            \item \textbf{Plugin Monitoring \& Repair}: Participated in developing the plugin monitoring and repair tool, redesigned the original solution approach, and completed development and testing, fixing 20+ problematic plugins daily on average.
+            \item \textbf{Engineering Optimization}: Used Redis distributed locks to solve the serial deployment requirement for plugins on the same platform; used multi-threaded concurrent deployment across different platforms to improve deployment efficiency.
+        \end{itemize}
+    }
+}
+
+\cvsection{Bilibili}[\seclogo{python}\seclogo{go}\seclogo{git}]
+
+\cvproject{Project 1: UGC Playback Page Testing \& Playback Consistency Migration}{}{2023/09 -- 2024/02}{%
+    \cvtech{Python, Golang, Git}
+    \cvlabeled{Overview}{The UGC playback page is Bilibili's core user experience surface (client DAU 15M, API QPS over 10K). UGC and OGV maintained two separate playback systems, leading to inconsistent experience and duplicated effort. In 2023, a multi-scenario consolidation migration was carried out for the player and playback page.}
+    \cvlabeled{Implementation}{%
+        \begin{itemize}
+            \item \textbf{Full-Process Testing}: Participated in mobile and server-side testing for playback consistency-related requirements, executed 220+ master test cases, optimized 15+ cases, documented 23+ business documents, performed systematic regression testing and UI/UX DIFF for consistency requirements, identified 40+ bugs.
+            \item \textbf{API Automation from 0 to 1}: Authored 57 P0 automated test cases, constructed UAT/PRE dual-environment test data, built API automation testing from scratch, discovered 1 production bug.
+            \item \textbf{Test System Development}: Completed testing for 17+ requirements, authored 6+ test case documents, discovered 86+ bugs, wrote 100+ Python automation scripts.
+        \end{itemize}
+    }
+}
+
+% ============================================================
+% Professional Skills
+% ============================================================
+\cvsection{Professional Skills}
+
+\begin{multicols}{2}
+\cvskill{Java Ecosystem}{Proficient in Java, familiar with JVM memory model and concurrent programming; skilled in SpringBoot, MyBatis (Plus); knowledgeable in SpringCloud microservice stack (Nacos, OpenFeign, Gateway)}
+
+\cvskill{Data Storage \& Retrieval}{Familiar with MySQL, with hands-on SQL tuning experience including N+1 query optimization (preloading + HashMap indexing), deferred join, and covering indexes; familiar with Redis caching strategies and data consistency assurance; familiar with Elasticsearch full-text search (Multi-Match, highlighting, multi-dimensional sorting)}
+
+\cvskill{AI Agent Engineering}{Hands-on experience building LLM Agents from 0 to 1: proficient in LangChain, LangGraph, Function Calling, MCP protocol; skilled in Agent reliability design; proficient with Cursor/ClaudeCode}
+
+\cvskill{Distributed Systems}{Knowledgeable in distributed locks (Redisson), distributed transactions (RocketMQ transactional messages / TCC / reliable eventual consistency), configuration centers (Nacos), and other common component design patterns and application scenarios}
+
+\cvskill{Performance Optimization}{Hands-on core API optimization experience: reduced 1K+ Mesh device query latency from 7--8s to under 1s, reduced 300K-row log deep pagination from 5s to under 1s (5x performance gain); adept at identifying and resolving query and storage bottlenecks in large-data-volume scenarios}
+
+\cvskill{Engineering Practices}{Familiar with Logback logging framework and Kibana troubleshooting, familiar with Linux + Docker basic operations; capable across the full lifecycle from requirements analysis to integration and delivery; experienced in cross-team collaboration across frontend, backend, and hardware/software}
+\end{multicols}
+
+% ============================================================
+% Competitions / Awards / Certificates
+% ============================================================
+\cvsection{Competitions / Awards / Certificates}
+
+\begin{itemize}
+    \item Postgraduate Entrance Exam: 368 (Ranked 1st in Major) \enspace|\enspace 2022 Xijing University First-Class Scholarship (Top 20\%) \enspace|\enspace 2022 Chuanzhi Cup Programming Competition Regional 2nd Prize (Top 20\%)
+    \item IELTS 6.5 \enspace|\enspace CET-6 593 \enspace|\enspace ETIC (Excellent) \enspace|\enspace National Computer Rank Examination Level 2 (MS Office)
+\end{itemize}
+
+\end{document}
