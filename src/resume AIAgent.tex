@@ -70,7 +70,7 @@
     \faWeixin\ cnjszzw%
 }
 \lineB{籍贯：江苏扬州 \enspace|\enspace 年龄：27 (1999/10/27) \enspace|\enspace 性别：男}
-\lineC{求职意向：后端开发/AI 全栈开发/测试开发}
+\lineC{求职意向：后端开发/全栈开发}
 \photo{assets/photo.jpg}
 
 % ============================================================
@@ -105,43 +105,20 @@
 
 \cvevent{2025/04 -- 2026/03 (正职)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/上海环创通信科技股份有限公司.png}}%
-    \hspace{0.4em}上海寰创通信 (软件平台部)}{物联网(政企B端)}{Java/Python/TS}{AI 全栈开发}{}
-
-\cvevent{2024/12 -- 2025/03 (实习)}{%
-    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/北京流金岁月科技有限公司.png}}%
-    \hspace{0.4em}北京流金岁月科技 (军民融合部)}{数据平台(内部平台)}{Java}{后端开发}{}
+    \hspace{0.4em}寰创通信}{物联网(政企B端)}{Java/Python/TS}{AI 全栈开发}{}
 
 \cvevent{2024/02 -- 2024/05 (实习)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/美团.png}}%
-    \hspace{0.4em}美团 (质量工程部/酒旅测试组)}{电商(B端商家侧)}{Java}{测试开发}{}
+    \hspace{0.4em}美团}{电商(B端商家侧)}{Java}{测试开发}{}
 
 \cvevent{2023/09 -- 2024/02 (实习)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/哔哩哔哩.png}}%
-    \hspace{0.4em}哔哩哔哩 (用户生态技术质量部)}{内容社区(C端)}{Python/Golang}{测试开发}{}
-
-\cvevent{2023/04 -- 2023/08 (实习)}{%
-    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/丁香园.png}}%
-    \hspace{0.4em}丁香园 (丁香人才/Insight)}{招聘平台(B/C双端)}{Python/JS}{测试开发}{}
-
+    \hspace{0.4em}哔哩哔哩}{内容社区(C端)}{Python/Golang}{测试开发}{}
 
 % ============================================================
 % 项目经历（按公司分组）
 % ============================================================
 \let\cvheading\cvheadingThree% 恢复3列版本
-\cvsection{硕士毕业论文-西安市科技局科技计划项目资助(22GXFW0149)}[\seclogo{python}\seclogo{pytorch}\seclogo{yolo}\seclogo{opencv}\seclogo{flask}]
-
-\cvproject{复杂环境下小目标无人机智能检测研究}{}{2023/05 -- 2024/12}{%
-    \cvtech{深度学习、 AI模型优化/训练、Python、PyTorch、YOLOv8、imgaug、OpenCV、labelimg、AutoDL、Flask}
-    \cvlabeled{项目概述}{面向复杂环境下小目标无人机检测难题，基于 YOLOv8 提出 TD-YOLO 改进算法，覆盖数据集构建、模型优化、注意力机制引入及可视化系统开发的全流程。论文获西安市科技局科技计划项目资助（22GXFW0149）。}
-    \cvlabeled{项目实现}{%
-        \begin{itemize}
-            \item \textbf{数据集构建与增强}：基于 TIB-NET 和 UAVDrones 数据集，利用 Python imgaug 库进行多维度数据增强（随机旋转/翻转/亮度对比度调整/高斯噪声），模拟雾天、雨天、雪天等复杂天气场景，并通过背景融合技术扩充复杂背景样本，最终构建 5920 张高质量标注数据集。
-            \item \textbf{TD-YOLO 算法设计}：针对小目标特征丢失和复杂环境干扰两大难点，在 YOLOv8 基础上引入三项改进——GDST-Conv 结构增强特征提取、自适应空间特征融合结构优化多尺度特征、Focal Loss 损失函数缓解类别不平衡，mAP50 较 YOLOv8 提升 1.3 个百分点。
-            \item \textbf{BiFormer 注意力机制优化}：引入 BiFormer 注意力模块增强模型对无人机目标的注意力分配，有效解决 TD-YOLO 在特定天气和复杂背景下的误检测问题，mAP50 进一步提升 1.9 个百分点。
-            \item \textbf{模型训练与系统开发}：基于 AutoDL 云算力平台（NVIDIA RTX 3090）完成模型训练与调优；使用 Flask 开发检测可视化系统，支持图像上传、实时推理与结果展示。
-        \end{itemize}
-    }
-}
 
 \cvsection{上海寰创通信股份有限公司}[%
     \seclogo{claudecode}\seclogo{cursor}%                                  AI 工具
@@ -211,22 +188,6 @@
     }
 }
 
-\cvsection{北京流金岁月科技有限公司}[\seclogo{cursor}\seclogo{java}\seclogo{spring}\seclogo{maven}\seclogo{oracle}\seclogo{git}]
-
-\cvproject{项目一：数据同步与监控平台}{}{2024/12 -- 2025/03}{%
-    \cvtech{Java、SpringBoot、Maven、Oracle、JDBC、Git}
-    \cvlabeled{项目概述}{面向公司多服务数据分散、缺少统一数据基建的现状，建设从数据接入、清洗、审核到同步入仓的全流程数据处理链路，并配套建设同步过程的监控告警体系。}
-    \cvlabeled{项目实现}{%
-        \begin{itemize}
-            \item \textbf{系统架构优化}：针对多数据源场景下 Controller 频繁手动实例化导致的代码重复问题，利用 JDK 动态代理 + 反射封装统一代理层，将实例化与横切逻辑集中管理，实现模块解耦。
-
-            \item \textbf{数据同步与监控}：参与跨库表结构映射、规则引擎驱动的清洗审核、数据同步的核心链路开发；建设数字化监控模块与预警机制，同步异常时自动触发告警；监控看板采用定时缓存预热策略，解决大数据量加载慢的问题。
-
-            \item \textbf{工程优化}：设计自定义注解 + AOP 切面的冗余字段自动处理方案（@RedundantField + @IgnoreRedundant），AOP 在请求进入前自动清理冗余数据，消除每个接口手工 set null 的重复代码。
-        \end{itemize}
-    }
-}
-
 \cvsection{美团}[\seclogo{java}\seclogo{spring}\seclogo{redis}\seclogo{git}]
 
 \cvproject{项目一：直连上单流程接口自动化测试}{}{2024/02 -- 2024/05}{%
@@ -262,6 +223,21 @@
             \item \textbf{全流程测试}：参与播放一致性相关需求的移动端和服务端测试，执行 220+ 总包 case，优化 15+ case，沉淀 23+ 业务文档，针对一致性需求进行系统回归测试和 UI/UX DIFF，排查 40+ bug。
             \item \textbf{接口自动化从 0 到 1}：梳理编写 57 条 P0 自动化 case，构造 UAT/PRE 双环境数据，从 0 到 1 落地接口自动化专项测试，发现 1 例线上 bug。
             \item \textbf{测试体系建设}：累计完成 17+ 需求测试，编写 6+ 测试用例，发现 86+ bug，编写 100+ Python 自动化脚本。
+        \end{itemize}
+    }
+}
+
+\cvsection{硕士毕业论文}[\seclogo{python}\seclogo{pytorch}\seclogo{yolo}\seclogo{opencv}\seclogo{flask}]
+
+\cvproject{复杂环境下小目标无人机智能检测研究}{}{2023/05 -- 2024/12}{%
+    \cvtech{深度学习、 AI模型优化/训练、Python、PyTorch、YOLOv8、imgaug、OpenCV、labelimg、AutoDL、Flask}
+    \cvlabeled{项目概述}{面向复杂环境下小目标无人机检测难题，基于 YOLOv8 提出 TD-YOLO 改进算法，覆盖数据集构建、模型优化、注意力机制引入及可视化系统开发的全流程。论文获西安市科技局科技计划项目资助（22GXFW0149）。}
+    \cvlabeled{项目实现}{%
+        \begin{itemize}
+            \item \textbf{数据集构建与增强}：基于 TIB-NET 和 UAVDrones 数据集，利用 Python imgaug 库进行多维度数据增强（随机旋转/翻转/亮度对比度调整/高斯噪声），模拟雾天、雨天、雪天等复杂天气场景，并通过背景融合技术扩充复杂背景样本，最终构建 5920 张高质量标注数据集。
+            \item \textbf{TD-YOLO 算法设计}：针对小目标特征丢失和复杂环境干扰两大难点，在 YOLOv8 基础上引入三项改进——GDST-Conv 结构增强特征提取、自适应空间特征融合结构优化多尺度特征、Focal Loss 损失函数缓解类别不平衡，mAP50 较 YOLOv8 提升 1.3 个百分点。
+            \item \textbf{BiFormer 注意力机制优化}：引入 BiFormer 注意力模块增强模型对无人机目标的注意力分配，有效解决 TD-YOLO 在特定天气和复杂背景下的误检测问题，mAP50 进一步提升 1.9 个百分点。
+            \item \textbf{模型训练与系统开发}：基于 AutoDL 云算力平台（NVIDIA RTX 3090）完成模型训练与调优；使用 Flask 开发检测可视化系统，支持图像上传、实时推理与结果展示。
         \end{itemize}
     }
 }
