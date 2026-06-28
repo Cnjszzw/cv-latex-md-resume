@@ -15,10 +15,10 @@
 % 教育经历专用四列（时间 / 学校 / 学历 / 专业）
 \newcommand{\cvheadingEdu}[4]{%
     \noindent
-    \makebox[0.26\textwidth][l]{\textbf{#1}}% 时间
-    \makebox[0.32\textwidth][l]{\textbf{#2}}% 学校
-    \makebox[0.12\textwidth][l]{\textbf{#3}}% 学历
-    \makebox[0.30\textwidth][r]{\textbf{#4}}\par% 专业
+    \makebox[0.30\textwidth][l]{\textbf{#1}}% 时间
+    \makebox[0.34\textwidth][l]{\textbf{#2}}% 学校
+    \makebox[0.11\textwidth][l]{\textbf{#3}}% 学历
+    \makebox[0.25\textwidth][r]{\textbf{#4}}\par% 专业
 }
 \newcommand{\cveventEdu}[5]{%
     \vspace{0.3em}
@@ -68,8 +68,8 @@
     \faEnvelope\ \href{mailto:cnjszzw@qq.com}{cnjszzw@qq.com} \enspace|\enspace
     \faWeixin\ cnjszzw%
 }
-\lineB{籍贯：江苏扬州 \enspace|\enspace 年龄：27 (1999/10/27) \enspace|\enspace 性别：男}
-\lineC{求职意向：后端开发/全栈开发}
+\lineB{籍贯：江苏扬州 \enspace|\enspace 年龄：26 (1999/10/27) \enspace|\enspace 性别：男}
+\lineC{求职意向：软件开发}
 \photo{assets/photo.jpg}
 
 % ============================================================
@@ -89,9 +89,13 @@
 \let\cvheading\cvheadingEdu
 \let\cvevent\cveventEdu
 
-\cvevent{2022/09 -- 2025/01}{西京学院}{硕士}{计算机技术}{}
+\cvevent{2022/09 -- 2025/01}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.50cm]{assets/school/Xijing_University_Emblem.png}}%
+    \hspace{0.4em}西京学院}{硕士}{计算机技术}{}
 
-\cvevent{2018/09 -- 2022/06}{山东师范大学}{本科}{广播电视编导}{}
+\cvevent{2018/09 -- 2022/06}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.50cm]{assets/school/Shandong_Normal_University_seal.png}}%
+    \hspace{0.4em}山东师范大学}{本科}{广播电视编导}{}
 
 % ============================================================
 % 工作经历
@@ -127,7 +131,21 @@
     \seclogo{git}\seclogo{docker}\seclogo{jenkins}\seclogo{subversion}%    基础设施
 ]
 
-\cvproject{项目一：WVP Copilot --- 基于 LLM 的无人机 AI Agent 智能体}{}{2025/11 -- 2026/03}{%
+\cvproject{项目一：无人机管理云平台}{}{2025/04 -- 2026/03}{%
+    \cvtech{Java、SpringBoot、Redis、MySQL、MyBatis(Plus)、WebSocket、MQTT、Vue、JavaScript、TypeScript、Cesium}
+    \cvlabeled{项目概述}{平台原有能力集中于地面 Mesh 设备管理，缺乏对无人机的统一接入与远程控制能力，无法满足消防场景下超视距视频回传与飞行控制需求。利用公司自组网超远距离传输（>20km）优势，建设无人机接入与控制模块，覆盖设备管理、飞行控制、相机操作、视频点播及三维 GIS 可视化等核心能力，实现空地一体化指挥调度。}
+    \cvlabeled{项目实现}{%
+        \begin{itemize}
+            \item \textbf{无人机接入与操控}：基于自组网硬件 + MQTT 搭建前端到无人机的实时操控通道（参考 DJI Cloud API 消息格式）。前端封装 MQTT 客户端，支持 1s 心跳保活、订阅自动恢复及遥测数据实时接收。后端通过 Redis 管理设备在线状态，区分主动下线与异常断连；利用 Spring 启动就绪事件 + MQTT 自定义重连指令，解决服务器重启后设备无法自动上线的问题，实现无人值守自愈。
+
+            \item \textbf{飞行控制与相机系统}：完成一键起飞、指点飞行、环绕飞行、航线飞行、返航、急停等飞行指令，以及变焦、拍照、录像、模式切换、云台重置、框选变焦、AIM 瞄准等相机负载指令的功能实现。前期大部分指令由前端通过 MQTT 与硬件直接通信以快速验证功能，后期迁移至后端统一处理，提高可维护性。后端增加飞行安全校验逻辑：起飞/返航/目标高度 vs 系统限高对比校验、降落确认与取消。
+
+            \item \textbf{实时视频点播服务}：集成 ZLM 流媒体服务器，搭建无人机视频流 \ \faArrowRight\  ZLM 拉流转发 \ \faArrowRight\  前端基于 Jessibuca 实现低延迟播放的完整链路。基于 Spring DeferredResult 实现异步点播：前端发起 HTTP 请求后，后端立即释放 Tomcat 线程，异步等待 ZLM 推流就绪后再通过回调返回播放地址，避免点播等待期间占用线程资源。设计 Redis 引用计数策略：每个视频流维护观看用户集合，用户关闭时计数减 1，归零时自动停止拉流，避免无人观看时持续消耗带宽。
+        \end{itemize}
+    }
+}
+
+\cvproject{项目二：WVP Copilot --- 基于 LLM 的无人机 AI Agent 智能体}{}{2025/11 -- 2026/03}{%
     \cvtech{Python、LangChain、LangGraph、SSE、MCP、FastAPI、DeepSeek API、Redis}
     \cvlabeled{项目概述}{面向消防应急指挥场景，深度结合软硬件能力与 AI 算法打造无人机智能体 Copilot，极大降低使用门槛。用户只需自然语言描述需求（如"飞到陆家嘴，变焦 7x 拍照，返航"），Copilot 即可精准理解意图，自动拆分为无人机指令序列并编排执行，通过对话的方式完成远程控制与任务下达。采用 Python（Agent 编排层）+ Java（设备控制层）两层架构，通过 REST 通信解耦。}
     \cvlabeled{项目实现}{%
@@ -141,20 +159,6 @@
             \item \textbf{状态机驱动的子任务编排替代 LLM 时序决策}：环绕飞行天然为状态机（进入环绕 $\to$ 逐 $30^\circ$ 拍照 $\to$ 满 $360^\circ$ 退出），LLM 推理延迟（1-3s/次）在无人机 3m/s 飞行速度下将导致拍照点偏移 3-9 米，ReAct 循环依赖 LLM 判断时序在实时控制场景下物理上不可行。引入 LangGraph 建模显式条件子图——enter\_orbit $\to$ orbit\_loop（条件边: $\ge 360^\circ$ 退出）$\to$ exit\_orbit，执行周期由图的边决定，LLM 仅负责意图路由而非时序判断。主链路（线性任务）保持 AgentExecutor 避免过度设计。
 
             \item \textbf{MCP 外部工具链与复合指令封装}：通过 MCP 协议集成高德地图 Server，15 个地图工具自动注册，地理编码多候选项回传 LLM 根据上下文仲裁最佳匹配。基于 LangChain @tool 定义 16 个无人机工具函数，遵循"暴露业务语义而非硬件原语"原则封装复合指令（如 record\_for\_duration 内部编排 start $\to$ 倒计时 $\to$ stop 完整时序）。SSE 流式推送实现工具调用链路的实时可观测。
-        \end{itemize}
-    }
-}
-
-\cvproject{项目二：无人机管理云平台}{}{2025/04 -- 2026/03}{%
-    \cvtech{Java、SpringBoot、Redis、MySQL、MyBatis(Plus)、WebSocket、MQTT、Vue、JavaScript、TypeScript、Cesium}
-    \cvlabeled{项目概述}{平台原有能力集中于地面 Mesh 设备管理，缺乏对无人机的统一接入与远程控制能力，无法满足消防场景下超视距视频回传与飞行控制需求。利用公司自组网超远距离传输（>20km）优势，建设无人机接入与控制模块，覆盖设备管理、飞行控制、相机操作、视频点播及三维 GIS 可视化等核心能力，实现空地一体化指挥调度。}
-    \cvlabeled{项目实现}{%
-        \begin{itemize}
-            \item \textbf{无人机接入与操控}：基于自组网硬件 + MQTT 搭建前端到无人机的实时操控通道（参考 DJI Cloud API 消息格式）。前端封装 MQTT 客户端，支持 1s 心跳保活、订阅自动恢复及遥测数据实时接收。后端通过 Redis 管理设备在线状态，区分主动下线与异常断连；利用 Spring 启动就绪事件 + MQTT 自定义重连指令，解决服务器重启后设备无法自动上线的问题，实现无人值守自愈。
-
-            \item \textbf{飞行控制与相机系统}：完成一键起飞、指点飞行、环绕飞行、航线飞行、返航、急停等飞行指令，以及变焦、拍照、录像、模式切换、云台重置、框选变焦、AIM 瞄准等相机负载指令的功能实现。前期大部分指令由前端通过 MQTT 与硬件直接通信以快速验证功能，后期迁移至后端统一处理，提高可维护性。后端增加飞行安全校验逻辑：起飞/返航/目标高度 vs 系统限高对比校验、降落确认与取消。
-
-            \item \textbf{实时视频点播服务}：集成 ZLM 流媒体服务器，搭建无人机视频流 \ \faArrowRight\  ZLM 拉流转发 \ \faArrowRight\  前端基于 Jessibuca 实现低延迟播放的完整链路。基于 Spring DeferredResult 实现异步点播：前端发起 HTTP 请求后，后端立即释放 Tomcat 线程，异步等待 ZLM 推流就绪后再通过回调返回播放地址，避免点播等待期间占用线程资源。设计 Redis 引用计数策略：每个视频流维护观看用户集合，用户关闭时计数减 1，归零时自动停止拉流，避免无人观看时持续消耗带宽。
         \end{itemize}
     }
 }
