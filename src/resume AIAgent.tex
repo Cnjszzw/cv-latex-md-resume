@@ -12,13 +12,13 @@
 
 % --- 局部扩展：四列布局等（调格式直接改数字） ---
 \let\cvheadingThree\cvheading% 保存3列版本，项目部分恢复用
-% 教育经历专用四列（学校 / 学历 / 专业·学院·地点 / 时间）
+% 教育经历专用四列（时间 / 学校 / 学历 / 专业）
 \newcommand{\cvheadingEdu}[4]{%
     \noindent
-    \makebox[0.18\textwidth][l]{\textbf{#1}}%
-    \makebox[0.24\textwidth][l]{\textbf{#2}}%
-    \makebox[0.34\textwidth][l]{\textbf{#3}}%
-    \makebox[0.24\textwidth][r]{\textbf{#4}}\par
+    \makebox[0.26\textwidth][l]{\textbf{#1}}% 时间
+    \makebox[0.32\textwidth][l]{\textbf{#2}}% 学校
+    \makebox[0.12\textwidth][l]{\textbf{#3}}% 学历
+    \makebox[0.30\textwidth][r]{\textbf{#4}}\par% 专业
 }
 \newcommand{\cveventEdu}[5]{%
     \vspace{0.3em}
@@ -89,9 +89,9 @@
 \let\cvheading\cvheadingEdu
 \let\cvevent\cveventEdu
 
-\cvevent{山东师范大学}{本科}{广播电视编导(山东济南)}{2018/09 -- 2022/06}{}
+\cvevent{2022/09 -- 2025/01}{西京学院}{硕士}{计算机技术}{}
 
-\cvevent{西京学院}{硕士}{计算机技术(陕西西安)}{2022/09 -- 2025/01}{}
+\cvevent{2018/09 -- 2022/06}{山东师范大学}{本科}{广播电视编导}{}
 
 % ============================================================
 % 工作经历
