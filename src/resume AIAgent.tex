@@ -29,16 +29,15 @@
     \fi
 }
 % 五列版本：工作经历用（时间 / 公司 / 领域 / 语言 / 岗位）
-% 调格式看这里：八个数字总和必须 ≤ 1.0
 \newcommand{\cvheadingWork}[5]{%
     \noindent
-    \makebox[0.24\textwidth][l]{\textbf{#1}}% ①时间列宽 | ②时间→公司间隙
-    \makebox[0.32\textwidth][l]{\textbf{#2}}% ③公司列宽 | ④公司→领域间隙
-    \makebox[0.18\textwidth][l]{\textbf{#3}}% ⑤领域列宽 | ⑥领域→语言间隙
-    \makebox[0.12\textwidth][l]{\textbf{#4}}%                        % ⑦语言列宽
-    \makebox[0.14\textwidth][r]{\textbf{#5}}\par                     % ⑧岗位列宽
+    \makebox[0.28\textwidth][l]{\textbf{#1}}% 时间
+    \makebox[0.18\textwidth][l]{\textbf{#2}}% 公司（图标+名称）
+    \makebox[0.11\textwidth][l]{\textbf{#3}}% base地
+    \makebox[0.23\textwidth][l]{\textbf{#4}}% 行业领域
+    \makebox[0.20\textwidth][r]{\textbf{#5}}\par% 岗位+语言
 }
-% 工作经历专用 \cvevent（6参：时间/公司/领域/语言/岗位/描述）
+% 工作经历专用 \cvevent（6参：时间/公司/base地/领域/岗位+语言/描述）
 \newcommand{\cveventWork}[6]{%
     \vspace{0.2em}
     \cvheadingWork{#1}{#2}{#3}{#4}{#5}
@@ -90,9 +89,9 @@
 \let\cvheading\cvheadingEdu
 \let\cvevent\cveventEdu
 
-\cvevent{山东师范大学}{本科（学信网全日制）}{广播电视编导(新闻与传媒学院/山东济南)}{2018/09 -- 2022/06}{}
+\cvevent{山东师范大学}{本科}{广播电视编导(山东济南)}{2018/09 -- 2022/06}{}
 
-\cvevent{西京学院}{硕士（学信网全日制）}{计算机技术(计算机学院/陕西西安)}{2022/09 -- 2025/01}{}
+\cvevent{西京学院}{硕士}{计算机技术(陕西西安)}{2022/09 -- 2025/01}{}
 
 % ============================================================
 % 工作经历
@@ -105,15 +104,15 @@
 
 \cvevent{2025/04 -- 2026/03 (正职)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/上海环创通信科技股份有限公司.png}}%
-    \hspace{0.4em}寰创通信}{物联网(政企B端)}{Java/Python/TS}{AI 全栈开发}{}
+    \hspace{0.4em}寰创通信}{上海}{物联网(政企B端)}{(Java/Vue/Python)全栈开发}{}
 
 \cvevent{2024/02 -- 2024/05 (实习)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/美团.png}}%
-    \hspace{0.4em}美团}{电商(B端商家侧)}{Java}{测试开发}{}
+    \hspace{0.4em}美团}{上海}{电商(B端商家侧)}{(Java)测试开发}{}
 
 \cvevent{2023/09 -- 2024/02 (实习)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/哔哩哔哩.png}}%
-    \hspace{0.4em}哔哩哔哩}{内容社区(C端)}{Python/Golang}{测试开发}{}
+    \hspace{0.4em}哔哩哔哩}{上海}{内容社区(C端)}{(Python/Go)测试开发}{}
 
 % ============================================================
 % 项目经历（按公司分组）
