@@ -32,7 +32,16 @@
       "Bash(/Library/TeX/texbin/xelatex -interaction=nonstopmode -output-directory=output 'src/resume AIAgent.tex')",
       "Bash(grep -v '^$')",
       "Bash(/Library/TeX/texbin/xelatex -output-directory=output 'src/resume AIAgent.tex')",
-      "Bash(/Library/TeX/texbin/xelatex -interaction=nonstopmode -output-directory=output '/Users/zhaozhiwen/CodeRepo/cv_latex_md_test/src/resume AIAgent.tex')"
+      "Bash(/Library/TeX/texbin/xelatex -interaction=nonstopmode -output-directory=output '/Users/zhaozhiwen/CodeRepo/cv_latex_md_test/src/resume AIAgent.tex')",
+      "Bash(git checkout *)",
+      "Bash(git -C /Users/zhaozhiwen/CodeRepo/WVP log --oneline -20 -- agent-demo/)",
+      "Bash(git -C /Users/zhaozhiwen/CodeRepo/WVP log --oneline -20 -- wvpserver/dji-cloud/)",
+      "Bash(git -C /Users/zhaozhiwen/CodeRepo/WVP log --oneline -5)",
+      "Bash(git -C /Users/zhaozhiwen/CodeRepo/WVP status --short)",
+      "Bash(awk '{print $6, $7, $8, $9}')",
+      "Bash(javac PrintInOrder.java)",
+      "Bash(java PrintInOrder)",
+      "Bash(grep *)"
     ]
   }
 }
