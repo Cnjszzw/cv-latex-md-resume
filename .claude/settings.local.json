@@ -41,7 +41,8 @@
       "Bash(awk '{print $6, $7, $8, $9}')",
       "Bash(javac PrintInOrder.java)",
       "Bash(java PrintInOrder)",
-      "Bash(grep *)"
+      "Bash(grep *)",
+      "Bash(/Library/TeX/texbin/xelatex -interaction=nonstopmode -output-directory=output \"src/resume AIAgent EN.tex\")"
     ]
   }
 }

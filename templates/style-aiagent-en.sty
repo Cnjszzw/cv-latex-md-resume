@@ -11,6 +11,7 @@
 \usepackage{xeCJK}
 \usepackage[table]{xcolor}
 \usepackage{tikz}
+\usepackage{amsmath}
 \usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
@@ -172,7 +173,24 @@
 }
 
 % ============================================================
-% 十、辅助宏
+% 十、STAR sub-list (hanging indent: wrapped lines align with content start)
+% ============================================================
+\newlist{starlist}{description}{1}
+\setlist[starlist]{
+    leftmargin = 4.8em,
+    labelwidth = 4.2em,
+    labelsep = 0.6em,
+    itemindent = 0em,
+    font = \normalfont\bfseries,
+    itemsep = 0.02em,
+    topsep = 0.08em,
+    parsep = 0em,
+    before = \vspace{0.06em},
+    after = \vspace{0em},
+}
+
+% ============================================================
+% 十一、輔助宏
 % ============================================================
 \newcommand{\cvtech}[1]{%
     \noindent\textbf{Tech Stack: #1}\par
@@ -189,6 +207,7 @@
 }
 
 \newcommand{\cvbullet}{\tikz[baseline=-0.65ex]{\fill[black] (0,0) circle (2.2pt);}}
+\newcommand{\thickarrow}{$\boldsymbol{\rightarrow}$}
 \makeatother
 
 \hypersetup{
