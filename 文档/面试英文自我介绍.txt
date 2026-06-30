@@ -1,0 +1,13 @@
+Hello everyone, my name is Zhiwen Zhao. Thank you for taking the time to interview me today.
+
+I got my Master's degree in Computer Science from Xijing University in 2025. My thesis focused on small object detection for drones in complex environments — basically, how to improve detection accuracy and reduce false positives when identifying tiny drones against cluttered backgrounds. During school, I also built a personal project: a Bilibili-style video website, where I dealt with challenges like pushing content to millions of followers without overwhelming the server, and ensuring data consistency in a distributed system.
+
+I had several internships during my studies — at Bilibili, Meituan, and DingXiangYuan — where I worked in test development and QA roles. After graduation, I found I was more passionate about development, so I joined Shanghai Huanchuang Communication as a full-stack developer.
+
+At Huanchuang, I worked on two main projects. The first is a Drone Management Platform built on top of the company's IoT infrastructure. I was responsible for the drone access and control module, covering device management, flight control, camera operations, and live streaming. Some key engineering challenges I solved: implementing a Redis reference counting strategy to automatically stop pulling video streams when no one is watching, and using Spring DeferredResult for async stream readiness confirmation to avoid thread blocking from unstable hardware.
+
+The second project is WVP Copilot — an LLM-based AI Agent for drone control. Users can simply type natural language commands like "Fly to Lujiazui, zoom to 7x, take a photo, then return home," and the Agent handles intent understanding, task planning, and execution. I built the Python Agent orchestration layer using LangChain and LangGraph, integrated 16 custom tool functions and 15 Amap MCP tools, and developed the SSE streaming frontend for real-time observability. The hardest parts were: ensuring real-time precision — we replaced LLM temporal decision-making with a LangGraph state machine for orbit flight to eliminate 3-9 meter photo drift caused by inference latency; and safety isolation — the emergency stop goes through a separate MQTT hardware channel bypassing the LLM entirely.
+
+Looking back, I'd say my core strengths are in the IoT domain — specifically around reliability, real-time performance, and safety in systems that connect hardware and software. I'm now looking for opportunities in AI Agent development, because I find the intersection of LLMs and real-world systems genuinely exciting. I also recently moved to Beijing and I'm ready to start quickly.
+
+That's my introduction. Thanks again for your time.

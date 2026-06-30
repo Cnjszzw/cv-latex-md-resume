@@ -1,0 +1,23 @@
+Project 1: Drone Management Cloud Platform (2025/04 -- 2026/03)
+Tech Stack: Java, SpringBoot, Redis, MySQL, MyBatis(Plus), WebSocket, MQTT, Vue, JavaScript, TypeScript, Cesium
+Overview: Built on the company's IoT platform, leveraged the self-organized mesh network's ultra-long-range (>20km) advantage to add a drone access module, enabling integrated air-ground command and dispatch.
+
+Implementation:
+
+● Drone Access & Device Management
+  (S) Situation: Drones connect to base stations via self-organized mesh hardware and needed to be integrated as a new device type into the existing IoT platform for unified management. Unlike ground devices, drones have longer connection chains and more complex disconnection scenarios, making the existing online/offline workflow unsuitable.
+  (T) Task: Integrate drones into the existing device management system, reuse permission control and online/offline workflows, and resolve the issue of devices failing to auto-recover online status after service restarts.
+  (A) Action: Integrated drones into the existing device management workflow on the backend, managed online status via Redis, and differentiated between intentional disconnection and abnormal disconnection. Leveraged Spring startup-ready event listeners to broadcast a custom reconnect command via MQTT upon service startup, triggering drones to re-initiate the online handshake.
+  (R) Result: Drones were fully integrated into the existing device management system, sharing permission control and online/offline logic with ground devices. Devices auto-recovered online status after service restarts with no manual intervention required.
+
+● Flight Control & Camera System
+  (S) Situation: Drone flight and camera commands are diverse, covering takeoff, waypoint flight, orbit flight, return-to-home, emergency stop, and camera commands such as zoom, photo, video recording, gimbal reset, area zoom, and AIM targeting. Initially, to quickly validate functionality, most commands were sent directly from the frontend to hardware via MQTT. While fast to develop, this scattered command logic across frontend components, hindering maintenance and security.
+  (T) Task: Implement all flight and camera commands, gradually migrate the command channel from frontend-direct to backend-unified processing, and add flight safety validation to prevent misoperation.
+  (A) Action: Implemented flight commands (takeoff, waypoint flight, orbit flight, route flight, return-to-home, emergency stop) and camera payload commands (zoom, photo, video recording, gimbal reset, area zoom, AIM targeting). Initially used frontend-direct MQTT for rapid feasibility validation, then migrated command logic to the backend for unified processing. Added backend flight safety validation: altitude limit comparison, landing confirmation and cancellation mechanism.
+  (R) Result: Achieved full coverage of flight and camera control capabilities. Command channels were consolidated to the backend, and flight safety validation effectively prevented risks such as altitude-limit violations.
+
+● Drone Live Streaming
+  (S) Situation: Hardware stream pushing was unstable, with video streams potentially arriving late or not at all. Multiple commanders needed to watch the same drone feed simultaneously.
+  (T) Task: Implement reliable multi-user live streaming under unreliable hardware conditions, while avoiding bandwidth waste when no one is watching.
+  (A) Action: Built an async acknowledgment mechanism using Spring DeferredResult -- the user's watch request immediately releases the thread, while the backend asynchronously polls ZLM to wait for the stream to become ready, then returns the playback URL via callback upon confirmation. Designed a Redis reference counting strategy to maintain the set of active viewers, automatically stopping stream pulling when the viewer count reaches zero.
+  (R) Result: Eliminated thread blocking caused by hardware latency. Multi-user viewing worked independently without interference, and bandwidth was automatically reclaimed when no viewers remained.

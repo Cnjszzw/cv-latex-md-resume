@@ -1,0 +1,3 @@
+● Participated in the full-cycle product testing of the Bilibili Fan App, including requirements review and analysis, test case design and execution, defect localization and tracking, and assisting developers with issue resolution
+● Fully engaged in UGC playback page API automation testing, including test script development, test data construction, and mocking, ensuring quality assurance and stability maintenance for the business
+● Collaborated with other SDETs on integration testing, regression testing, and defect investigation, and continuously proposed product improvement and optimization suggestions

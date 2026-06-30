@@ -1,0 +1,3 @@
+● Participated in the development of Meituan's internal testing tools, including requirements analysis, development documentation, coding and testing, bug investigation and resolution, and cross-department communication.
+● Responsible for automated testing of the online ordering flow API, including business/API analysis, solution design, test data construction, interaction flow validation, and test case maintenance.
+● Participated in test environment governance tool development, resolving plugin synchronization challenges by optimizing deployment workflows and concurrency control strategies to ensure CI environment stability.

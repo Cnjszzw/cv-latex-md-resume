@@ -1,0 +1,19 @@
+● Full-time Master's in Computer Science, 1 year of Java full-stack development experience, capable of end-to-end independent delivery from requirements analysis and solution design to coding and integration
+● AI Agent Engineering: Hands-on experience building LLM Agent systems from 0 to 1
+    1. Proficient in LangChain and LangGraph for Agent orchestration and state machine modeling
+    2. Proficient in Function Calling and MCP protocol for toolchain integration and external service connectivity
+    3. Familiar with FastAPI + SSE streaming interaction, enabling real-time observability of tool call chains
+    4. Proficient in Agent system reliability design: multi-layer hallucination defense, async timeout recovery, cascading failure circuit-breaking, etc.
+● Solid Java fundamentals, familiar with JVM memory model and concurrent programming
+    1. Proficient in SpringBoot and MyBatis (Plus) for backend development
+    2. Hands-on experience with SpringCloud Alibaba (Nacos, Gateway, OpenFeign) microservice architecture
+● Practical experience in distributed system design
+    1. Message Queues: RocketMQ transactional messages for eventual cross-service consistency
+    2. Caching & Locking: Redis reference counting strategies, Redisson distributed locks
+    3. Distributed Transactions: Familiar with TCC, reliable message eventual consistency, and transactional message patterns
+    4. Other Patterns: Push-pull hybrid model to eliminate write amplification, and other common design patterns
+● Experience in database and search engine optimization
+    1. MySQL: Index optimization (deferred join, execution plan analysis), N+1 query optimization (eager loading + HashMap indexing)
+    2. Elasticsearch: Full-text search (Multi-Match multi-field matching, keyword highlighting, multi-dimensional sorting)
+● Familiar with Vue, Cesium, Android, and other frontend/client technologies; cross-team collaboration experience across frontend, backend, and hardware-software integration
+● Proficient in AI-assisted coding tools such as Cursor and Claude Code, effectively boosting development efficiency
