@@ -1,4 +1,4 @@
-Hello everyone, my name is Zhiwen Zhao. Thank you for taking the time to interview me today.
+Hello everyone, my name is Zhiwen Zhao (Eric). Thank you for taking the time to interview me today.
 
 I got my Master's degree in Computer Science from Xijing University in 2025. My thesis focused on small object detection for drones in complex environments — basically, how to improve detection accuracy and reduce false positives when identifying tiny drones against cluttered backgrounds. During school, I also built a personal project: a Bilibili-style video website, where I dealt with challenges like pushing content to millions of followers without overwhelming the server, and ensuring data consistency in a distributed system.
 
