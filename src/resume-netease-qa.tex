@@ -1,0 +1,98 @@
+% 独立投递版。从仓库根目录使用 XeLaTeX 编译。
+% xelatex -halt-on-error -output-directory=output src/resume-netease-qa.tex
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[a4paper,top=15mm,bottom=15mm,left=18mm,right=18mm]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\IfFontExistsTF{Arial}{\setmainfont{Arial}}{\setmainfont{Latin Modern Sans}}
+\IfFontExistsTF{Microsoft YaHei}{%
+    \setCJKmainfont{Microsoft YaHei}[BoldFont={Microsoft YaHei Bold}]%
+}{%
+    \IfFontExistsTF{PingFang SC}{%
+        \setCJKmainfont{PingFang SC}[BoldFont={PingFang SC Semibold}]%
+    }{%
+        \setCJKmainfont{FandolHei-Regular.otf}[BoldFont={FandolHei-Bold.otf}]%
+    }%
+}
+
+\definecolor{accent}{HTML}{8E3038}
+\definecolor{ink}{HTML}{222326}
+\definecolor{secondary}{HTML}{52555B}
+\definecolor{divider}{HTML}{DFC9CC}
+\hypersetup{pdftitle={赵志文 - 测试开发},pdfauthor={赵志文}}
+\pagestyle{empty}
+\raggedbottom
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\linespread{1.19}
+\setlist[itemize]{
+    label=\textbullet,
+    leftmargin=1.2em,
+    itemsep=6pt,
+    topsep=5pt,
+    parsep=0pt,
+    partopsep=0pt
+}
+
+\newcommand{\resumesection}[1]{%
+    \par\addvspace{14pt}%
+    {\large\bfseries\color{accent}#1}\par\nopagebreak
+    \vspace{2pt}{\color{divider}\hrule height 0.6pt}\nopagebreak\vspace{5pt}%
+}
+\newcommand{\experience}[3]{%
+    \par\addvspace{10pt}%
+    \textbf{#1}\enspace{\color{secondary}#2}\hfill
+    \mbox{\small\color{secondary}#3}\par\nopagebreak
+}
+\newcommand{\education}[3]{%
+    \textbf{#1}\enspace #2\hfill\mbox{\small\color{secondary}#3}\par
+}
+
+\begin{document}
+\color{ink}
+
+{\fontsize{27pt}{32pt}\selectfont\bfseries 赵志文}\hfill
+{\large\bfseries\color{accent} 求职意向 · 测试开发}\par
+\vspace{4pt}
+{\color{secondary}185-5613-5826\enspace|\enspace
+    \href{mailto:cnjszzw@qq.com}{cnjszzw@qq.com}}\par
+
+\resumesection{工作经历}
+
+\experience{交个朋友}{高级 AI 开发工程师}{2026.07--至今}
+{\small 面向电商内容生产，负责数字人口播、混剪及复刻 Agent 的开发、回归测试和交付验收。}\par
+\begin{itemize}
+    \item \textbf{Agent 异常回归}。实现 AI Studio 可恢复的数字人口播 DAG，以 pytest 验证轮询超时、中断和产物缺失。按任务 ID 回查并校验产物，状态不明时停止自动重试。
+    \item \textbf{多模态模型对照}。用同一套提示词、参考片、商品图、配音和时长对比 Seedance 与 MiniMax H3，保留各模型原始输出和独立音轨，复核人物、商品和实际口播与输入是否一致。
+    \item \textbf{混剪规则验收}。在 Commerce Agent Hub 用词级 ASR 和 FFmpeg 核验切点，并校验话术完整性、商品权益与源片段重复率。一次迭代后同组素材的可用成片由 \textbf{3 条增至 22 条}。
+    \item \textbf{缺陷复现与发布验证}。复现复刻工作台的跨镜头字幕丢失和尾部花屏，补充 Node.js 回归用例，用口播边界样片、花屏原片和正常样片复测，完成 Windows 安装包隔离启动验收。
+    \item \textbf{线上性能回归}。针对片段工场的资产目录全量加载，验证服务端分页、跨页检索与单条详情。在 346 条画面资产的数据集上，首屏响应体积从约 \textbf{6.3 MB 降至 73 KB}。
+\end{itemize}
+
+\experience{上海寰创通信股份有限公司}{后端开发 · 软件平台部}{2025.04--2026.03}
+\begin{itemize}
+    \item 负责消防应急平台的无人机接入与端到端联调。户外测试复现服务器重启后设备断连，通过 MQTT 日志定位并实现设备自动重连，一次现场复测中设备在 30 秒内恢复在线。
+    \item 为无人机 Copilot 加入工具参数校验、关键操作人工确认和异常中止，覆盖多步操作中参数异常与步骤失败的处理。
+\end{itemize}
+
+\experience{美团}{测试开发实习生 · 酒旅测试组}{2024.02--2024.05}
+\begin{itemize}
+    \item 使用 Java 和 Mario（TestNG）构造直连上单测试数据并校验网关、业务服务及数据库，完成 5 个核心流程、24 条接口自动化用例，相关代码覆盖率提升至 77\%。
+\end{itemize}
+
+\experience{哔哩哔哩}{测试开发实习生 · 用户生态技术质量部}{2023.09--2024.02}
+\begin{itemize}
+    \item 参与 UGC 播放一致性改造的移动端与服务端测试，执行 220+ 条整包用例，编写 57 条 P0 接口自动化用例并构造 UAT、PRE 双环境数据。
+\end{itemize}
+
+\resumesection{教育经历}
+\education{西京学院}{计算机技术 · 硕士}{2022.09--2025.01}
+\vspace{3pt}
+\education{山东师范大学}{广播电视编导 · 本科}{2018.09--2022.06}
+
+\end{document}
