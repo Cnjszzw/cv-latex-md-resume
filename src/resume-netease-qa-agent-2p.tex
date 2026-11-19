@@ -1,0 +1,241 @@
+% 网易测试开发两页投递版，沿用原 AI Agent 模板。
+% 从仓库根目录编译：xelatex -halt-on-error -output-directory=output src/resume-netease-qa-agent-2p.tex
+% pytest、Node.js 图标 https://github.com/devicons/devicon
+% FFmpeg 图标 https://commons.wikimedia.org/wiki/File:FFmpeg_icon.svg（Hervé Flores）
+\documentclass[10pt,a4paper]{article}
+
+% --- 加载样式与模板 ---
+% Windows 字体回退。复用 Agent 样式，仅在平台字体缺失时替换其字体设置。
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\let\agentSetMainFont\setmainfont
+\let\agentSetCJKMainFont\setCJKmainfont
+\let\agentSetCJKMonoFont\setCJKmonofont
+\IfFontExistsTF{Helvetica Neue}{}{%
+    \IfFontExistsTF{Arial}{%
+        \renewcommand{\setmainfont}[1]{\agentSetMainFont{Arial}}%
+    }{%
+        \renewcommand{\setmainfont}[1]{\agentSetMainFont{Latin Modern Sans}}%
+    }%
+}
+\IfFontExistsTF{PingFang SC}{}{%
+    \IfFontExistsTF{Microsoft YaHei}{%
+        \renewcommand{\setCJKmainfont}[1]{\agentSetCJKMainFont{Microsoft YaHei}}%
+        \renewcommand{\setCJKmonofont}[1]{\agentSetCJKMonoFont{Microsoft YaHei}}%
+    }{%
+        \renewcommand{\setCJKmainfont}[1]{\agentSetCJKMainFont{FandolHei-Regular.otf}[BoldFont=FandolHei-Bold.otf]}%
+        \renewcommand{\setCJKmonofont}[1]{\agentSetCJKMonoFont{FandolHei-Regular.otf}}%
+    }%
+}
+\input{templates/style-aiagent.sty}
+\let\setmainfont\agentSetMainFont
+\let\setCJKmainfont\agentSetCJKMainFont
+\let\setCJKmonofont\agentSetCJKMonoFont
+\input{templates/cv.latex}
+
+% --- 局部扩展：四列布局等（调格式直接改数字） ---
+\let\cvheadingThree\cvheading% 保存3列版本，项目部分恢复用
+% 教育经历专用四列（学校 / 学历 / 专业·学院·地点 / 时间）
+\newcommand{\cvheadingEdu}[4]{%
+    \noindent
+    \makebox[0.18\textwidth][l]{\textbf{#1}}%
+    \makebox[0.24\textwidth][l]{\textbf{#2}}%
+    \makebox[0.34\textwidth][l]{\textbf{#3}}%
+    \makebox[0.24\textwidth][r]{\textbf{#4}}\par
+}
+\newcommand{\cveventEdu}[5]{%
+    \vspace{0.3em}
+    \cvheadingEdu{#1}{#2}{#3}{#4}
+    \ifx\relax#5\relax\else
+        \vspace{0.06em}
+        #5
+    \fi
+}
+% 五列版本：工作经历用（时间 / 公司 / 领域 / 语言 / 岗位）
+% 调格式看这里：八个数字总和必须 ≤ 1.0
+\newcommand{\cvheadingWork}[5]{%
+    \noindent
+    \makebox[0.22\textwidth][l]{\textbf{#1}}% ①时间列宽 | ②时间→公司间隙
+    \makebox[0.32\textwidth][l]{\textbf{#2}}% ③公司列宽 | ④公司→领域间隙
+    \makebox[0.18\textwidth][l]{\textbf{#3}}% ⑤领域列宽 | ⑥领域→语言间隙
+    \makebox[0.12\textwidth][l]{\textbf{#4}}%                        % ⑦语言列宽
+    \makebox[0.16\textwidth][r]{\textbf{#5}}\par                     % ⑧岗位列宽
+}
+% 工作经历专用 \cvevent（6参：时间/公司/领域/语言/岗位/描述）
+\newcommand{\cveventWork}[6]{%
+    \vspace{0.2em}
+    \cvheadingWork{#1}{#2}{#3}{#4}{#5}
+    \ifx\relax#6\relax\else
+        \vspace{0.04em}
+        #6
+    \fi
+}
+% section 标题旁的技术栈图标（PNG 彩色小图标）
+% 技术栈图标：优先 devicon(-original) → simple-icons(-simple) → 手动(-custom)
+\newcommand{\ticon}[1]{%
+    \IfFileExists{assets/myIcons/#1-original.png}{%
+        \raisebox{-0.08cm}{\includegraphics[height=0.42cm]{assets/myIcons/#1-original.png}}%
+    }{\IfFileExists{assets/myIcons/#1-simple.png}{%
+        \raisebox{-0.08cm}{\includegraphics[height=0.42cm]{assets/myIcons/#1-simple.png}}%
+    }{%
+        \raisebox{-0.08cm}{\includegraphics[height=0.42cm]{assets/myIcons/#1-custom.png}}%
+    }}%
+}
+\newcommand{\seclogo}[1]{\hspace{0.12em}\ticon{#1}}
+
+% ============================================================
+% 个人信息设置
+% ============================================================
+\name{赵志文}
+\lineA{%
+    \faPhone\ 185-5613-5826 \enspace|\enspace
+    \faEnvelope\ \href{mailto:cnjszzw@qq.com}{cnjszzw@qq.com} \enspace|\enspace
+    \faWeixin\ cnjszzw%
+}
+\lineB{籍贯：江苏扬州 \enspace|\enspace 年龄：27 (1999/10/27) \enspace|\enspace 性别：男}
+\lineC{求职意向：测试开发}
+\photo{assets/photo.jpg}
+
+% ============================================================
+% 文档正文
+% ============================================================
+% 仅调整两页版的留白、段间距和页码。
+\geometry{top=0.65cm,bottom=1.25cm,footskip=15pt}
+\setlist[itemize]{itemsep=0.2em,topsep=0.14em}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\small\color{black!55}\thepage\ / 2}
+\renewcommand{\headrulewidth}{0pt}
+\hypersetup{pdftitle={赵志文 - 网易测试开发},pdfauthor={赵志文}}
+
+\begin{document}
+
+\makecvheader
+
+% ============================================================
+% 教育经历
+% ============================================================
+\vspace{-0.825cm}%  第一个标题向上偏移，利用 header 下方空白
+\cvsection{教育经历}
+
+% 切换为4列布局（学校 / 学历 / 专业·学院·地点 / 时间）
+\let\cvheading\cvheadingEdu
+\let\cvevent\cveventEdu
+
+\cvevent{山东师范大学}{本科（学信网全日制）}{广播电视编导(新闻与传媒学院/山东济南)}{2018/09 -- 2022/06}{}
+
+\cvevent{西京学院}{硕士（学信网全日制）}{计算机技术(计算机学院/陕西西安)}{2022/09 -- 2025/01}{}
+
+% ============================================================
+% 工作经历
+% ============================================================
+\cvsection{工作经历}
+
+\let\cvheading\cvheadingWork
+\let\cvevent\cveventWork
+
+\cvevent{2026/07 -- 至今 (正职)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/befriends.jpeg}}%
+    \hspace{0.4em}交个朋友}{电商内容生产}{Python/JS}{高级 AI 开发工程师}{}
+
+\cvevent{2025/04 -- 2026/03 (正职)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/上海环创通信科技股份有限公司.png}}%
+    \hspace{0.4em}上海寰创通信 (软件平台部)}{物联网(政企B端)}{Java/Python}{后端开发}{}
+
+\cvevent{2024/02 -- 2024/05 (实习)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/美团.png}}%
+    \hspace{0.4em}美团 (质量工程部/酒旅测试组)}{电商(B端商家侧)}{Java}{测试开发}{}
+
+\cvevent{2023/09 -- 2024/02 (实习)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/哔哩哔哩.png}}%
+    \hspace{0.4em}哔哩哔哩 (用户生态技术质量部)}{内容社区(C端)}{Python/Golang}{测试开发}{}
+
+% 项目与测试经历
+\let\cvheading\cvheadingThree
+
+\cvsection{交个朋友}[
+    \seclogo{python}\seclogo{pytest}\seclogo{fastapi}\seclogo{nodejs}\seclogo{ffmpeg}\seclogo{git}
+]
+
+负责电商视频 Agent 开发与验收，覆盖数字人口播、混剪、复刻，以及模型对照、异常恢复、媒体质检和 Windows 交付。
+
+\cvproject{项目一、AI Studio / 无限画布与 Local Runner}{}{2026/08}{%
+    \begin{itemize}
+        \item \textbf{网页到本机的执行链路}。参与工作台与 Node.js Local Runner 的授权交接，使用短期凭证启动本机任务。接入版本化 Skill 清单、摘要校验及旧包迁移，复现并修复切换工作台地址后，同 revision Skill 被误判为版本冲突的问题。
+        \item \textbf{可恢复的数字人口播 DAG}。将输入校验、配音、首帧、口型视频和合成拆成节点，用 SQLite 记录提交状态和任务 ID，以 SHA-256 校验已有产物。使用 pytest 覆盖轮询超时、流程中断和历史产物缺失，继续时优先回查已提交任务。
+        \item \textbf{跨版本交付回归}。验证 Windows Runner 的隔离安装、启动、升级失败回滚和卸载。复查旧 Skill 与新版本共存的迁移路径，把网页交接、运行时和产物检查纳入发布验证。
+    \end{itemize}
+}
+
+\cvproject{项目二、Commerce Agent Hub 混剪与成片}{}{2026/08 -- 至今}{%
+    \begin{itemize}
+        \item \textbf{选片与组合验收}。用词级 ASR 和 FFmpeg 核查源片切点，将话术完整性、商品权益一致性、相邻段落的信息增量、收口位置和源区间重复率转成可检查的规则。一次规则迭代后，同一组素材的可用成片由 \textbf{3 条增至 22 条}。
+        \item \textbf{字幕和包装缺陷}。复现切片带入邻句残字、跨素材字幕粘连和不足一帧导致的包装失败，统一切片与字幕的时间基准。原失败案例复测通过，另有 \textbf{399 项相关回归}通过。
+        \item \textbf{一键成片首帧校验}。对异常人脸首帧执行最多三次检测与生成尝试，保留候选结果供选优。复核安装包内功能、页面入口和生成样片，检查调整后的人脸参考与服装预览。
+    \end{itemize}
+}
+
+\cvproject{项目三、视频复刻与模型对照}{}{2026/10 -- 至今}{%
+    \begin{itemize}
+        \item \textbf{同输入对照评测}。将商品开头与无口播展示封装为两个独立 Skill。固定提示词、参考片、商品图、配音和时长，比较 Seedance 与 MiniMax H3，逐项核验人物、商品、口播和动作，保留各模型原始输出和独立音轨供审片。
+        \item \textbf{模板与安装交付}。独立 Skill 安装版交付 7 套模板，后续源码版本扩展至 13 套。校验模板文件摘要和安装版本，支持更新失败回退，旧任务继续引用原版本。
+        \item \textbf{生成失败恢复}。Hypit 长视频按段独立提交、下载并按原顺序合成。用 \textbf{41.625 秒四段样例}验证首段下载卡住时其余三段仍可完成，任务中断后按原任务 ID 恢复已提交片段。
+        \item \textbf{洗片模式验收}。拆分 H3 只换脸与多模态模式，分别验证保留原声／商品和替换商品图／台词配音流程。修正失败片段的定位提示，支持已成功片段单独下载、历史失败原因回查。
+    \end{itemize}
+}
+
+\clearpage
+\noindent\textbf{赵志文}\enspace\textcolor{black!65}{测试开发}\hfill
+\href{mailto:cnjszzw@qq.com}{\textcolor{black!65}{cnjszzw@qq.com}}\par
+
+\cvsection{交个朋友（续）}[
+    \seclogo{python}\seclogo{pytest}\seclogo{nodejs}\seclogo{ffmpeg}\seclogo{git}
+]
+
+\cvproject{项目四、片段工场与复刻工作台}{}{2026/11 -- 至今}{%
+    \begin{itemize}
+        \item \textbf{资产入库与溯源验收}。将源片、ASR 字幕、时间戳与关键帧纳入证据校验，复查候选是否引用实际输入的帧。跟踪一次 \textbf{121 条原视频}的入库批次，核验 195 个学习片段和 390 条画面／文稿候选。
+        \item \textbf{媒体缺陷复现与闭环}。复现跨镜头合并后字幕丢失和生成片尾花屏，补充 Node.js 回归。用口播边界样片、原故障视频和正常对照验证切分、合并及解码检查，完成 Windows 0.2.7 包隔离启动验收。
+        \item \textbf{线上性能回归}。定位资产目录全量扫描和详情核验的开销，分别验证服务端分页、跨页搜索和按条详情。在 346 条画面资产的数据集上，首屏响应体积由约 \textbf{6.3 MB 降至 73 KB}。
+        \item \textbf{4K 预处理对照}。复用低分辨率分析代理，按需精确转码并保留原片摘要。以同一条 12.13 秒 4K 样本核对产物和开销，预处理 CPU 时间约下降 91.7\%。
+    \end{itemize}
+}
+
+\cvproject{项目五、科普成片与客户端交付}{}{2026/11 -- 至今}{%
+    \begin{itemize}
+        \item \textbf{端到端成片验收}。将 395 条空镜预先抽帧并打标，运行时按口播匹配。验证从对标稿、配音、数字人口播到 FFmpeg 合成、字幕和导出的完整流程，并交付可独立安装的素材包。
+        \item \textbf{历史账单补查}。对接 CRH Manager，把未取得的供应商费用记为待查。以一条已交付的 80.6 秒历史成片复测，确认后台能更新同一条费用记录，流程复用原任务及产物。
+        \item \textbf{跨盘安装兼容性}。复现旧版升级遇到异常 JSON 中断，加入文件校验、批量检查点和已安装资源复用。用本机 4,128 个小文件验证失败后续传与跨盘迁移，样例耗时约从 40 秒降至 22 秒。
+    \end{itemize}
+}
+
+\cvsection{上海寰创通信股份有限公司}[
+    \seclogo{java}\seclogo{springboot}\seclogo{redis}\seclogo{mqtt}\seclogo{python}\seclogo{langchain}
+]
+
+\cvproject{无人机接入与 WVP Copilot}{}{2025/04 -- 2026/03}{%
+    \begin{itemize}
+        \item 负责无人机接入与端到端联调。户外测试复现服务端重启后设备断连，结合 MQTT 日志定位并实现自动重连，一次现场复测中设备在 \textbf{30 秒内}恢复在线。
+        \item 为 WVP Copilot 增加工具参数校验、关键操作人工确认和异常中止，覆盖指令参数越界、异步响应超时和多步任务中途失败的处理。
+    \end{itemize}
+}
+
+\cvsection{美团}[\seclogo{java}\seclogo{redis}\seclogo{git}]
+
+\cvproject{直连上单接口自动化与测试环境治理}{}{2024/02 -- 2024/05}{%
+    \begin{itemize}
+        \item 基于 Java、Mario（TestNG）构造上单数据，分层校验网关、内部服务和数据库记录。覆盖 \textbf{5 个核心流程、24 条接口自动化用例}，相关代码覆盖率提升至 77\%。
+        \item 参与 JBOX 测试环境治理，负责线上线下插件同步，并参与监控修复联调，减少插件状态或部署顺序造成的自动化无效失败。
+    \end{itemize}
+}
+
+\cvsection{哔哩哔哩}[\seclogo{python}\seclogo{go}\seclogo{git}]
+
+\cvproject{UGC 播放页测试与播放一致性改造}{}{2023/09 -- 2024/02}{%
+    \begin{itemize}
+        \item 参与移动端和服务端的功能测试及 UI 差异验证，执行 \textbf{220+ 条整包用例}，跟进播放问题的定位和版本回归。
+        \item 设计并编写 \textbf{57 条 P0 接口自动化用例}，构造 UAT、PRE 双环境数据，覆盖播放一致性相关接口，在专项中发现 1 例线上缺陷。
+    \end{itemize}
+}
+
+\end{document}
