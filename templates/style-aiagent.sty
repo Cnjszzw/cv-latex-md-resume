@@ -44,9 +44,19 @@
 % ============================================================
 % 三、字体设置
 % ============================================================
-\setmainfont{Helvetica Neue}
-\setCJKmainfont{PingFang SC}
-\setCJKmonofont{PingFang SC}
+\IfFontExistsTF{Helvetica Neue}{%
+    \setmainfont{Helvetica Neue}%
+}{%
+    \setmainfont[BoldFont=texgyreheros-bold.otf,ItalicFont=texgyreheros-italic.otf,
+        BoldItalicFont=texgyreheros-bolditalic.otf]{texgyreheros-regular.otf}%
+}
+\IfFontExistsTF{PingFang SC}{%
+    \setCJKmainfont{PingFang SC}%
+    \setCJKmonofont{PingFang SC}%
+}{%
+    \setCJKmainfont[BoldFont=FandolHei-Bold.otf]{FandolHei-Regular.otf}%
+    \setCJKmonofont{FandolHei-Regular.otf}%
+}
 
 % ============================================================
 % 四、基础排版参数
