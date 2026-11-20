@@ -1,0 +1,235 @@
+% ============================================================
+% resume AIAgent Compact.tex — 精简版，源自 src/resume AIAgent.tex
+% 改动：项目描述大幅压缩（结构不变：两个项目、7 个 STAR 子项），去掉「个人项目」
+% 样式与原版共用 templates/style-aiagent.sty
+% 编译（仓库根目录）：xelatex -output-directory=output "src/resume AIAgent Compact.tex"
+
+\documentclass[10pt,a4paper]{article}
+
+% --- 加载样式与模板 ---
+\input{templates/style-aiagent.sty}
+\input{templates/cv.latex}
+
+% --- 局部扩展：四列布局等（调格式直接改数字） ---
+\let\cvheadingThree\cvheading% 保存3列版本，项目部分恢复用
+% 教育经历专用四列（时间 / 学校 / 学历 / 专业）
+\newcommand{\cvheadingEdu}[4]{%
+    \noindent
+    \makebox[0.32\textwidth][l]{\textbf{#1}}% 时间
+    \makebox[0.33\textwidth][l]{\textbf{#2}}% 学校
+    \makebox[0.12\textwidth][l]{\textbf{#3}}% 学历
+    \makebox[0.23\textwidth][r]{\textbf{#4}}\par% 专业
+}
+\newcommand{\cveventEdu}[5]{%
+    \vspace{0.3em}
+    \cvheadingEdu{#1}{#2}{#3}{#4}
+    \ifx\relax#5\relax\else
+        \vspace{0.06em}
+        #5
+    \fi
+}
+% 五列版本：工作经历用（时间 / 公司 / 领域 / 语言 / 岗位）
+\newcommand{\cvheadingWork}[5]{%
+    \noindent
+    \makebox[0.28\textwidth][l]{\textbf{#1}}% 时间
+    \makebox[0.18\textwidth][l]{\textbf{#2}}% 公司（图标+名称）
+    \makebox[0.11\textwidth][l]{\textbf{#3}}% base地
+    \makebox[0.23\textwidth][l]{\textbf{#4}}% 行业领域
+    \makebox[0.20\textwidth][r]{\textbf{#5}}\par% 岗位+语言
+}
+% 工作经历专用 \cvevent（6参：时间/公司/base地/领域/岗位+语言/描述）
+\newcommand{\cveventWork}[6]{%
+    \vspace{0.2em}
+    \cvheadingWork{#1}{#2}{#3}{#4}{#5}
+    \ifx\relax#6\relax\else
+        \vspace{0.04em}
+        #6
+    \fi
+}
+% section 标题旁的技术栈图标（PNG 彩色小图标）
+% 技术栈图标：优先 devicon(-original) → simple-icons(-simple) → 手动(-custom)
+\newcommand{\ticon}[1]{%
+    \IfFileExists{assets/myIcons/#1-original.png}{%
+        \raisebox{-0.08cm}{\includegraphics[height=0.42cm]{assets/myIcons/#1-original.png}}%
+    }{\IfFileExists{assets/myIcons/#1-simple.png}{%
+        \raisebox{-0.08cm}{\includegraphics[height=0.42cm]{assets/myIcons/#1-simple.png}}%
+    }{%
+        \raisebox{-0.08cm}{\includegraphics[height=0.42cm]{assets/myIcons/#1-custom.png}}%
+    }}%
+}
+\newcommand{\seclogo}[1]{\hspace{0.12em}\ticon{#1}}
+
+% ============================================================
+% 个人信息设置
+% ============================================================
+\name{赵志文}
+\lineA{%
+    \faPhone\ 185-5613-5826 \enspace|\enspace
+    \faEnvelope\ \href{mailto:cnjszzw@qq.com}{cnjszzw@qq.com} \enspace|\enspace
+    \faWeixin\ cnjszzw%
+}
+\lineB{籍贯：江苏扬州 \enspace|\enspace 年龄：26 (1999/10/27) \enspace|\enspace 性别：男}
+\lineC{求职意向：软件开发}
+\photo{assets/photo.jpg}
+
+% ============================================================
+% 文档正文
+% ============================================================
+\begin{document}
+
+\makecvheader
+
+% ============================================================
+% 教育经历
+% ============================================================
+\vspace{-0.825cm}%  第一个标题向上偏移，利用 header 下方空白
+\cvsection{教育经历}
+
+% 切换为4列布局（学校 / 学历 / 专业·学院·地点 / 时间）
+\let\cvheading\cvheadingEdu
+\let\cvevent\cveventEdu
+
+\cvevent{2022/09 -- 2025/01}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.50cm]{assets/school/Xijing_University_Emblem.png}}%
+    \hspace{0.4em}西京学院}{硕士}{计算机技术}{}
+
+\cvevent{2018/09 -- 2022/06}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.50cm]{assets/school/Shandong_Normal_University_seal.png}}%
+    \hspace{0.4em}山东师范大学}{本科}{广播电视编导}{}
+
+% ============================================================
+% 工作经历
+% ============================================================
+\cvsection{工作经历}
+
+% 切换为4列布局（时间 / 公司 / 领域 / 岗位）
+\let\cvheading\cvheadingWork
+\let\cvevent\cveventWork
+
+\cvevent{2025/04 -- 2026/03 (正职)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/上海环创通信科技股份有限公司.png}}%
+    \hspace{0.4em}寰创通信}{上海}{物联网(政企B端)}{(Java/Vue/Python)全栈开发}{}
+
+\cvevent{2024/02 -- 2024/05 (实习)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/美团.png}}%
+    \hspace{0.4em}美团}{上海}{电商(B端商家侧)}{(Java)测试开发}{}
+
+\cvevent{2023/09 -- 2024/02 (实习)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/哔哩哔哩.png}}%
+    \hspace{0.4em}哔哩哔哩}{上海}{内容社区(C端)}{(Python/Go)测试开发}{}
+
+% ============================================================
+% 项目经历（按公司分组）
+% ============================================================
+\let\cvheading\cvheadingThree% 恢复3列版本
+
+\cvsection{上海寰创通信股份有限公司}[%
+    \seclogo{claudecode}\seclogo{cursor}%                                  AI 工具
+    \seclogo{python}\seclogo{langchain}\seclogo{langgraph}\seclogo{deepseek}\seclogo{mcp}\seclogo{fastapi}% Python/AI 栈
+    \seclogo{java}\seclogo{spring}\seclogo{springboot}\seclogo{mybatis}\seclogo{mybatis-plus}\seclogo{mysql}\seclogo{redis}\seclogo{mqtt}% Java 栈
+    \seclogo{vuejs}\seclogo{javascript}\seclogo{typescript}\seclogo{cesium}% 前端
+    \seclogo{git}\seclogo{docker}\seclogo{jenkins}\seclogo{subversion}%    基础设施
+]
+
+\cvproject{项目一：无人机管理云平台}{}{2025/04 -- 2026/03}{%
+    \cvtech{Java、SpringBoot、Redis、MySQL、MyBatis(Plus)、WebSocket、MQTT、Vue、JavaScript、TypeScript、Cesium}
+    \cvlabeled{项目概述}{在公司物联网平台基础上，利用自组网超远距离（>20km）优势新增无人机接入模块，实现空地一体化指挥调度。}
+    \cvlabeled{项目实现}{%
+        \begin{itemize}
+            \item \textbf{无人机接入与设备管理}
+              \begin{starlist}
+                \item[(S)背景:]无人机经自组网硬件接入基站，链路长、断连场景复杂，现有上下线流程无法直接适配。
+                \item[(T)任务:]将无人机融入现有设备管理体系，并解决服务重启后设备无法自动恢复在线的问题。
+                \item[(A)动作:]通过 Redis 维护在线状态（60s TTL 心跳续期），结合设备上报的离线原因区分主动下线与异常断连；监听 Spring 启动就绪事件拉起 MQTT，订阅后向自研硬件模块逐台下发自定义重启指令，触发无人机重新上线。
+                \item[(R)结果:]无人机与地面设备统一管理、共用区域权限，服务重启后自动恢复上线，无需人工值守。
+              \end{starlist}
+
+            \item \textbf{飞行控制与相机系统}
+              \begin{starlist}
+                \item[(S)背景:]飞行与相机指令繁多，前期为快速验证由前端直连 MQTT，逻辑分散在组件中，不利于维护与安全管控。
+                \item[(T)任务:]完成主要飞行与相机指令的实现，将关键相机指令迁至后端，并补齐飞行安全校验与降落确认。
+                \item[(A)动作:]前端基于 MQTT 直连实现一键起飞、指点飞行、环绕飞行、返航、急停及变焦、拍照、录像、云台重置；航线任务、框选变焦与 AIM 瞄准走后端接口；后端在飞行参数设置时做限高校验，并提供降落确认/取消接口。
+                \item[(R)结果:]覆盖主要飞行与相机操控场景，限高校验与降落确认降低超限与误操作风险。
+              \end{starlist}
+
+            \item \textbf{无人机直播观看}
+              \begin{starlist}
+                \item[(S)背景:]硬件推流不稳定，视频流可能延迟到达甚至不可达；多指挥员需同时观看同一无人机画面。
+                \item[(T)任务:]推流不可靠时仍要支持多人观看，并避免无人观看时浪费带宽。
+                \item[(A)动作:]基于 Spring DeferredResult 异步确认：发起观看后释放线程，由 ZLM 流注册回调（12s 超时兜底）确认推流就绪后返回播放信息；Redis 按路维护观看用户列表做引用计数，人数归零才停止推流，缺流时重新推流。
+                \item[(R)结果:]硬件延迟不再阻塞线程，多人共享同一路流互不影响，无人观看时带宽自动回收。
+              \end{starlist}
+        \end{itemize}
+    }
+}
+
+\cvproject{项目二：WVP Copilot --- 基于 LLM 的无人机 AI Agent 智能体}{}{2025/11 -- 2026/03}{%
+    \cvtech{Python、LangChain、LangGraph、SSE、MCP、FastAPI、DeepSeek API、Redis}
+    \cvlabeled{项目概述}{面向消防应急指挥场景的无人机 Copilot，把自然语言需求（如“飞到陆家嘴，变焦 7x 拍照，返航”）拆解为指令序列并编排执行，以对话完成远程控制；采用 Python（Agent 编排层）+ Java（设备控制层）两层架构，通过 REST 解耦。}
+    \cvlabeled{项目实现}{%
+        \begin{itemize}
+            \item \textbf{异步操作的状态同步与确定性故障恢复}
+              \begin{starlist}
+                \item[(S)背景:]LLM 推理为同步过程（秒级），无人机飞行为异步过程（分钟级），等待时长随飞行距离与通信延迟浮动。
+                \item[(T)任务:]在同步推理与异步执行间建立状态同步，超时后确定性判断飞行结果，避免误判导致后续指令出错。
+                \item[(A)动作:]工具函数内每秒轮询 Redis 任务状态，超时阈值按预估飞行时间动态设定；超时不直接判失败，先查 OSD 位置兜底（< 5m 判到达、无位移判硬件故障、仍在移动则延长等待）；中间进度只推前端，LLM 只拿最终状态。
+                \item[(R)结果:]超时不再直接等同失败，LLM 不会被错误状态带偏下一步决策。
+              \end{starlist}
+
+            \item \textbf{多步任务链的级联故障阻断与安全隔离}
+              \begin{starlist}
+                \item[(S)背景:]任务链（飞行 \thickarrow 拍照 \thickarrow 返航）中任一步失败若不阻断，后续步骤会在异常状态下执行；急停须绕开 LLM。
+                \item[(T)任务:]任一步失败立即中断后续执行，高风险操作有人工确认，急停通道不经过 Agent 与 LLM。
+                \item[(A)动作:]Plan-Confirm-Execute 三段式：计划经用户确认卡片审核后逐步执行，工具返回失败或急停即中断后续步骤；飞行、返航另在工具层内置确认钩子；急停走独立 MQTT 通道，前端同步中断 SSE 连接。
+                \item[(R)结果:]单步失败不会扩散为链式误操作，急停后前端会话与后续步骤一并终止。
+              \end{starlist}
+
+            \item \textbf{状态机驱动的子任务编排替代 LLM 时序决策}
+              \begin{starlist}
+                \item[(S)背景:]环绕飞行是天然状态机（进入 \thickarrow 逐角度拍照 \thickarrow 退出），但 LLM 推理 1-3s，3m/s 飞行下拍照点偏移 3-9 米。
+                \item[(T)任务:]把实时控制任务的时序决策从 LLM 交给确定性状态机，同时保留 LLM 的意图理解。
+                \item[(A)动作:]用 LangGraph 建模条件子图：enter\_orbit \thickarrow{} orbit\_step（按角度步进拍照，$\ge 360^\circ$ 条件边退出）\thickarrow{} exit\_orbit，执行节奏由条件边决定，LLM 只做意图路由；线性主链路仍用 AgentExecutor，避免过度设计。
+                \item[(R)结果:]拍照时机由图状态转移决定，环绕时序不再受 LLM 推理延迟影响。
+              \end{starlist}
+
+            \item \textbf{MCP 外部工具链与复合指令封装}
+              \begin{starlist}
+                \item[(S)背景:]控制链路需接入高德地图、设备控制等外部系统，一句“录像 30 秒”即对应多条底层指令，LLM 编排易出错。
+                \item[(T)任务:]集成外部工具链，把复合指令封装为业务语义，让 LLM 不直接编排硬件原语。
+                \item[(A)动作:]经 MCP 接入高德地图 Server，地图工具自动注册为 LangChain Tool，地理编码多候选回传 LLM 仲裁；用 @tool 定义 16 个无人机工具，其中 record\_for\_duration 封装 start \thickarrow 倒计时 \thickarrow{} stop；SSE 流式推送工具调用。
+                \item[(R)结果:]常见操作从多步收敛为单步，工具调用与执行结果对用户实时可见。
+              \end{starlist}
+        \end{itemize}
+    }
+}
+
+% ============================================================
+% 专业技能
+% ============================================================
+\cvsection{专业技能}
+
+\begin{multicols}{2}
+\cvskill{Java 全家桶}{熟练掌握 Java，熟悉 JVM 内存模型与并发编程；熟练使用 SpringBoot、MyBatis（Plus）；了解 SpringCloud 微服务体系（Nacos、OpenFeign、Gateway）}
+
+\cvskill{数据存储与检索}{熟悉 MySQL，有 N+1 查询优化（预加载 + HashMap 索引）、延迟关联、覆盖索引等 SQL 调优实战经验；熟悉 Redis 缓存策略与数据一致性保障；熟悉 Elasticsearch 全文检索（Multi-Match、高亮、多维度排序）}
+
+\cvskill{AI Agent 工程化}{有 LLM Agent 从 0 到 1 的实践经验：熟练使用 LangChain、LangGraph、Function Calling、MCP 协议；掌握 Agent 可靠性设计；熟练使用 Cursor/ClaudeCode}
+
+\cvskill{分布式系统}{了解分布式锁（Redisson）、分布式事务（RocketMQ 事务消息 / TCC / 可靠消息最终一致）、配置中心（Nacos）等常见组件的设计思路与应用场景}
+
+\cvskill{性能优化}{有核心接口性能优化实战经验：千台 Mesh 设备查询从 7-8s 优化至 1s 以内，30w 条日志深分页从 5s 降至 1s 以内（性能提升 5 倍）；善于定位并解决大数据量场景下的查询与存储瓶颈}
+
+\cvskill{工程实践}{熟悉 Logback 日志框架与 Kibana 排障，熟悉 Linux + Docker 基础运维；具备从需求分析到联调交付的全流程能力，有前后端 + 软硬件跨团队协作经验}
+\end{multicols}
+
+% ============================================================
+% 竞赛/获奖/证书
+% ============================================================
+\cvsection{竞赛/获奖/证书}
+
+\begin{itemize}
+    \item 考研初试368分（专业第一）\enspace|\enspace 2022西京学院一等奖学金（前20\%）\enspace|\enspace 2022传智杯程序设计赛区域赛二等奖（前20\%）
+    \item 雅思IELTS（6.5分）\enspace|\enspace 英语六级CET-6（593分）\enspace|\enspace 国际人才英语考试ETIC（优秀等级）\enspace|\enspace 计算机二级证书（MS OFFICE）
+\end{itemize}
+
+\end{document}
