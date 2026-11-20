@@ -131,18 +131,18 @@
 \let\cvheading\cvheadingThree% 恢复3列版本
 
 \cvsection{交个朋友}[%
-    \seclogo{claudecode}\seclogo{cursor}%                                    AI 编程工具
+    \seclogo{claudecode}\seclogo{codex}%                                    AI 编程工具
     \seclogo{python}\seclogo{fastapi}\seclogo{pytest}\seclogo{ffmpeg}\seclogo{nodejs}%  Python / 媒体
     \seclogo{vuejs}\seclogo{mysql}\seclogo{redis}\seclogo{docker}\seclogo{git}%         平台与基建
 ]
 
 \cvproject{项目一：电商短视频生产 Agent}{}{2026/07 -- 至今}{%
     \cvtech{Python、FastAPI、WebView2、FFmpeg、Hypit、RunningHub}
-    \noindent\textbf{项目概述}\enspace 根据商品链接自动批量生成可投放的罗永浩带货视频，降低制作成本、提升出片效率。平台同时支持爆款复刻和副主播混剪。\par
+    \noindent\textbf{项目概述}\enspace 根据商品链接批量生成罗永浩带货视频，降低制作成本、提升出片效率，集成爆款复刻与混剪。\par
     \begin{itemize}
         % 同规模对照：Commerce Agent Hub 提交 1603419 前后的 pool_requirements(3, 'selling') 分别为每商品 3 段与 1 段。批次规模见已归档的 20260913 成片包。
         % 10/14 发布时约 30% 为业务估算，非财务对账结论：https://applink.feishu.cn/client/chat/open?openChatId=oc_a0dae74e15b30bdc8cd7f7d38c9998b0&position=527
-        \item \textbf{老罗（罗永浩）一键成片}\enspace 商品链接 \thickarrow{} 采集商品信息 \thickarrow{} 生成卖点稿、配音与口型视频 \thickarrow{} 合成出片。并行抓取、筛选商品空镜，按卖点穿插并保留口播原声。支持按阶段续跑，复用卖点片段后成片生成成本估算 \textbf{约降 30\%}。
+        \item \textbf{老罗（罗永浩）一键成片}\enspace 商品链接 \thickarrow{} 采集商品信息 \thickarrow{} 生成卖点稿、配音与口型视频 \thickarrow{} 合成出片。并行抓取、筛选商品空镜，按卖点穿插并保留口播原声。支持 DAG 节点级续跑，复用卖点片段后成片生成成本估算 \textbf{约降 30\%}。
         % 千川生产备份 pre-baiying-settings-valid-20260918-155918.sql，按 ZIP 批次与上传 video_id 核对新建计划；每计划 3 条成片，关闭智能选素材。
         % 导入批次 1d0565f3、2e61cf82、d42c6b3e 的 50 个新建计划中，41 个匹配 9/15 15:05 至 9/18 15:05 的千川报表。
         % alerting_taskcheckpoint 的 report_since_creation，按计划 ID 去重，三批分别为 11、16、14 个计划。
@@ -153,8 +153,8 @@
         % https://befriends.feishu.cn/wiki/HdLVwBgFIi36a4kKyUockpKAnlf#doxcnTMGgVUZu5eEkeHKLnl3Kth
         % 换户试投原始数据，含净成交 ROI 3.45、未达止损 ROI：https://befriends.feishu.cn/wiki/DeDAwtBj3iV7MVkYDyQcHY6knFc#Nm5RdIKHtoME0YxtAxpccOB0nve
         \par\textbf{切片运营成果（账号口径）}\enspace 3 个账号接手后 16 天（9 月 9--24 日），有效净佣金增长 \textbf{148.4\%}，预估毛利从 \textbf{1,817 元增至 9,149 元（+403.5\%）}。10 月 14--15 日换户试投覆盖 48 个商品、发布 144 条视频，记录 \textbf{62 单、支付 GMV 2,846.20 元}。
-        \item \textbf{爆款复刻}\enspace 参考视频 \thickarrow{} 精确分镜、词级 ASR 与动作分析 \thickarrow{} 运营确认镜头组和台词 \thickarrow{} H3/Seedance 洗片 \thickarrow{} 原序合成与 Hypit 字幕包装。Hypit 长片最多 4 段并发，失败段按任务 ID 续取。
-        \item \textbf{副主播混剪}\enspace 直播原片 \thickarrow{} 词级 ASR 与画面分析 \thickarrow{} 提取开头钩子与完整卖点 \thickarrow{} 按商品权益、语义衔接和重复率筛选组合 \thickarrow{} 批量渲染。包装系统按时间轴叠加字幕、花字、动效和音效。已为陈浩洋等明星 IP 的成片混剪与分发提供支持。同组素材可用成片从 \textbf{3 条增至 22 条}。
+        \item \textbf{爆款复刻}\enspace 参考视频 \thickarrow{} 精确分镜、词级 ASR 与多模态动作分析 \thickarrow{} 运营确认镜头组和台词 \thickarrow{} H3/Seedance 洗片 \thickarrow{} 原序合成与 Hypit 字幕包装。Hypit 长片最多 4 段并发，失败段按任务 ID 续取。
+        \item \textbf{混剪系统}\enspace 直播原片 \thickarrow{} 词级 ASR 与多模态分析 \thickarrow{} 提取开头钩子与完整卖点 \thickarrow{} 按商品权益、语义衔接和重复率筛选组合 \thickarrow{} 批量渲染。包装系统按时间轴叠加字幕、花字、动效和音效。已为陈浩洋等明星 IP 的成片混剪与分发提供支持。同组素材可用成片从 \textbf{3 条增至 22 条}。
     \end{itemize}
 }
 
@@ -162,7 +162,7 @@
     \cvtech{Django、Celery、MySQL、Redis、Vue 3、TypeScript、Docker}
     \noindent\textbf{项目概述}\enspace 面向千川投放运营，按小时跟踪多账户计划，识别空耗和高消耗计划，发现追爆机会，通过飞书预警帮助运营及时止损，并支持自动追投与目标 ROI 调控。\par
     \begin{itemize}
-        \item \textbf{投放决策流程}\enspace 定时拉取计划与素材归因数据 \thickarrow{} 规则评估 \thickarrow{} 分流到飞书预警、素材追投或目标 ROI 调控。预警覆盖止损、追爆、空耗与退货。追投按订单、ROI、退款与毛利筛选，并校验预算、冷却期及黑名单。
+        \item \textbf{投放决策流程}\enspace 定时拉取计划与素材归因数据 \thickarrow{} 规则引擎评估 \thickarrow{} 分流到飞书预警、素材追投或目标 ROI 调控。预警覆盖止损、追爆、空耗与退货。追投按订单、ROI、退款与毛利筛选，并校验预算、冷却期及黑名单。
         \item \textbf{执行可靠性}\enspace 任务先落 MySQL 再投递 Celery，重启从检查点续跑。写前保存快照并做幂等校验，写后回读千川状态，回包不明先核验。批量建计划按素材和参数逐行校验，失败行可单独续跑。
         % 飞书「千川计划预警通知」群，2026-09-09 至 09-24（北京时间）：预警按 687 张去重卡片的明细条数（同计划可跨轮重复），ROI 按成功回执的千川 request_id，追投按平台任务 ID。
         % https://applink.feishu.cn/client/chat/open?openChatId=oc_9a788c139fe605bb2e578c82d06bedbb
@@ -173,7 +173,7 @@
 
 \cvproject{其他交付}{}{2026/07 -- 至今}{%
     \begin{itemize}
-        \item \textbf{AI Studio 工作台与 Local Runner}：可恢复的数字人口播 DAG（幂等键 + SQLite 提交记录 + 服务商任务 ID，状态不明不重投、只按原任务回查），网页到本机的短期凭据交接与受管 Skill 同步（按来源 + 版本校验后原子替换）。
+        \item \textbf{AI Studio 工作台与 Local Runner}：实现数字人口播 Agent Harness，编排可恢复的 DAG，以幂等键去重，在 SQLite 持久化提交记录，状态不明时按服务商任务 ID 回查。支持短期凭据交接与受管 Skill 同步。
         \item \textbf{片段工场与复刻工作台}：资产审核回执以记录 SHA-256 绑定学习版本，学习内容变更即置 review\_stale；4K 预处理改为共享分析代理，固定 12.13 秒样本 CPU 由 730.43 秒降至 60.38 秒（约 -91.7\%），346 条资产首屏响应由约 6.3 MB 降至 73 KB。
         \item \textbf{视频 Skill 与素材同步}：封装 2 个 Codex Skill（13 套版本化模板、按条预算预占与付费幂等、Seedance 与 MiniMax H3 同输入对照）；开发 Windows 素材同步工具（同卷暂存校验 + 原子落位 + 飞书回写回读 + 一键自检）。
     \end{itemize}
@@ -190,6 +190,7 @@
 \cvproject{项目一：无人机管理云平台}{}{2025/04 -- 2026/03}{%
     \cvtech{Java、SpringBoot、Redis、MySQL、MyBatis(Plus)、WebSocket、MQTT、Vue、JavaScript、TypeScript、Cesium}
     \cvlabeled{项目概述}{在公司物联网平台基础上，利用自组网超远距离（>20km）优势新增无人机接入模块，实现空地一体化指挥调度。}
+    \needspace{3\baselineskip}% 让实现小标题和首条内容一起换页
     \cvlabeled{无人机管理云平台实现}{%
         \begin{itemize}
             \item \textbf{无人机接入与设备管理}：将无人机纳入现有设备管理体系并复用区域权限；Redis 维护在线状态（60s TTL 心跳续期）与离线原因，区分主动下线与异常断连；监听 Spring 启动就绪事件，服务启动后经 MQTT 向硬件逐台下发重启指令，重启后自动恢复在线，无需人工值守。
@@ -212,18 +213,20 @@
 }
 
 \cvsection{美团}%
-\cvproject{项目：直连上单接口自动化}{}{2024/02 -- 2024/05}{%
-    \cvtech{Java、TestNG}
+\cvproject{项目：直连上单自动化与 JBOX 环境治理}{}{2024/02 -- 2024/05}{%
+    \cvtech{Java、TestNG、Redis}
     \begin{itemize}
-        \item 覆盖 5 个核心上单流程，编写 24 条接口自动化用例。
+        \item \textbf{接口自动化}\enspace 构造供应商商品上单数据，分层校验网关入参、内部服务和数据库记录。覆盖 5 个核心流程，编写 \textbf{24 条接口用例}，相关代码覆盖率提升至 \textbf{77\%}。
+        \item \textbf{环境治理}\enspace 独立开发线上与测试环境的插件同步工具，同平台部署加锁串行、跨平台并发，减少环境问题导致的自动化失败。
     \end{itemize}
 }
 
 \cvsection{哔哩哔哩}%
-\cvproject{项目：UGC 播放一致性测试}{}{2023/09 -- 2024/02}{%
+\cvproject{项目：UGC 播放页测试与播放一致性改造}{}{2023/09 -- 2024/02}{%
     \cvtech{Python}
     \begin{itemize}
-        \item 编写 57 条 P0 接口自动化用例，构造 UAT、PRE 双环境测试数据。
+        \item \textbf{接口自动化}\enspace 构造 UAT、PRE 双环境数据，编写 \textbf{57 条 P0 接口自动化用例}，专项测试发现 1 例线上缺陷。
+        \item \textbf{播放回归}\enspace 参与移动端和服务端功能测试，验证 UI 差异，执行 \textbf{220+ 条整包用例}并跟进缺陷定位与版本回归。
     \end{itemize}
 }
 
@@ -237,7 +240,7 @@
 
 \cvskill{数据存储与检索}{熟悉 MySQL，有 N+1 查询优化（预加载 + HashMap 索引）、延迟关联、覆盖索引等 SQL 调优实战经验；熟悉 Redis 缓存策略与数据一致性保障；熟悉 Elasticsearch 全文检索（Multi-Match、高亮、多维度排序）}
 
-\cvskill{AI Agent 工程化}{有 LLM Agent 从 0 到 1 的实践经验：熟练使用 LangChain、LangGraph、Function Calling、MCP 协议；掌握 Agent 可靠性设计；熟练使用 Cursor/ClaudeCode}
+\cvskill{AI Agent 工程化}{熟练使用 LangChain、LangGraph、Function Calling 和 MCP。有 Agent Harness 工具编排、状态管理与故障恢复实践，熟练使用 Codex、Claude Code 和 Cursor}
 
 \cvskill{分布式系统}{了解分布式锁（Redisson）、分布式事务（RocketMQ 事务消息 / TCC / 可靠消息最终一致）、配置中心（Nacos）等常见组件的设计思路与应用场景}
 
