@@ -179,7 +179,6 @@
     \end{itemize}
 }
 
-\needspace{11\baselineskip}% 上海段整段落到下一页，避免标题卡在页边
 \cvsection{上海寰创通信股份有限公司}[%
     \seclogo{claudecode}\seclogo{cursor}%                                  AI 工具
     \seclogo{python}\seclogo{langchain}\seclogo{langgraph}\seclogo{deepseek}\seclogo{mcp}\seclogo{fastapi}% Python/AI 栈
@@ -191,7 +190,7 @@
 \cvproject{项目一：无人机管理云平台}{}{2025/04 -- 2026/03}{%
     \cvtech{Java、SpringBoot、Redis、MySQL、MyBatis(Plus)、WebSocket、MQTT、Vue、JavaScript、TypeScript、Cesium}
     \cvlabeled{项目概述}{在公司物联网平台基础上，利用自组网超远距离（>20km）优势新增无人机接入模块，实现空地一体化指挥调度。}
-    \cvlabeled{项目实现}{%
+    \cvlabeled{无人机管理云平台实现}{%
         \begin{itemize}
             \item \textbf{无人机接入与设备管理}：将无人机纳入现有设备管理体系并复用区域权限；Redis 维护在线状态（60s TTL 心跳续期）与离线原因，区分主动下线与异常断连；监听 Spring 启动就绪事件，服务启动后经 MQTT 向硬件逐台下发重启指令，重启后自动恢复在线，无需人工值守。
             \item \textbf{飞行控制与相机系统}：实现一键起飞、指点飞行、环绕飞行、返航、急停及变焦、拍照、录像、云台重置等飞行与相机指令；前期前端直连 MQTT 快速验证，后期将关键相机指令与航线任务迁至后端，并补充限高校验与降落确认，降低超限与误操作风险。
@@ -212,12 +211,21 @@
     }
 }
 
-\cvsection{实习项目}
+\cvsection{美团}%
+\cvproject{项目：直连上单接口自动化}{}{2024/02 -- 2024/05}{%
+    \cvtech{Java、TestNG}
+    \begin{itemize}
+        \item 覆盖 5 个核心上单流程，编写 24 条接口自动化用例。
+    \end{itemize}
+}
 
-\begin{itemize}
-    \item \textbf{美团｜直连上单接口自动化}\enspace 使用 Java / TestNG 覆盖 5 个核心流程，编写 24 条接口用例。
-    \item \textbf{哔哩哔哩｜UGC 播放一致性}\enspace 编写 57 条 P0 接口自动化用例，覆盖 UAT、PRE 双环境。
-\end{itemize}
+\cvsection{哔哩哔哩}%
+\cvproject{项目：UGC 播放一致性测试}{}{2023/09 -- 2024/02}{%
+    \cvtech{Python}
+    \begin{itemize}
+        \item 编写 57 条 P0 接口自动化用例，构造 UAT、PRE 双环境测试数据。
+    \end{itemize}
+}
 
 % ============================================================
 % 专业技能
