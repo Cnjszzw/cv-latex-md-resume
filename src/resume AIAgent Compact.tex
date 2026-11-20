@@ -1,7 +1,7 @@
 % ============================================================
 % resume AIAgent Compact.tex — 精简版，源自 src/resume AIAgent.tex
 % 改动：各家项目各压成 3 条要点（去掉 STAR 标签、A/R 合并），去掉「个人项目」；
-%       交个朋友按业务问题、执行流程与可核验结果组织，账号经营与工具产出分开统计
+%       交个朋友按项目概述、执行流程与可核验结果组织，账号经营与工具产出分开统计
 % 样式与原版共用 templates/style-aiagent.sty
 % 编译（仓库根目录）：xelatex -output-directory=output "src/resume AIAgent Compact.tex"
 
@@ -138,7 +138,7 @@
 
 \cvproject{项目一：电商短视频生产 Agent}{}{2026/07 -- 至今}{%
     \cvtech{Python、FastAPI、WebView2、FFmpeg、Hypit、RunningHub}
-    \noindent\textbf{业务问题}\enspace 带货运营需要逐商品写稿、录制和剪辑，复用爆款时还要手工拆镜、改稿和重拍。\par
+    \noindent\textbf{项目概述}\enspace 根据商品链接自动批量生成可投放的罗永浩带货视频，降低制作成本、提升出片效率。平台同时支持爆款复刻和副主播混剪。\par
     \begin{itemize}
         % 同规模对照：Commerce Agent Hub 提交 1603419 前后的 pool_requirements(3, 'selling') 分别为每商品 3 段与 1 段。批次规模见已归档的 20260913 成片包。
         % 10/14 发布时约 30% 为业务估算，非财务对账结论：https://applink.feishu.cn/client/chat/open?openChatId=oc_a0dae74e15b30bdc8cd7f7d38c9998b0&position=527
@@ -155,7 +155,7 @@
 
 \cvproject{项目二：巨量千川预警与投放调控平台}{}{2026/07 -- 至今}{%
     \cvtech{Django、Celery、MySQL、Redis、Vue 3、TypeScript、Docker}
-    \noindent\textbf{业务问题}\enspace 多账户人工盯盘难以及时发现亏损与放量机会，追投和调参需要留痕、可回查。\par
+    \noindent\textbf{项目概述}\enspace 面向千川投放运营，按小时跟踪多账户计划，识别空耗和高消耗计划，发现追爆机会，通过飞书预警帮助运营及时止损，并支持自动追投与目标 ROI 调控。\par
     \begin{itemize}
         \item \textbf{投放决策流程}\enspace 定时拉取计划与素材归因数据 \thickarrow{} 规则评估 \thickarrow{} 分流到飞书预警、素材追投或目标 ROI 调控。预警覆盖止损、追爆、空耗与退货。追投按订单、ROI、退款与毛利筛选，并校验预算、冷却期及黑名单。
         \item \textbf{执行可靠性}\enspace 任务先落 MySQL 再投递 Celery，重启从检查点续跑。写前保存快照并做幂等校验，写后回读千川状态，回包不明先核验。批量建计划按素材和参数逐行校验，失败行可单独续跑。
