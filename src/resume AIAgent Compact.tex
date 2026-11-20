@@ -1,6 +1,7 @@
 % ============================================================
 % resume AIAgent Compact.tex — 精简版，源自 src/resume AIAgent.tex
-% 改动：项目描述大幅压缩（结构不变：两个项目、7 个 STAR 子项），去掉「个人项目」
+% 改动：各家项目各压成 3 条要点（去掉 STAR 标签、A/R 合并），去掉「个人项目」；
+%       新增交个朋友（高级 AI 开发工程师）：电商视频 Agent 工作台、千川为独立项目，AI Studio、片段工场等并入「其他交付」
 % 样式与原版共用 templates/style-aiagent.sty
 % 编译（仓库根目录）：xelatex -output-directory=output "src/resume AIAgent Compact.tex"
 
@@ -31,11 +32,11 @@
 % 五列版本：工作经历用（时间 / 公司 / 领域 / 语言 / 岗位）
 \newcommand{\cvheadingWork}[5]{%
     \noindent
-    \makebox[0.28\textwidth][l]{\textbf{#1}}% 时间
-    \makebox[0.18\textwidth][l]{\textbf{#2}}% 公司（图标+名称）
-    \makebox[0.11\textwidth][l]{\textbf{#3}}% base地
-    \makebox[0.23\textwidth][l]{\textbf{#4}}% 行业领域
-    \makebox[0.20\textwidth][r]{\textbf{#5}}\par% 岗位+语言
+    \makebox[0.27\textwidth][l]{\textbf{#1}}% 时间
+    \makebox[0.17\textwidth][l]{\textbf{#2}}% 公司（图标+名称）
+    \makebox[0.08\textwidth][l]{\textbf{#3}}% base地
+    \makebox[0.20\textwidth][l]{\textbf{#4}}% 行业领域
+    \makebox[0.28\textwidth][r]{\textbf{#5}}\par% 岗位+语言
 }
 % 工作经历专用 \cvevent（6参：时间/公司/base地/领域/岗位+语言/描述）
 \newcommand{\cveventWork}[6]{%
@@ -68,7 +69,7 @@
     \faEnvelope\ \href{mailto:cnjszzw@qq.com}{cnjszzw@qq.com} \enspace|\enspace
     \faWeixin\ cnjszzw%
 }
-\lineB{籍贯：江苏扬州 \enspace|\enspace 年龄：26 (1999/10/27) \enspace|\enspace 性别：男}
+\lineB{籍贯：江苏扬州 \enspace|\enspace 年龄：27 (1999/10/27) \enspace|\enspace 性别：男}
 \lineC{求职意向：软件开发}
 \photo{assets/photo.jpg}
 
@@ -106,9 +107,13 @@
 \let\cvheading\cvheadingWork
 \let\cvevent\cveventWork
 
+\cvevent{2026/07 -- 至今 (正职)}{%
+    \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/befriends.jpeg}}%
+    \hspace{0.4em}交个朋友}{杭州}{电商/AIGC}{(Python)高级 AI 开发工程师}{}
+
 \cvevent{2025/04 -- 2026/03 (正职)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/上海环创通信科技股份有限公司.png}}%
-    \hspace{0.4em}寰创通信}{上海}{物联网(政企B端)}{(Java/Vue/Python)全栈开发}{}
+    \hspace{0.4em}寰创通信}{上海}{物联网(政企B端)}{(Java/Python)全栈开发}{}
 
 \cvevent{2024/02 -- 2024/05 (实习)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/美团.png}}%
@@ -116,13 +121,47 @@
 
 \cvevent{2023/09 -- 2024/02 (实习)}{%
     \raisebox{-0.12cm}{\includegraphics[height=0.55cm]{assets/LOGO/哔哩哔哩.png}}%
-    \hspace{0.4em}哔哩哔哩}{上海}{内容社区(C端)}{(Python/Go)测试开发}{}
+    \hspace{0.4em}哔哩哔哩}{上海}{内容社区(C端)}{(Python)测试开发}{}
 
 % ============================================================
 % 项目经历（按公司分组）
 % ============================================================
 \let\cvheading\cvheadingThree% 恢复3列版本
 
+\cvsection{交个朋友}[%
+    \seclogo{claudecode}\seclogo{cursor}%                                    AI 编程工具
+    \seclogo{python}\seclogo{fastapi}\seclogo{pytest}\seclogo{ffmpeg}\seclogo{nodejs}%  Python / 媒体
+    \seclogo{vuejs}\seclogo{mysql}\seclogo{redis}\seclogo{docker}\seclogo{git}%         平台与基建
+]
+
+\cvproject{项目一：电商视频 Agent 工作台}{}{2026/07 -- 至今}{%
+    \cvtech{Python、FastAPI、WebView2、FFmpeg、Django、Vue 3、SQLite}
+    \begin{itemize}
+        \item \textbf{一键成片（老罗版）}：输入商品链接即可自动采集商品事实、生成卖点口播，套用老罗 IP 的形象与话术，按经典六段结构产出竖屏成片，单批可选商品数与条数；采集、卖点、文案、配音、首帧、合成串成一条可断点续跑的父任务，升级后点「继续原任务」只补缺失片段，已完成的文案、配音与视频全部复用。
+        \item \textbf{爆款复刻}：把一条爆款原片拆成「洗片 \thickarrow{} 拆片 \thickarrow{} Hypit 复刻 \thickarrow{} 合成」的主流程 DAG——洗片先按镜头判断有没有人，只对有人镜头换人换声，无人镜头原样保留以省生成费；拆片沿完整镜头切开，配词级 ASR 与动作事件生成结构化片段；复刻环节调用 Hypit（RunningHub H3 / Seedance）按原镜头节奏重拍；成片按原顺序拼回，超长镜头按边界合并提交而不截断。
+        \item \textbf{混剪}：以词级 ASR 定位原话与句尾，结合画面动作证据确定可用时段；组装阶段校验商品权益一致性、相邻信息增量与源片段重叠率，保留源区间便于审片追溯；同组素材规则迭代后可用成片由 3 条增至 22 条（单组复测口径）。
+    \end{itemize}
+}
+
+\cvproject{项目二：巨量千川预警与投放调控平台}{}{2026/07 -- 至今}{%
+    \cvtech{Django、Celery、MySQL、Redis、Vue 3、TypeScript、Docker}
+    \begin{itemize}
+        \item \textbf{多账户预警}：止损、追爆、空耗（高消耗低转化）、退货四类规则扫描投放计划，命中后按接收范围聚合飞书卡片并保存发送进度，已确认发送不重发；单次人工验收覆盖 5 个账户、249 个计划，产生 79 条告警。
+        \item \textbf{自动追投}：按素材归因的订单、ROI 与退款核对筛出可追素材，经预算、投放时长、冷却窗口与抖音号黑名单约束后调用官方素材追投接口，在途去重避免重复追投。
+        \item \textbf{异步任务与写安全}：任务先持久化再投递，重启从 MySQL 检查点续跑，执行者凭带期限的租约提交；有财务副作用的写入记录写前快照与幂等键、写后强制回读，回包不明先查真实状态，确认失败才停自动写入；账户停用后排队任务重新校验当前状态。
+        \item \textbf{批量建计划}：ZIP 素材与 XLSX 参数逐行校验，记录文件摘要与行级结果，成功行跳过、失败行按原输入续跑，已上传视频按记录复用。
+    \end{itemize}
+}
+
+\cvproject{其他交付}{}{2026/07 -- 至今}{%
+    \begin{itemize}
+        \item \textbf{AI Studio 工作台与 Local Runner}：可恢复的数字人口播 DAG（幂等键 + SQLite 提交记录 + 服务商任务 ID，状态不明不重投、只按原任务回查），网页到本机的短期凭据交接与受管 Skill 同步（按来源 + 版本校验后原子替换）。
+        \item \textbf{片段工场与复刻工作台}：资产审核回执以记录 SHA-256 绑定学习版本，学习内容变更即置 review\_stale；4K 预处理改为共享分析代理，固定 12.13 秒样本 CPU 由 730.43 秒降至 60.38 秒（约 -91.7\%），346 条资产首屏响应由约 6.3 MB 降至 73 KB。
+        \item \textbf{视频 Skill 与素材同步}：封装 2 个 Codex Skill（13 套版本化模板、按条预算预占与付费幂等、Seedance 与 MiniMax H3 同输入对照）；开发 Windows 素材同步工具（同卷暂存校验 + 原子落位 + 飞书回写回读 + 一键自检）。
+    \end{itemize}
+}
+
+\needspace{11\baselineskip}% 上海段整段落到下一页，避免标题卡在页边
 \cvsection{上海寰创通信股份有限公司}[%
     \seclogo{claudecode}\seclogo{cursor}%                                  AI 工具
     \seclogo{python}\seclogo{langchain}\seclogo{langgraph}\seclogo{deepseek}\seclogo{mcp}\seclogo{fastapi}% Python/AI 栈
@@ -136,69 +175,21 @@
     \cvlabeled{项目概述}{在公司物联网平台基础上，利用自组网超远距离（>20km）优势新增无人机接入模块，实现空地一体化指挥调度。}
     \cvlabeled{项目实现}{%
         \begin{itemize}
-            \item \textbf{无人机接入与设备管理}
-              \begin{starlist}
-                \item[(S)背景:]无人机经自组网硬件接入基站，链路长、断连场景复杂，现有上下线流程无法直接适配。
-                \item[(T)任务:]将无人机融入现有设备管理体系，并解决服务重启后设备无法自动恢复在线的问题。
-                \item[(A)动作:]通过 Redis 维护在线状态（60s TTL 心跳续期），结合设备上报的离线原因区分主动下线与异常断连；监听 Spring 启动就绪事件拉起 MQTT，订阅后向自研硬件模块逐台下发自定义重启指令，触发无人机重新上线。
-                \item[(R)结果:]无人机与地面设备统一管理、共用区域权限，服务重启后自动恢复上线，无需人工值守。
-              \end{starlist}
-
-            \item \textbf{飞行控制与相机系统}
-              \begin{starlist}
-                \item[(S)背景:]飞行与相机指令繁多，前期为快速验证由前端直连 MQTT，逻辑分散在组件中，不利于维护与安全管控。
-                \item[(T)任务:]完成主要飞行与相机指令的实现，将关键相机指令迁至后端，并补齐飞行安全校验与降落确认。
-                \item[(A)动作:]前端基于 MQTT 直连实现一键起飞、指点飞行、环绕飞行、返航、急停及变焦、拍照、录像、云台重置；航线任务、框选变焦与 AIM 瞄准走后端接口；后端在飞行参数设置时做限高校验，并提供降落确认/取消接口。
-                \item[(R)结果:]覆盖主要飞行与相机操控场景，限高校验与降落确认降低超限与误操作风险。
-              \end{starlist}
-
-            \item \textbf{无人机直播观看}
-              \begin{starlist}
-                \item[(S)背景:]硬件推流不稳定，视频流可能延迟到达甚至不可达；多指挥员需同时观看同一无人机画面。
-                \item[(T)任务:]推流不可靠时仍要支持多人观看，并避免无人观看时浪费带宽。
-                \item[(A)动作:]基于 Spring DeferredResult 异步确认：发起观看后释放线程，由 ZLM 流注册回调（12s 超时兜底）确认推流就绪后返回播放信息；Redis 按路维护观看用户列表做引用计数，人数归零才停止推流，缺流时重新推流。
-                \item[(R)结果:]硬件延迟不再阻塞线程，多人共享同一路流互不影响，无人观看时带宽自动回收。
-              \end{starlist}
+            \item \textbf{无人机接入与设备管理}：将无人机纳入现有设备管理体系并复用区域权限；Redis 维护在线状态（60s TTL 心跳续期）与离线原因，区分主动下线与异常断连；监听 Spring 启动就绪事件，服务启动后经 MQTT 向硬件逐台下发重启指令，重启后自动恢复在线，无需人工值守。
+            \item \textbf{飞行控制与相机系统}：实现一键起飞、指点飞行、环绕飞行、返航、急停及变焦、拍照、录像、云台重置等飞行与相机指令；前期前端直连 MQTT 快速验证，后期将关键相机指令与航线任务迁至后端，并补充限高校验与降落确认，降低超限与误操作风险。
+            \item \textbf{无人机直播观看}：基于 Spring DeferredResult 异步确认——发起观看即释放线程，由 ZLM 流注册回调（12s 超时兜底）确认推流就绪后返回播放信息；Redis 按路维护观看用户引用计数，人数归零才停止推流，缺流时重新推流，实现多人共享同一路流。
         \end{itemize}
     }
 }
 
 \cvproject{项目二：WVP Copilot --- 基于 LLM 的无人机 AI Agent 智能体}{}{2025/11 -- 2026/03}{%
     \cvtech{Python、LangChain、LangGraph、SSE、MCP、FastAPI、DeepSeek API、Redis}
-    \cvlabeled{项目概述}{面向消防应急指挥场景的无人机 Copilot，把自然语言需求（如“飞到陆家嘴，变焦 7x 拍照，返航”）拆解为指令序列并编排执行，以对话完成远程控制；采用 Python（Agent 编排层）+ Java（设备控制层）两层架构，通过 REST 解耦。}
+    \cvlabeled{项目概述}{面向消防应急指挥的无人机 Copilot：把自然语言需求（如“飞到陆家嘴，变焦 7x 拍照，返航”）拆解为指令序列并编排执行；采用 Python（Agent 编排层）+ Java（设备控制层）两层架构，通过 REST 解耦。}
     \cvlabeled{项目实现}{%
         \begin{itemize}
-            \item \textbf{异步操作的状态同步与确定性故障恢复}
-              \begin{starlist}
-                \item[(S)背景:]LLM 推理为同步过程（秒级），无人机飞行为异步过程（分钟级），等待时长随飞行距离与通信延迟浮动。
-                \item[(T)任务:]在同步推理与异步执行间建立状态同步，超时后确定性判断飞行结果，避免误判导致后续指令出错。
-                \item[(A)动作:]工具函数内每秒轮询 Redis 任务状态，超时阈值按预估飞行时间动态设定；超时不直接判失败，先查 OSD 位置兜底（< 5m 判到达、无位移判硬件故障、仍在移动则延长等待）；中间进度只推前端，LLM 只拿最终状态。
-                \item[(R)结果:]超时不再直接等同失败，LLM 不会被错误状态带偏下一步决策。
-              \end{starlist}
-
-            \item \textbf{多步任务链的级联故障阻断与安全隔离}
-              \begin{starlist}
-                \item[(S)背景:]任务链（飞行 \thickarrow 拍照 \thickarrow 返航）中任一步失败若不阻断，后续步骤会在异常状态下执行；急停须绕开 LLM。
-                \item[(T)任务:]任一步失败立即中断后续执行，高风险操作有人工确认，急停通道不经过 Agent 与 LLM。
-                \item[(A)动作:]Plan-Confirm-Execute 三段式：计划经用户确认卡片审核后逐步执行，工具返回失败或急停即中断后续步骤；飞行、返航另在工具层内置确认钩子；急停走独立 MQTT 通道，前端同步中断 SSE 连接。
-                \item[(R)结果:]单步失败不会扩散为链式误操作，急停后前端会话与后续步骤一并终止。
-              \end{starlist}
-
-            \item \textbf{状态机驱动的子任务编排替代 LLM 时序决策}
-              \begin{starlist}
-                \item[(S)背景:]环绕飞行是天然状态机（进入 \thickarrow 逐角度拍照 \thickarrow 退出），但 LLM 推理 1-3s，3m/s 飞行下拍照点偏移 3-9 米。
-                \item[(T)任务:]把实时控制任务的时序决策从 LLM 交给确定性状态机，同时保留 LLM 的意图理解。
-                \item[(A)动作:]用 LangGraph 建模条件子图：enter\_orbit \thickarrow{} orbit\_step（按角度步进拍照，$\ge 360^\circ$ 条件边退出）\thickarrow{} exit\_orbit，执行节奏由条件边决定，LLM 只做意图路由；线性主链路仍用 AgentExecutor，避免过度设计。
-                \item[(R)结果:]拍照时机由图状态转移决定，环绕时序不再受 LLM 推理延迟影响。
-              \end{starlist}
-
-            \item \textbf{MCP 外部工具链与复合指令封装}
-              \begin{starlist}
-                \item[(S)背景:]控制链路需接入高德地图、设备控制等外部系统，一句“录像 30 秒”即对应多条底层指令，LLM 编排易出错。
-                \item[(T)任务:]集成外部工具链，把复合指令封装为业务语义，让 LLM 不直接编排硬件原语。
-                \item[(A)动作:]经 MCP 接入高德地图 Server，地图工具自动注册为 LangChain Tool，地理编码多候选回传 LLM 仲裁；用 @tool 定义 16 个无人机工具，其中 record\_for\_duration 封装 start \thickarrow 倒计时 \thickarrow{} stop；SSE 流式推送工具调用。
-                \item[(R)结果:]常见操作从多步收敛为单步，工具调用与执行结果对用户实时可见。
-              \end{starlist}
+            \item \textbf{异步状态同步与故障兜底}：工具函数内每秒轮询 Redis 任务状态，超时阈值按预估飞行时间动态设定；超时不直接判失败，先查 OSD 位置兜底（< 5m 判到达、无位移判硬件故障、仍在移动则延长等待），中间进度只推前端，LLM 只取最终状态。
+            \item \textbf{任务链级联阻断与安全隔离}：Plan-Confirm-Execute 三段式，计划经用户确认卡片审核后逐步执行，任一步返回失败或急停即中断后续；飞行、返航在工具层内置确认钩子；急停走独立 MQTT 通道并同步中断 SSE 连接，不经过 Agent 与 LLM。
+            \item \textbf{状态机替代 LLM 时序决策}：用 LangGraph 条件子图建模环绕飞行——enter\_orbit \thickarrow{} orbit\_step（按角度步进拍照，$\ge 360^\circ$ 条件边退出）\thickarrow{} exit\_orbit，拍照时机由图状态转移决定，规避 LLM 推理延迟在 3m/s 下造成的 3-9 米偏移；线性主链路仍用 AgentExecutor。
         \end{itemize}
     }
 }
