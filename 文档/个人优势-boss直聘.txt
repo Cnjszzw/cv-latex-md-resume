@@ -1,5 +1,7 @@
-1. 全日制计算机硕士，1年半后端开发经验，具备从需求分析、方案设计到编码联调的端到端独立交付能力
-2. 扎实的Java基础，熟悉JVM与并发编程；熟练使用SpringBoot、MyBatis（Plus）；有SpringCloud Alibaba（Nacos/Gateway/OpenFeign）微服务架构实战经验
-3. 有分布式系统设计实践：RocketMQ事务消息实现跨服务最终一致、推拉结合消除写扩散、Redis引用计数等，熟悉分布式事务（TCC/可靠消息最终一致）、分布式锁（Redisson）等技术选型
-4. 有数据库与搜索引擎优化经验：MySQL索引优化（覆盖索引/延迟关联/执行计划分析）、Elasticsearch全文检索（Multi-Match/高亮/多维度排序）
-5. 了解Vue/Cesium/Android等前端与客户端技术，有前后端+软硬件跨团队协作经验；熟练使用Trae、Cursor、ClaudeCode等AI辅助编码工具
+● 全日制计算机硕士，有 Python、Java 全栈开发经验，能独立完成从需求分析到上线交付。
+
+● 在交个朋友开发电商短视频 Agent，支持数字人一键成片、爆款复刻和智能混剪。3 批成片关联的 41 个千川计划累计支付 GMV 约 1.23 万元、322 单。
+
+● 建设千川投放自动化平台，支持小时级预警、自动追投和目标 ROI 调整。9 月 9–24 日推送 16,811 条预警明细，核验 236 次目标 ROI 调整。
+
+● 有多模态 AI Agent 从 0 到 1 的交付经验，搭建过支持 DAG 编排和断点续跑的 Agent Harness，熟悉 LangGraph、MCP。
